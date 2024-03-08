@@ -14,5 +14,5 @@ Skapande av user stories och acceptanskriterier
 
 ## Uppkomna frågor:
 Kontrollera med produktägare hur funktionen mellan landing page och meny ska vara.
-Skissen är lite osäker. Ska man klicka på landing page eller ska vi lägga tille en burgarmeny?
-Eller hur ska flödet vara?
+Skissen är lite osäker. Ska man klicka på landing page eller ska vi lägga till en burgarmeny?
+Hur ska vi göra med nav-sidan?
