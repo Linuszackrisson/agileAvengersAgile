@@ -10,5 +10,9 @@
 
 ## Protokoll
 Genomgång av projektets uppgifter.
+Skapande av user stories och acceptanskriterier
 
-Kontrollera med produktägare om
+## Uppkomna frågor:
+Kontrollera med produktägare hur funktionen mellan landing page och meny ska vara.
+Skissen är lite osäker. Ska man klicka på landing page eller ska vi lägga tille en burgarmeny?
+Eller hur ska flödet vara?
