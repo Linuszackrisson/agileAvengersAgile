@@ -1,4 +1,5 @@
-# Mötesprotokoll (2024-03-08)
+# Mötesprotokoll inledande projektmöte (2024-03-08)
+Via Discord. Startat klockan 10.00 c:a
 
 ## Närvarande
 * Linus
@@ -10,7 +11,10 @@
 
 ## Protokoll
 Genomgång av projektets uppgifter.
-Skapande av user stories och acceptanskriterier
+Skapande av user stories och acceptanskriterier.
+Avslutat klockan 14.30
+Nästa möte måndag 12/3 klockan 9.00
+
 
 ## Uppkomna frågor:
 Kontrollera med produktägare hur funktionen mellan landing page och meny ska vara.
