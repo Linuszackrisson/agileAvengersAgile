@@ -16,3 +16,5 @@ Skapande av user stories och acceptanskriterier
 Kontrollera med produktägare hur funktionen mellan landing page och meny ska vara.
 Skissen är lite osäker. Ska man klicka på landing page eller ska vi lägga till en burgarmeny?
 Hur ska vi göra med nav-sidan?
+
+Login/registreringssida står det i uppgiften, men Figmaskissen visar bara login.
