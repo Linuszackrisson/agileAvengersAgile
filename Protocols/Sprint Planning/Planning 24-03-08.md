@@ -9,4 +9,6 @@
 
 
 ## Protokoll
-Sammanfatta vad ni diskuterat, vad ni kommit fram till, beslut som tagits med mera.
+Genomgång av projektets uppgifter.
+
+Kontrollera med produktägare om
