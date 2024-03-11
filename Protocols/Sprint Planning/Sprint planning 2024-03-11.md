@@ -13,7 +13,7 @@ Via Discord. Startat klockan 09.00
 
 
 
-Nästa möte måndag 12/3 klockan 9.00
+Nästa möte
 
 
 ## Uppkomna frågor:
