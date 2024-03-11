@@ -10,7 +10,8 @@ Via Discord. Startat klockan 09.00
 
 
 ## Protokoll
-
+Vi kom överens om att detta möte är ett återupptagande av mötet som hölls i fredags,
+eftersom sekreteraren då missförstod instruktionerna.
 
 
 Nästa möte
