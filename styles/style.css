@@ -5,6 +5,21 @@
     background-color: #38846D;
 }
 
+.main__nav-icon {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    z-index: 3;
+    cursor: pointer;
+}
+
+.main__nav-icon img {
+    min-width: 1rem;
+    max-width: 15vw;
+    height: auto;
+}
+
+
 .content-wrapper {
     position: relative;
     width: 100%;
@@ -32,6 +47,8 @@
 
 .landing-img:nth-child(2) {
     /* max-width: 50vw; */
+    min-width: 40Vw;
+    max-height: 50vh;
     z-index: 2;
 }
 
