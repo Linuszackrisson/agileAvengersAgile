@@ -1,4 +1,4 @@
-# Mötesprotokoll (dagens datum)
+# Mötesprotokoll (2024-03-12)
 
 Sätt en timer på 15 minuter
 
