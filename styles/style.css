@@ -1,0 +1,9 @@
+.status__main {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #E5674E;
+    display: flex;
+    flex-direction: column;
+}
+
