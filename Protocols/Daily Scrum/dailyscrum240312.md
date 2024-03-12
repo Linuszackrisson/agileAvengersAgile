@@ -43,6 +43,5 @@ Funktioner för att lägga till, ta bort och hämta i local storage.
 
 ### Övrigt
 Eventuellt ska vi definiera om saker som hamnat i pending och göra ny issue av kvarvarande moment. Får se vid nästa möte om det är aktuellt.
-Är det någon som behöver hjälp? Bestäm vem som hoppar in och stöttar
 
 ### Nästa möte imorgon 09.15
