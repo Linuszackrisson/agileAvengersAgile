@@ -1,62 +1,12 @@
-function countItemPrice(price, quantity) {
-    return price * quantity
-}
+import {
+    addLocalStorage,
+    getLocalStorage,
+} from "./localStorage.js";
 
-function countTotalPrice(cart) {
-    let totalPrice = 0
-    cart.forEach(item => {
-        totalPrice += (item.price * item.inCart)
-    });
-    return totalPrice
-}
-
-function changeCartValue() {
-    const cart = getLocalStorage(`cart`)
-    if (this.alt === `arrow-up icon`) {
-        cart.forEach(item => {
-            if (item.id === Number(this.dataset.id)) {
-                if (item.inCart > 0) {
-                    item.inCart++
-                    console.log(item.inCart);
-                }
-            }
-        });
-    } else if (this.alt === `arrow-down icon`) {
-        cart.forEach(item => {
-            if (item.id === Number(this.dataset.id)) {
-                if (item.inCart > 0) {
-                    item.inCart--
-                    console.log(item.inCart);
-                }
-            }
-        });
-    }
-    addLocalStorage(`cart`, cart)
-}
-
-function renderCart() {
-    const cart = getLocalStorage(`cart`)
-    cart.forEach(item => {
-        if (item.inCart > 0) {
-            console.log(item.title, item.inCart);
-            console.log(countItemPrice(item.price, item.inCart));
-        }
-    });
-    console.log(`total`, countTotalPrice(cart));
-}
-
-function addLocalStorage(title, item) {
-    localStorage.setItem(title, JSON.stringify(item))
-}
-
-function getLocalStorage(title) {
-    const respons = localStorage.getItem(title)
-    return JSON.parse(respons)
-}
-
-function removeLocalStorage(title) {
-    localStorage.removeItem(title)
-}
+import {
+    renderShoppingModal,
+    renderShoppingCart,
+} from "./render.js";
 
 const cart = [
     {
@@ -103,11 +53,48 @@ const cart = [
     }
 ]
 
-document.querySelectorAll(`.order__stock-arrow`).forEach(arrow => {
-    arrow.addEventListener(`click`, changeCartValue)
-})
+addLocalStorage(`cart`, cart);
+renderShoppingModal();
 
-document.querySelector(`.order__btn`).addEventListener(`click`, () => { window.location.href = `status.html` })
+function countItemPrice(price, quantity) {
+    return price * quantity;
+}
 
-addLocalStorage(`cart`, cart)
-renderCart();
+function countTotalPrice(cart) {
+    const deliveryFee = 25;
+    let totalPrice = 0;
+    totalPrice += deliveryFee;
+    cart.forEach(item => {
+        totalPrice += (item.price * item.inCart);
+    });
+    return totalPrice;
+}
+
+function changeCartValue() {
+    const cart = getLocalStorage(`cart`);
+    if (this.alt.includes(`Add`)) {
+        cart.forEach(item => {
+            if (item.id === Number(this.dataset.id)) {
+                if (item.inCart > 0) {
+                    item.inCart++;
+                }
+            }
+        });
+    } else if (this.alt.includes(`Remove`)) {
+        cart.forEach(item => {
+            if (item.id === Number(this.dataset.id)) {
+                if (item.inCart > 0) {
+                    item.inCart--;
+                }
+            }
+        });
+    }
+    addLocalStorage(`cart`, cart);
+    renderShoppingCart();
+}
+
+export {
+    countItemPrice,
+    countTotalPrice,
+    changeCartValue,
+};
