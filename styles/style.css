@@ -1,23 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Serif&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
 
-
-body {
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+body {
     background-color: #F3E4E1;
 
 }
 
+main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
 .about-header {
     width: 100%;
+    
     
 }
 
 .about-footer {
     width: 100%;
-    bottom: 0;
-    position: absolute;
+    
+    
+    
+
     
 }
 
@@ -32,13 +44,11 @@ body {
     font-family: PT Serif;
     font-size: 42px;
     text-align: left;
+    margin-bottom: 1rem;
     
 }
 
-.about-footer {
-    bottom: 0;
-    
-}
+
 
 .about__text {
     font-family: Work Sans;
@@ -47,6 +57,8 @@ body {
     line-height: 19px;
     letter-spacing: 0em;
     text-align: left;
+    margin-bottom: 1rem;
+
     
 }
 
@@ -55,6 +67,8 @@ body {
     font-size: 14px;
     font-weight: 600;
     line-height: 22px;
+    margin-bottom: 1rem;
+
 
 
 }
