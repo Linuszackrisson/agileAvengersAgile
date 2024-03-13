@@ -56,7 +56,7 @@ const cart = [
 addLocalStorage(`cart`, cart);
 renderShoppingModal();
 
-// document.querySelector(`.NAV_SHOPPING_CART`).addEventListener(`click`, openShoppingCart)
+document.querySelector(`.landing-img`).addEventListener(`click`, openShoppingCart)
 // document.querySelectorAll(`.ADD-BUTTON_DRINK_MENU`).forEach(item => item.addEventListener(`click`, changeCartValue))
 
 function openShoppingCart() {
@@ -72,9 +72,11 @@ function countItemPrice(price, quantity) {
 }
 
 function countTotalPrice(cart) {
-    const deliveryFee = 25;
     let totalPrice = 0;
-    totalPrice += deliveryFee;
+    if (cart.length != 0) {
+        const deliveryFee = 25;
+        totalPrice += deliveryFee;
+    }
     cart.forEach(item => {
         totalPrice += (item.price * item.inCart);
     });

@@ -13,7 +13,7 @@ function renderShoppingModal() {
     modalRef.classList.add(`shopping`);
     document.querySelector(`body`).appendChild(modalRef);
     const formRef = document.createElement(`form`);
-    formRef.classList.add(`shopping__containe`);
+    formRef.classList.add(`shopping__container`);
     formRef.method = `dialog`;
     modalRef.appendChild(formRef);
     const h2Ref = document.createElement(`h2`);
@@ -64,7 +64,7 @@ function renderShoppingCart() {
                 divRef.classList.add(`shopping__item-container`);
                 articleRef.appendChild(divRef);
                 let h3Ref = document.createElement(`h3`);
-                h3Ref.classList.add(`"shopping__item-title`);
+                h3Ref.classList.add(`shopping__item-title`);
                 h3Ref.textContent = item.title;
                 divRef.appendChild(h3Ref);
                 let pRef = document.createElement(`p`);
@@ -94,7 +94,7 @@ function renderShoppingCart() {
                 divRef.appendChild(imgRef);
             }
         });
-        document.querySelector(`.shopping__total-price`).textContent = countTotalPrice(cart);
+        document.querySelector(`.shopping__total-price`).textContent = countTotalPrice(cart) + ` kr`;
     }
 }
 
