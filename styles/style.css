@@ -1,12 +1,21 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
 body {
     max-width:375px;
-    max-height: 667px;
+    min-height: 667px;
+    margin: 0;
+    padding: 0;
 }
 
 .status__main {
     margin: 0;
-    width: 100vw;
-    height: 100vh;
+    padding-bottom: 50px;
+    /* max-width: 100%;
+    max-height: 100%; */
     background-color: #E5674E;
     display: flex;
     flex-direction: column;
@@ -15,34 +24,41 @@ body {
 }
 
 .status__orderNr {
-
+margin-top: 5%;
+/* max-width: 53%; */
 }
 
 .status__droneImg {
-
+    margin-top: 5%;
+    /* max-width: 55%; */
+    
 }
 
 .status__orderOnWay {
-
+    margin-top: 5%;
+    /* max-width: 51%; */
+    
 }
 
 .status__delivCounter {
-
+    margin-top: 5%;
+    
 }
 
 .status__acceptBtn {
-/* width: 100vw; */
-
-
-}
-
-.status__acceptBtn button {
-    width: 51vw;
-    max-width: 51vw;
-    margin: 1rem auto 0 auto;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: auto;
+    margin-bottom: auto;
+    /* width: 51vw; */
+    /* max-width: 51%; */
+    /* margin: 1rem 0 0 0; */
     background-color: white;
     color: black;
     border: none;
     border-radius: 50px;
 }
 
+.status__btnText {
+    
+}
