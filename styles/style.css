@@ -1,0 +1,188 @@
+/*
+=============== 
+Fonts
+===============
+*/
+@import url("https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,700&display=swap");
+
+/*
+=============== 
+Variables
+===============
+*/
+
+:root {
+  --clr-primary-1: hsl(205, 86%, 17%);
+ --clr-primary-5: hsl(205, 78%, 60%);
+ --clr-primary-8: hsl(205, 86%, 81%);
+  --clr-grey-1: hsl(209, 61%, 16%);
+   --clr-grey-3: hsl(209, 34%, 30%);
+  --clr-grey-10: hsl(210, 36%, 96%);
+  --clr-white: #fff;
+  
+  --clr-black: #222;
+  --ff-primary: 'Roboto', sans-serif;
+  --ff-secondary: 'Open Sans', sans-serif;
+  --transition: all 0.3s linear;
+  --spacing: 0.1rem;
+  --radius: 0.25rem;
+}
+/*
+=============== 
+Global Styles
+===============
+*/
+
+*
+ {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: var(--ff-secondary);
+  background: black;
+  color: var(--clr-grey-1);
+  line-height: 1.5;
+  font-size: 0.875rem;
+}
+
+
+
+
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
+
+
+@media screen and (min-width: 1200px) {
+ 
+  .img-user{
+  
+  display:none
+  }
+
+  .nav-center .links{
+
+    display:none;
+  }
+
+}
+/*  global classes */
+
+/* section */
+
+
+@media screen and (min-width: 480px) {
+ 
+  
+}
+
+
+/*
+=============== 
+Navbar
+===============
+*/
+nav {
+  background: var(--clr-white);
+  box-shadow: var(--light-shadow);
+}
+.nav-header {
+  background-color: black;
+  align-items: center;
+  
+ 
+}
+
+.img-user{
+position: absolute;
+top:0;
+right:0;
+padding:10px;
+}
+
+.img-user img{
+
+  width:80%;
+}
+.nav-toggle {
+  font-size: 1.8rem;
+  color: #fff;
+  background: transparent;
+  border-color: transparent;
+  transition: var(--transition);
+  cursor: pointer;
+  padding:1rem;
+}
+.nav-toggle:hover {
+  
+  transform: rotate(90deg);
+  scale: 1.2em;
+}
+.logo {
+  height: 40px;
+}
+.links a {
+  color:#fff;
+ 
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  letter-spacing: var(--spacing);
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  padding: 1.1rem 1rem;
+  transition: var(--transition);
+}
+.links a:hover {
+  background: var(--clr-primary-8);
+  color: var(--clr-primary-5);
+  padding-left: 1.5rem;
+}
+
+
+.links {
+ 
+  padding-top:50px;
+  height: 0;
+  overflow: hidden;
+  transition: var(--transition);
+  background:black;
+  
+  
+
+}
+.show-links {
+  height: 100vh;
+  overflow:hidden;
+}
+@media screen and (min-width: 800px) {
+  .nav-center {
+    
+  }
+  .nav-header {
+    padding: 0;
+  }
+  .nav-toggle {
+    display: none;
+  }
+
+  .links {
+    height: auto;
+    display: flex;
+  }
+  .links a {
+    padding: 0;
+    margin: 0 0.5rem;
+    
+  }
+  .links a:hover {
+    padding: 0;
+    background: transparent;
+  }
+  
+}
