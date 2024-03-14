@@ -6,6 +6,24 @@
 
 @import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #F3E4E1;
+
+}
+
+main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
 .landing__main {
     margin: 0;
     width: 100vw;
@@ -65,7 +83,7 @@
     left: auto;
     transform: translateY(-50%);
 }
-  /* **********-------STATUSSIDAN BÖRJAR HÄR--------********** */
+
 .status__main {
     margin: 0;
     padding: 3rem 0;
@@ -123,6 +141,80 @@
     background-color: lightgray;
 }
 
-.status__btnText {
+.about-header {
+    width: 100%;
+   
     
+}
+
+.about-footer {
+    width: 100%;
+    
+    
+    
+
+    
+}
+
+.about-container {
+    padding: 2rem;
+    
+
+}
+
+.about__title {
+    margin: 0;
+    font-family: PT Serif;
+    font-size: 42px;
+    text-align: left;
+    margin-bottom: 1rem;
+    
+}
+
+
+
+.about__text {
+    font-family: Work Sans;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-bottom: 1rem;
+    
+}
+
+.about__boldtext {
+    font-family: Work Sans;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 22px;
+    margin-bottom: 1rem;
+
+
+
+}
+
+.about_profile-image {
+    border-radius: 50%;
+    margin: 0 auto; 
+    display: block; 
+    width: 74px;
+    height: 74px;
+    margin-top: 3rem;
+}
+
+.about__author {
+    text-align: center;
+    font-family: PT serif;
+    font-weight: 700;
+    font-size: 22px;
+    margin: 0.3rem;
+}
+
+.about__auther-title {
+    text-align: center;
+    font-family: Work Sans;
+    font-size: 12px;
+    margin: 0.3rem;
 }
