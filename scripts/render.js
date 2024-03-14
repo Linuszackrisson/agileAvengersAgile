@@ -6,8 +6,102 @@ import {
     countItemPrice,
     countTotalPrice,
     changeCartValue,
-    statusPageUpdate,
+    checkUserRole,
 } from "./script.js";
+
+function renderNavLinks() {
+
+    const role = checkUserRole();
+    const navObject = [
+        [
+            {
+                text: `Meny`,
+                href: `menu.html`
+            },
+            {
+                text: `Vårt Kaffe`,
+                href: `about.html`
+            },
+            {
+                text: `Min profil`,
+                href: `profil.html`
+            },
+            {
+                text: `Orderstatus`,
+                href: `status.html`
+            }
+        ],
+        [
+            {
+                text: `Meny`,
+                href: `menu.html`
+            },
+            {
+                text: `Vårt Kaffe`,
+                href: `about.html`
+            },
+            {
+                text: `Login`,
+                href: `login.html`
+            },
+            {
+                text: `Registrera`,
+                href: `register.html`
+            },
+            {
+                text: `Orderstatus`,
+                href: `status.html`
+            }
+        ],
+        [
+            {
+                text: `Admin`,
+                href: `admin.html`
+            }
+        ],
+    ]
+    document.querySelector(`.nav-menu__list`).textContent = ``
+    if (role === `user`) {
+        navObject[0].forEach(link => {
+            const liRef = document.createElement(`li`)
+            liRef.classList.add(`nav-menu__list-item`)
+
+            const aRef = document.createElement(`a`)
+            aRef.href = link.href
+            aRef.textContent = link.text
+            aRef.classList.add(`nav-menu__list-link`)
+            liRef.appendChild(aRef)
+
+            document.querySelector(`.nav-menu__list`).appendChild(liRef)
+        })
+    } else if (role === `guest`) {
+        navObject[1].forEach(link => {
+            const liRef = document.createElement(`li`)
+            liRef.classList.add(`nav-menu__list-item`)
+
+            const aRef = document.createElement(`a`)
+            aRef.href = link.href
+            aRef.textContent = link.text
+            aRef.classList.add(`nav-menu__list-link`)
+            liRef.appendChild(aRef)
+
+            document.querySelector(`.nav-menu__list`).appendChild(liRef)
+        })
+    } else if (role === `admin`) {
+        navObject[2].forEach(link => {
+            const liRef = document.createElement(`li`)
+            liRef.classList.add(`nav-menu__list-item`)
+
+            const aRef = document.createElement(`a`)
+            aRef.href = link.href
+            aRef.textContent = link.text
+            aRef.classList.add(`nav-menu__list-link`)
+            liRef.appendChild(aRef)
+
+            document.querySelector(`.nav-menu__list`).appendChild(liRef)
+        })
+    }
+}
 
 function renderShoppingModal() {
     const modalRef = document.createElement(`dialog`);
@@ -100,6 +194,7 @@ function renderShoppingCart() {
 }
 
 export {
+    renderNavLinks,
     renderShoppingModal,
     renderShoppingCart,
 };

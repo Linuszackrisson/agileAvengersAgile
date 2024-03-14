@@ -1,4 +1,37 @@
+/*
+=============== 
+Fonts
+===============
+*/
 @import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,700&display=swap");
+
+/*
+=============== 
+Variables
+===============
+*/
+:root {
+    --clr-primary-1: hsl(205, 86%, 17%);
+    --clr-primary-5: hsl(205, 78%, 60%);
+    --clr-primary-8: hsl(205, 86%, 81%);
+    --clr-grey-1: hsl(209, 61%, 16%);
+    --clr-grey-3: hsl(209, 34%, 30%);
+    --clr-grey-10: hsl(210, 36%, 96%);
+    --clr-white: #fff;
+    --clr-black: #222;
+    --ff-primary: 'Roboto', sans-serif;
+    --ff-secondary: 'Open Sans', sans-serif;
+    --transition: all 0.3s linear;
+    --spacing: 0.1rem;
+    --radius: 0.25rem;
+}
+
+/*
+=============== 
+Global Styles
+===============
+*/
 
 * {
     margin: 0;
@@ -17,6 +50,69 @@ main {
     justify-content: space-between;
 }
 
+/* Nav Section Styling*/
+
+.nav-menu {
+    position: absolute;
+    z-index: 4;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #2F2926;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-100%);
+    transition: all .3s ease-in-out;
+}
+
+.nav-menu--open {
+    transform: translateY(0);
+}
+
+.nav-menu__list-item {
+    position: relative;
+    list-style: none;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.nav-menu__list-item:hover {
+    opacity: .8;
+}
+
+.nav-menu__list-item::after {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    content: "";
+    height: 1px;
+    width: 48px;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: inline-block;
+    transform: translateX(-50%);
+}
+
+.nav-menu__list-link {
+    text-decoration: none;
+    color: white;
+    font-size: 2rem;
+}
+
+.nav-menu__nav-icon {
+    background-color: white;
+    padding: 14px 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+
+/* End of Nav Section Styling */
+
 .landing__main {
     margin: 0;
     width: 100vw;
@@ -26,16 +122,28 @@ main {
 
 .main__nav-icon {
     position: absolute;
-    top: 1.5rem;
-    left: 1.5rem;
-    z-index: 3;
+    top: 1rem;
+    left: 1rem;
+    z-index: 5;
     cursor: pointer;
+    background-color: white;
+    max-width: 48px;
+    border-radius: 50%;
+    padding: 14px 11px 0;
+    aspect-ratio: 1/1;
 }
 
 .main__nav-icon img {
-    min-width: 1rem;
+    min-width: 1.2rem;
     max-width: 15vw;
     height: auto;
+}
+
+.main__nav-icon--close {
+    padding: 14px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .content-wrapper {
@@ -95,12 +203,9 @@ main {
     color: rgba(255, 255, 255, .70);
 }
 
-.status__droneImg {
+.status__droneImg {}
 
-    
-}
-
-.status__orderOnWay {    
+.status__orderOnWay {
     font-size: 2.25rem;
     font-family: 'PT Serif';
     font-weight: 700;
@@ -202,16 +307,6 @@ main {
     background-size: 100%;
     min-height: 100vh;
     padding-top: 83px;
-}
-
-.login-page .main__nav-icon {
-    background-color: white;
-    padding: 14px 11px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
 }
 
 .login-page__form {
