@@ -354,3 +354,123 @@ main {
 }
 
 /* End of LoginPage Styling*/
+
+/* Profile Page Styling */
+
+.Profile__banner {
+    width: 100%;
+}
+
+.profile-page {
+    background-color: #2F2926;
+    height: 100vh;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.profile__image {
+    min-width: 94px;
+    height: auto;
+}
+
+.profile__name {
+    font-family: PT Serif;
+    font-size: 24px;
+    color: #FFFF;
+    font-weight: 600;
+    line-height: 29px;
+    margin-top: 1rem;
+    
+    
+    
+}
+
+.profile__mail {
+    font-family: Work Sans;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    color:#FFFFFFCC; 
+    margin-top: 0.5rem;
+}
+
+.orderhistory-container {
+    padding: 2rem;
+}
+
+.orderhistory__title {
+    color: #FFFF;
+    font-family: PT Serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 26px;
+    margin-bottom: 1rem;
+
+}
+
+.order-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.order-number {
+    color:#FFFFFFB2;
+    font-family: Work Sans;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 17px;
+
+
+
+}
+
+.order-date {
+    font-family: Work Sans;
+    font-size: 14px;
+    font-weight: 400;
+    color: #FFFFFFB2;
+    line-height: 17px;
+    text-align: right;
+
+}
+
+.order-total, #orderTotal1 {
+    font-family: Work Sans;
+    font-size: 12px;
+    color: #FFFFFF80;
+    margin-top: 0.2rem;
+    font-weight: 400;
+    line-height: 14px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.order {
+    border-bottom: 1px solid #FFFFFF14;
+    padding-bottom: 0.7rem;
+    margin-top: 0.7rem;
+}
+
+.total-spent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.7rem;
+    font-family: Work Sans;
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFFFFFCC;
+    
+
+}
+
+
+
+
+
