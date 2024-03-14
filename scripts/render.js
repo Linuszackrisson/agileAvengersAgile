@@ -6,6 +6,7 @@ import {
     countItemPrice,
     countTotalPrice,
     changeCartValue,
+    statusPageUpdate,
 } from "./script.js";
 
 function renderShoppingModal() {
@@ -46,7 +47,7 @@ function renderShoppingModal() {
     const btnRef = document.createElement(`button`);
     btnRef.classList.add(`shopping__btn`);
     btnRef.textContent = `Take my money!`;
-    btnRef.addEventListener(`click`, () => { window.location.href = `status.html` });
+    btnRef.addEventListener(`click`, () => { statusPageUpdate(), window.location.href = `status.html` });
     formRef.appendChild(btnRef);
     renderShoppingCart();
 }
