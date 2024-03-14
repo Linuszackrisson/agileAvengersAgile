@@ -1,0 +1,356 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #F3E4E1;
+}
+
+main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.landing__main {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #38846D;
+}
+
+.main__nav-icon {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    z-index: 3;
+    cursor: pointer;
+}
+
+.main__nav-icon img {
+    min-width: 1rem;
+    max-width: 15vw;
+    height: auto;
+}
+
+.content-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.landing-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90vw;
+    height: auto;
+}
+
+.landing-img:nth-child(1) {
+    height: 100%;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+.landing-img:nth-child(2) {
+    /* max-width: 50vw; */
+    min-width: 40Vw;
+    max-height: 50vh;
+    z-index: 2;
+}
+
+.landing-img:nth-child(3) {
+    height: 100%;
+    right: 0;
+    left: auto;
+    transform: translateY(-50%);
+}
+
+.status__main {
+    margin: 0;
+    padding: 3rem 0;
+    min-width: 375px;
+    min-height: 100vh;
+    background-color: #E5674E;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400
+}
+
+.status__orderNr {
+    color: rgba(255, 255, 255, .70);
+}
+
+.status__droneImg {
+
+    
+}
+
+.status__orderOnWay {    
+    font-size: 2.25rem;
+    font-family: 'PT Serif';
+    font-weight: 700;
+    max-width: 65%;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.status__delivCounter {
+    font-size: 1.375rem;
+}
+
+.status__acceptBtn {
+    min-height: 3.4rem;
+    min-width: 11.5rem;
+    font-family: 'PT Serif';
+    font-weight: 700;
+    font-size: 1.5rem;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.status__acceptBtn:hover {
+    background-color: lightgray;
+}
+
+.about-header {
+    width: 100%;
+}
+
+.about-footer {
+    width: 100%;
+}
+
+.about-container {
+    padding: 2rem;
+}
+
+.about__title {
+    margin: 0;
+    font-family: PT Serif;
+    font-size: 42px;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.about__text {
+    font-family: Work Sans;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.about__boldtext {
+    font-family: Work Sans;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 22px;
+    margin-bottom: 1rem;
+}
+
+.about_profile-image {
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+    width: 74px;
+    height: 74px;
+    margin-top: 3rem;
+}
+
+.about__author {
+    text-align: center;
+    font-family: PT serif;
+    font-weight: 700;
+    font-size: 22px;
+    margin: 0.3rem;
+}
+
+.about__auther-title {
+    text-align: center;
+    font-family: Work Sans;
+    font-size: 12px;
+    margin: 0.3rem;
+}
+
+/* Login Page Styling */
+
+.login-page {
+    background-color: #2F2926;
+    background-image: url(../Assets/graphics-header.svg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    min-height: 100vh;
+    padding-top: 83px;
+}
+
+.login-page .main__nav-icon {
+    background-color: white;
+    padding: 14px 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+
+.login-page__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 1rem;
+    background-color: #F3E4E1;
+    width: 92%;
+    max-width: 700px;
+    height: 85vh;
+    margin: 0 auto;
+}
+
+.login-page__form-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    gap: 4px;
+}
+
+.login-page__logo {
+    height: 30px;
+    width: 30px;
+    margin: 0 auto;
+}
+
+.login-page__form-title {
+    font-size: 2rem;
+    font-family: PT serif;
+}
+
+.login-page__form-description {
+    font-size: 1rem;
+    font-family: Work Sans;
+}
+
+.login-page__input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.login-page__input-container--checkbox {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: .5rem 0;
+}
+
+.login-page__form-label {
+    text-align: left;
+    font-family: Work Sans;
+    font-weight: 400;
+}
+
+.login-page__form-input {
+    padding: .7rem 1rem;
+    border: solid 1px #2F2926;
+    border-radius: 6px;
+    background-color: transparent;
+    font-family: Work Sans;
+    font-weight: 400;
+}
+
+/* Custom Checkbox Styling */
+
+.login-page__check-container {
+    text-align: left;
+    display: block;
+    position: relative;
+    padding-left: 24px;
+    margin: 12px 0;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: Work Sans;
+    font-weight: 400;
+}
+
+.login-page__check-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 10px;
+    width: 10px;
+}
+
+.login-page__form-checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    border: 1px solid black;
+    border: inset 1px solid white;
+}
+
+.login-page__form-checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid white;
+}
+
+.login-page__check-container input:checked~.login-page__form-checkmark::after {
+    display: block;
+    background-color: #0E927D;
+}
+
+/* END of Custom Checkbox Styling */
+
+.login-page__submit-btn {
+    padding: .5rem 1.6rem .8rem;
+    background-color: #2F2926;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-family: PT serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.login-page__submit-btn:hover {
+    opacity: .8;
+}
+
+/* End of LoginPage Styling*/
