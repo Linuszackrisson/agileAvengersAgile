@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Air Bean Login </title>
+    <link rel="icon" href="/Assets/drone.svg" type="image/x-icon">
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+
+<body>
+    <main class="login-page">
+        <div class="main__nav-icon">
+            <img src="/Assets/navicon.svg" alt="Navigation-icon">
+        </div>
+        <form class="login-page__form">
+            <section class="login-page__form-container">
+                <img class="login-page__logo" src="Assets/logo-sml.svg">
+                <h1 class="login-page__form-title">
+                    Välkommen tillbaka
+                </h1>
+                <p class="login-page__form-description">
+                    Logga in på ditt konto nedan för att se din orderhistorik.
+                </p>
+            </section>
+            <section class="login-page__form-container">
+                <div class="login-page__input-container">
+                    <label class="login-page__form-label" for="loginEmail"> Email </label>
+                    <input class="login-page__form-input" type="email" id="loginEmail">
+                </div>
+                <div class="login-page__input-container">
+                    <label class="login-page__form-label" for="loginPassword">
+                        Password
+                    </label>
+                    <input class="login-page__form-input" type="password" id="loginPassword">
+                </div>
+                <label class="login-page__check-container">
+                    GDPR Ok!
+                    <input type="checkbox">
+                    <span class="login-page__form-checkmark"></span>
+                </label>
+            </section>
+            <button class="login-page__submit-btn">
+                Brew me a cup!
+            </button>
+        </form>
+    </main>
+
+    <script type="module" src="scripts/script.js"></script>
+</body>
+
+</html>
