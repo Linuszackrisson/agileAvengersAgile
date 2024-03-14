@@ -169,6 +169,7 @@ main {
     padding: 2rem 1rem;
     background-color: #F3E4E1;
     width: 92%;
+    max-width: 700px;
     height: 85vh;
     margin: 0 auto;
 }
@@ -267,6 +268,8 @@ main {
     content: "";
     position: absolute;
     display: none;
+    top: 0;
+    left: 0;
     width: 12px;
     height: 12px;
     border-radius: 50%;
