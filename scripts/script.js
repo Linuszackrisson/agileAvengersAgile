@@ -4,6 +4,7 @@ import {
 } from "./localStorage.js";
 
 import {
+    renderNavLinks,
     renderShoppingModal,
     renderShoppingCart,
 } from "./render.js";
@@ -56,6 +57,23 @@ const cart = [
 addLocalStorage(`cart`, cart);
 renderShoppingModal();
 
+document.querySelector(`.main__nav-icon`).addEventListener(`click`, () => {
+    const iconRef = document.querySelector(`.main__nav-icon`)
+    const iconImgRef = document.querySelector(`.main__nav-icon img`)
+    const navRef = document.querySelector(`.nav-menu`)
+
+    if (document.querySelector(`.nav-menu--open`)) {
+        iconImgRef.src = `../assets/navicon.svg`
+        navRef.classList.remove(`nav-menu--open`)
+        iconRef.classList.remove(`main__nav-icon--close`)
+    } else {
+        iconImgRef.src = `../assets/close.svg`
+        navRef.classList.add(`nav-menu--open`)
+        iconRef.classList.add(`main__nav-icon--close`)
+    }
+    renderNavLinks();
+})
+
 function countItemPrice(price, quantity) {
     return price * quantity;
 }
@@ -93,114 +111,19 @@ function changeCartValue() {
     renderShoppingCart();
 }
 
+function checkUserRole() {
+    const currentUser = getLocalStorage(`currentUser`)
+    if (!currentUser) {
+        return `guest`
+    } else {
+        return currentUser.role
+    }
+
+}
+
 export {
     countItemPrice,
     countTotalPrice,
     changeCartValue,
+    checkUserRole,
 };
-
-const navToggle = document.querySelector(".nav-toggle");
-const links = document.querySelector(".links");
-
-
-
-
-navToggle.addEventListener("click", function () {
-
-    links.classList.toggle("show-links");
-});
-
-renderNavLinks()
-
-function renderNavLinks() {
-
-
-    const navObject = [
-        [
-            {
-                text: `Meny`,
-                href: `menu.html`
-            },
-            {
-                text: `Vårt Kaffe`,
-                href: `about.html`
-            },
-            {
-                text: `Min profil`,
-                href: `profil.html`
-            },
-            {
-                text: `Orderstatus`,
-                href: `status.html`
-            }
-        ],
-        [
-            {
-                text: `Meny`,
-                href: `menu.html`
-            },
-            {
-                text: `Vårt Kaffe`,
-                href: `about.html`
-            },
-            {
-                text: `Login`,
-                href: `login.html`
-            },
-            {
-                text: `Registrera`,
-                href: `register.html`
-            },
-            {
-                text: `Orderstatus`,
-                href: `status.html`
-            }
-        ],
-        [
-            {
-                text: `Admin`,
-                href: `admin.html`
-            }
-        ],
-    ]
-
-
-    const login = JSON.parse(localStorage.getItem('loginValue'))
-    // To make this code work we need the loginValue from the
-    // loginfoorm . You can test this function if you with this code:
-    // const test =`user`. Change the login to test.
-    if (login === `user`) {
-        navObject[0].forEach(link => {
-            const liRef = document.createElement(`li`)
-
-            const aRef = document.createElement(`a`)
-            aRef.href = link.href
-            aRef.textContent = link.text
-
-            liRef.appendChild(aRef)
-            document.querySelector(`.links`).appendChild(liRef)
-        })
-    } else if (login === `guest`) {
-        navObject[1].forEach(link => {
-            const liRef = document.createElement(`li`)
-
-            const aRef = document.createElement(`a`)
-            aRef.href = link.href
-            aRef.textContent = link.text
-
-            liRef.appendChild(aRef)
-            document.querySelector(`.links`).appendChild(liRef)
-        })
-    } else if (login === `admin`) {
-        navObject[2].forEach(link => {
-            const liRef = document.createElement(`li`)
-
-            const aRef = document.createElement(`a`)
-            aRef.href = link.href
-            aRef.textContent = link.text
-
-            liRef.appendChild(aRef)
-            document.querySelector(`.links`).appendChild(liRef)
-        })
-    }
-}
