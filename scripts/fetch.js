@@ -5,6 +5,7 @@ async function fetchProducts() {
 
         return products;
     } catch(error) {
+        console.log(error);
         return [];
     }
 }
