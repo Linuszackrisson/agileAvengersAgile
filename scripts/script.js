@@ -4,6 +4,7 @@ import {
 } from "./localStorage.js";
 
 import {
+    renderNavLinks,
     renderShoppingModal,
     renderShoppingCart,
 } from "./render.js";
@@ -56,6 +57,23 @@ const cart = [
 addLocalStorage(`cart`, cart);
 renderShoppingModal();
 
+document.querySelector(`.main__nav-icon`).addEventListener(`click`, () => {
+    const iconRef = document.querySelector(`.main__nav-icon`)
+    const iconImgRef = document.querySelector(`.main__nav-icon img`)
+    const navRef = document.querySelector(`.nav-menu`)
+
+    if (document.querySelector(`.nav-menu--open`)) {
+        iconImgRef.src = `../assets/navicon.svg`
+        navRef.classList.remove(`nav-menu--open`)
+        iconRef.classList.remove(`main__nav-icon--close`)
+    } else {
+        iconImgRef.src = `../assets/close.svg`
+        navRef.classList.add(`nav-menu--open`)
+        iconRef.classList.add(`main__nav-icon--close`)
+    }
+    renderNavLinks();
+})
+
 function countItemPrice(price, quantity) {
     return price * quantity;
 }
@@ -93,6 +111,23 @@ function changeCartValue() {
     renderShoppingCart();
 }
 
+function checkUserRole() {
+    const currentUser = getLocalStorage(`currentUser`)
+    if (!currentUser) {
+        return `guest`
+    } else {
+        return currentUser.role
+    }
+
+}
+
+export {
+    countItemPrice,
+    countTotalPrice,
+    changeCartValue,
+    checkUserRole,
+    statusPageUpdate,
+};
 function statusPageUpdate () {
     const uniqueOrderNr = '#12345'; 
 // Här ska det implementeras värde från funktion som skrivs senare.
@@ -109,13 +144,6 @@ function statusPageUpdate () {
     counterText = counterText.replace("[nr]", deliveryTime);
     delivCountRef.textContent = counterText;
 }
-export {
-    countItemPrice,
-    countTotalPrice,
-    changeCartValue,
-    statusPageUpdate,
-};
-
 // Simpel funktion för att slumpa tiden för leveransen. Mellan 13 och 20 minuter.
 // Körs varje gång sidan laddas om.
 
@@ -127,4 +155,8 @@ function renderDeliveryTime() {
 
   renderDeliveryTime();
 
-  // Jag hoppas detta kommer med
+ 
+
+    
+};
+
