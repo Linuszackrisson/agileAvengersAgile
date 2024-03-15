@@ -126,3 +126,5 @@ function renderDeliveryTime() {
   
 
   renderDeliveryTime();
+
+  // Jag hoppas detta kommer med
