@@ -126,4 +126,37 @@ export {
     countTotalPrice,
     changeCartValue,
     checkUserRole,
+    statusPageUpdate,
 };
+function statusPageUpdate () {
+    const uniqueOrderNr = '#12345'; 
+// Här ska det implementeras värde från funktion som skrivs senare.
+    const orderNrRef = document.querySelector(".status__orderNr")
+    let orderNr = uniqueOrderNr;
+    let orderNrText = orderNrRef.textContent;
+    orderNrText = orderNrText.replace("[ordernr]", orderNr);
+    orderNrRef.textContent = orderNrText;
+
+    const delivCountRef = document.querySelector(".status__delivCounter");
+    let deliveryTime = 30;
+// ^ Här ska det istället för en siffra implementeras värde från funktion som skrivs senare.
+    let counterText = delivCountRef.textContent;
+    counterText = counterText.replace("[nr]", deliveryTime);
+    delivCountRef.textContent = counterText;
+}
+// Simpel funktion för att slumpa tiden för leveransen. Mellan 13 och 20 minuter.
+// Körs varje gång sidan laddas om.
+
+function renderDeliveryTime() {
+    var minuter = Math.floor(Math.random() * (20 - 13 + 1)) + 13; 
+    document.getElementById("deliveryCounter").innerHTML = "<strong>" + minuter + "</strong> minuter"; 
+  }
+  
+
+  renderDeliveryTime();
+
+ 
+
+    
+};
+
