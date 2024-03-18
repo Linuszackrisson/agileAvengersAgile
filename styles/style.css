@@ -354,3 +354,172 @@ main {
 }
 
 /* End of LoginPage Styling*/
+
+
+
+/* Order menu-coffee Styling */
+
+
+
+/*size on body acordenly to figma skiss */
+.menu-coffee{
+background-color:#F3E4E1;
+width: 100%;
+
+font-family: "PT Serif", serif;
+
+
+}
+ .menu-coffee-cont{
+
+    margin:0 auto;
+}
+
+span{
+
+    font-size:10px;
+}
+
+
+
+.menu-coffee-cont h2{
+
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 27.6px;
+}
+
+
+.menu-coffee-cont img{
+
+    width:32px;
+    height: 32px;
+    background-color:black;
+    border-radius: 50%;
+    padding:10px;
+}
+
+
+
+.img-header{
+
+    background-image: url('/Assets/graphics-header.svg');
+    height: 113px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 10;
+    width: 100%;
+}
+
+.menu-title{
+
+    display:flex;
+    justify-content: center;
+}
+
+.menu-title h1{
+
+    font-size:42px;
+    font-weight: 700;
+    line-height: 50.4px;
+    
+}
+
+.img-footer{
+   
+    
+    background-image: url('/Assets/graphics-footer.svg');
+    height: 100px;
+    background-size:cover;
+    background-repeat: no-repeat;
+    z-index: 100%;
+    width: 100%;
+    
+   
+}
+
+.img-header-nav-icon img{
+    position:absolute;
+    top:0;
+    width: 45px;
+    height: 45px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 50%;
+    margin:20px;
+}
+
+.img-header-bag-icon-number{
+    position: absolute;
+    left:371px;
+    top:22px;
+    width:18px;
+    height: 18px;
+    background-color:red;
+    z-index: 50;
+    border-radius: 50%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.small-number{
+
+    color:#fff;
+    font-weight: 700;
+    font-size:10px;
+}
+
+.img-header-bag-icon{
+    display:flex;
+    justify-content: center;
+    position:absolute;
+    left:321px;
+    top:4px;
+   
+    z-index:20;
+    background-color: black;
+    border-radius:50%;
+    padding:15px;
+    margin:20px;
+}
+
+.img-header-bag-icon img{
+
+    width:20px;
+    height:20px;
+}
+
+.row-2,
+.row-3,
+.row-4,
+.row-5,
+.row-6,
+.row-1{
+
+    max-width: 350px;
+    display:flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-bottom:2.8rem;
+    margin-top:2rem;
+}
+
+.img-add-icon{
+
+    margin-right:20px;
+    margin-top:10px;
+}
+
+.img-footer{
+
+    margin-top:120px;
+}
+
+
+
+
+
+/* End of Order menu-coffee Styling */
