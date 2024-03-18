@@ -2,6 +2,7 @@ import {
     addLocalStorage,
     getLocalStorage,
     addUsersLocalStorage,
+    addCustomerOrderHistory,
 } from "./localStorage.js";
 
 import {
@@ -54,6 +55,8 @@ const cart = [
         "inCart": 0
     }
 ]
+addCustomerOrderHistory(123)
+
 addUsersLocalStorage()
 addLocalStorage(`cart`, cart);
 renderShoppingModal();
