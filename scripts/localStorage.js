@@ -1,3 +1,5 @@
+import { fetchUsers, } from "./fetch.js";
+
 function addLocalStorage(title, item) {
     try {
         localStorage.setItem(title, JSON.stringify(item));
@@ -23,8 +25,14 @@ function removeLocalStorage(title) {
     }
 }
 
+async function addUsersLocalStorage() {
+    const users = await fetchUsers()
+    addLocalStorage("users", users.users)
+}
+
 export {
     addLocalStorage,
     getLocalStorage,
     removeLocalStorage,
+    addUsersLocalStorage,
 };
