@@ -10,56 +10,17 @@ import {
     renderShoppingCart,
 } from "./render.js";
 
+import {
+    fetchProducts,
+} from "./fetch.js";
 
-const cart = [
-    {
-        "id": 1,
-        "title": "Bryggkaffe",
-        "price": 29,
-        "inCart": 2
-    },
-    {
-        "id": 2,
-        "title": "Caffè Doppio",
-        "price": 59,
-        "inCart": 1
-    },
-    {
-        "id": 3,
-        "title": "Cappuccino",
-        "price": 49,
-        "inCart": 0
-    },
-    {
-        "id": 4,
-        "title": "Latte Macchiato",
-        "price": 49,
-        "inCart": 0
-    },
-    {
-        "id": 5,
-        "title": "Kaffe Latte",
-        "price": 59,
-        "inCart": 3
-    },
-    {
-        "id": 6,
-        "title": "Cortado",
-        "price": 55,
-        "inCart": 0
-    },
-    {
-        "id": 7,
-        "title": "Santos Special",
-        "price": 69,
-        "inCart": 0
-    }
-]
 addUsersLocalStorage()
-addLocalStorage(`cart`, cart);
-renderShoppingModal();
-document.querySelector(`.landing-img`).addEventListener(`click`, openShoppingCart)
-// document.querySelectorAll(`.ADD-BUTTON_DRINK_MENU`).forEach(item => item.addEventListener(`click`, changeCartValue))
+renderShoppingModal()
+
+if (window.location.pathname === "/product-page.html") {
+    document.querySelector(`.img-header-bag-icon`).addEventListener(`click`, openShoppingCart)
+    document.querySelectorAll(`.img-add-icon`).forEach(item => item.addEventListener(`click`, changeCartValue))
+}
 
 document.querySelector(`.main__nav-icon`).addEventListener(`click`, () => {
     const iconRef = document.querySelector(`.main__nav-icon`)
@@ -78,9 +39,6 @@ document.querySelector(`.main__nav-icon`).addEventListener(`click`, () => {
     renderNavLinks();
 })
 
-document.querySelector(`.landing-img`).addEventListener(`click`, openShoppingCart)
-// document.querySelectorAll(`.ADD-BUTTON_DRINK_MENU`).forEach(item => item.addEventListener(`click`, changeCartValue))
-
 function openShoppingCart() {
     const modalRef = document.querySelector(`.shopping`)
     if (modalRef.open) {
@@ -89,6 +47,7 @@ function openShoppingCart() {
         modalRef.open = true;
     }
 }
+
 function countItemPrice(price, quantity) {
     return price * quantity;
 }
@@ -103,36 +62,55 @@ function countTotalPrice(cart) {
     return totalPrice;
 }
 
-function openShoppingCart() {
-    const modalRef = document.querySelector(`.shopping`)
-    if (modalRef.open) {
-        modalRef.open = false;
-    } else {
-        modalRef.open = true;
-    }
-}
+async function changeCartValue() {
+    if (!getLocalStorage(`cart`)) {
+        const products = await fetchProducts()
+        const cart = []
+        products.menu.forEach(item => {
 
-function changeCartValue() {
-    const cart = getLocalStorage(`cart`);
-    if (this.alt.includes(`Add`)) {
-        cart.forEach(item => {
             if (item.id === Number(this.dataset.id)) {
-                if (item.inCart > 0) {
-                    item.inCart++;
+                const cartItem = {
+                    "id": item.id,
+                    "title": item.title,
+                    "price": item.price,
+                    "inCart": 1,
                 }
+                cart.push(cartItem)
+            } else {
+                const cartItem = {
+                    "id": item.id,
+                    "title": item.title,
+                    "price": item.price,
+                    "inCart": 0,
+                }
+                cart.push(cartItem)
             }
         });
-    } else if (this.alt.includes(`Remove`)) {
-        cart.forEach(item => {
-            if (item.id === Number(this.dataset.id)) {
-                if (item.inCart > 0) {
-                    item.inCart--;
+        addLocalStorage(`cart`, cart);
+        renderShoppingCart()
+    } else {
+        const cart = getLocalStorage(`cart`);
+        if (this.alt.includes(`Add`)) {
+            cart.forEach(item => {
+                if (item.id === Number(this.dataset.id)) {
+                    if (item.inCart >= 0) {
+                        item.inCart++;
+                    }
                 }
-            }
-        });
+            });
+        } else if (this.alt.includes(`Remove`)) {
+            cart.forEach(item => {
+                if (item.id === Number(this.dataset.id)) {
+                    if (item.inCart >= 0) {
+                        item.inCart--;
+                    }
+                }
+            });
+        }
+        addLocalStorage(`cart`, cart);
+        renderShoppingCart();
     }
-    addLocalStorage(`cart`, cart);
-    renderShoppingCart();
+
 }
 
 function checkUserRole() {
@@ -142,7 +120,6 @@ function checkUserRole() {
     } else {
         return currentUser.role
     }
-
 }
 
 export {
@@ -153,22 +130,16 @@ export {
     statusPageUpdate,
 };
 
-
-
-function statusPageUpdate() {
-    const uniqueOrderNr = '#12345';
 // Här ska det implementeras värde från funktion som skrivs senare.
-=======
 function statusPageUpdate() {
+    console.log(`test`);
     const uniqueOrderNr = '#12345';
     // Här ska det implementeras värde från funktion som skrivs senare.
-
     const orderNrRef = document.querySelector(".status__orderNr")
     let orderNr = uniqueOrderNr;
     let orderNrText = orderNrRef.textContent;
     orderNrText = orderNrText.replace("[ordernr]", orderNr);
     orderNrRef.textContent = orderNrText;
-
     const delivCountRef = document.querySelector(".status__delivCounter");
     let deliveryTime = 30;
     // ^ Här ska det istället för en siffra implementeras värde från funktion som skrivs senare.
@@ -176,6 +147,7 @@ function statusPageUpdate() {
     counterText = counterText.replace("[nr]", deliveryTime);
     delivCountRef.textContent = counterText;
 }
+
 // Simpel funktion för att slumpa tiden för leveransen. Mellan 13 och 20 minuter.
 // Körs varje gång sidan laddas om.
 
@@ -183,11 +155,7 @@ function renderDeliveryTime() {
 
     var minuter = Math.floor(Math.random() * (20 - 13 + 1)) + 13;
     document.getElementById("deliveryCounter").innerHTML = "<strong>" + minuter + "</strong> minuter";
-  }
-
-
-  renderDeliveryTime();
-
+}
 
 // Här börjar funktionen för att generera unikt ordernummer.
 function generateUniqueOrderNumber() {
@@ -203,33 +171,16 @@ function generateUniqueOrderNumber() {
     for (let i = 0; i < 10; i++) {
         orderNumber += numbers.charAt(Math.floor(Math.random() * numbers.length));
     }
-
-
-
     if (getLocalStorage('orderNumbers')) {
         const uniqueOrders = getLocalStorage('orderNumbers')
-        uniqueOrders.forEach (item => {
-            orderArray.push (item)
+        uniqueOrders.forEach(item => {
+            orderArray.push(item)
         })
-
     }
-
-    if (orderArray.includes(orderNumber)){
+    if (orderArray.includes(orderNumber)) {
         generateUniqueOrderNumber()
-
+    } else {
+        orderArray.push(orderNumber)
+        addLocalStorage('orderNumbers', orderArray)
     }
-
-    else { orderArray.push(orderNumber)
-    addLocalStorage('orderNumbers', orderArray)
 }
-
-}
-
-
-
-    var minuter = Math.floor(Math.random() * (20 - 13 + 1)) + 13;
-    document.getElementById("deliveryCounter").innerHTML = "<strong>" + minuter + "</strong> minuter";
-}
-
-
-renderDeliveryTime();

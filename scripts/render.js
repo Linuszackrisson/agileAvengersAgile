@@ -7,6 +7,7 @@ import {
     countTotalPrice,
     changeCartValue,
     checkUserRole,
+    statusPageUpdate,
 } from "./script.js";
 
 function renderNavLinks() {
@@ -16,7 +17,7 @@ function renderNavLinks() {
         [
             {
                 text: `Meny`,
-                href: `menu.html`
+                href: `product-page.html`
             },
             {
                 text: `Vårt Kaffe`,
@@ -34,7 +35,7 @@ function renderNavLinks() {
         [
             {
                 text: `Meny`,
-                href: `menu.html`
+                href: `product-page.html`
             },
             {
                 text: `Vårt Kaffe`,
@@ -54,6 +55,10 @@ function renderNavLinks() {
             }
         ],
         [
+            {
+                text: `Meny`,
+                href: `product-page.html`
+            },
             {
                 text: `Admin`,
                 href: `admin.html`
@@ -141,9 +146,8 @@ function renderShoppingModal() {
     const btnRef = document.createElement(`button`);
     btnRef.classList.add(`shopping__btn`);
     btnRef.textContent = `Take my money!`;
-    btnRef.addEventListener(`click`, () => { statusPageUpdate(), window.location.href = `status.html` });
+    btnRef.addEventListener(`click`, () => { window.location.href = `status.html`; statusPageUpdate() });
     formRef.appendChild(btnRef);
-    renderShoppingCart();
 }
 
 function renderShoppingCart() {
