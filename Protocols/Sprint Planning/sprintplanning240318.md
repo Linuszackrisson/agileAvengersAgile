@@ -9,10 +9,13 @@ Via Discord. Startat klockan 09.00
 
 
 ## Protokoll
+Ammar ingår inte längre i teamet.
+Vi går igenom vilka issues som behöver göras för att mobilversionen ska anses fungera.
 
 
 
-Nästa möte: imorgon tisdag 18/3 kl 9.00
+
+Nästa möte: Daily scrum imorgon tisdag 18/3 kl 8.55
 
 
 ## Uppkomna frågor:
