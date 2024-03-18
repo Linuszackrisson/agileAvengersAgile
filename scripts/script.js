@@ -110,7 +110,6 @@ async function changeCartValue() {
         addLocalStorage(`cart`, cart);
         renderShoppingCart();
     }
-
 }
 
 function checkUserRole() {
@@ -152,7 +151,6 @@ function statusPageUpdate() {
 // Körs varje gång sidan laddas om.
 
 function renderDeliveryTime() {
-
     var minuter = Math.floor(Math.random() * (20 - 13 + 1)) + 13;
     document.getElementById("deliveryCounter").innerHTML = "<strong>" + minuter + "</strong> minuter";
 }
@@ -179,8 +177,12 @@ function generateUniqueOrderNumber() {
     }
     if (orderArray.includes(orderNumber)) {
         generateUniqueOrderNumber()
+
     } else {
         orderArray.push(orderNumber)
         addLocalStorage('orderNumbers', orderArray)
     }
+
 }
+
+renderDeliveryTime();
