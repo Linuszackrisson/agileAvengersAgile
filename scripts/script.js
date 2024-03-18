@@ -145,8 +145,8 @@ function statusPageUpdate() {
     counterText = counterText.replace("[nr]", deliveryTime);
     delivCountRef.textContent = counterText;
 }
-// Simpel funktion för att slumpa tiden för leveransen. Mellan 13 och 20 minuter.
-// Körs varje gång sidan laddas om.
+Simpel funktion för att slumpa tiden för leveransen. Mellan 13 och 20 minuter.
+Körs varje gång sidan laddas om.
 
 function renderDeliveryTime() {
     var minuter = Math.floor(Math.random() * (20 - 13 + 1)) + 13;
@@ -155,3 +155,115 @@ function renderDeliveryTime() {
 
 
 renderDeliveryTime();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//ˇˇˇˇˇˇ Den här funktionen får gärna flyttas upp senare när vi går igenom och snyggar till!!!
+window.onload = function() {    
+    if (window.location.pathname.endsWith("login.html")) {
+        checkLoginDetails();
+    }
+};
+//^^^^^^^ Den här funktionen får gärna flyttas upp senare när vi går igenom och snyggar till!!!
+
+function checkLoginDetails() {
+    let logInBtnRef = document.querySelector('.login-page__submit-btn');
+    logInBtnRef.addEventListener('click', (event) => {
+        event.preventDefault();
+        validateLogin();
+    })
+}
+
+function validateLogin() {
+    try {
+        const userNameRef = document.querySelector('#loginEmail');
+        const passwordRef = document.querySelector('#loginPassword');
+        let descriptionRef = document.querySelector('.login-page__form-description');
+        const checkboxRef = document.querySelector('.login-page__check-container input[type="checkbox"]');
+
+        const users = getLocalStorage("users");
+        if (!users) {
+            throw "No users found in localStorage!"
+        }
+
+        const user = users.find(user => user.email === userNameRef.value);
+        console.log(user);
+        
+        // if(!users.some(user => user.username === userNameRef.value)){
+        if(!user) {            
+            descriptionRef.innerText = 'Kontrollera användarnamn!';
+            userNameRef.focus();        
+        } else {
+            // const user = users.find(user => user.username === userNameRef.value);
+            if(user.password !== passwordRef.value) {
+                descriptionRef.innerText = 'Kontrollera lösenord!'
+                passwordRef.focus();
+            } else {
+                if (!checkboxRef.checked) {
+                    descriptionRef.innerText = 'Godkänn GDPR!';
+                    checkboxRef.focus()
+                } else {
+                    descriptionRef.innerText ='Logga in på ditt konto nedan för att se din orderhistorik.';
+                    addLocalStorage("currentUser", user)                    
+                    window.location.href = 'product-page.html';
+                }
+            }
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
