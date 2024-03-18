@@ -10,6 +10,7 @@ import {
     renderShoppingCart,
 } from "./render.js";
 
+
 const cart = [
     {
         "id": 1,
@@ -129,9 +130,17 @@ export {
     checkUserRole,
     statusPageUpdate,
 };
+
+
+
+function statusPageUpdate () {
+    const uniqueOrderNr = '#12345'; 
+// Här ska det implementeras värde från funktion som skrivs senare.
+=======
 function statusPageUpdate() {
     const uniqueOrderNr = '#12345';
     // Här ska det implementeras värde från funktion som skrivs senare.
+
     const orderNrRef = document.querySelector(".status__orderNr")
     let orderNr = uniqueOrderNr;
     let orderNrText = orderNrRef.textContent;
@@ -149,6 +158,53 @@ function statusPageUpdate() {
 // Körs varje gång sidan laddas om.
 
 function renderDeliveryTime() {
+
+    var minuter = Math.floor(Math.random() * (20 - 13 + 1)) + 13; 
+    document.getElementById("deliveryCounter").innerHTML = "<strong>" + minuter + "</strong> minuter"; 
+  }
+  
+
+  renderDeliveryTime();
+
+ 
+// Här börjar funktionen för att generera unikt ordernummer.
+function generateUniqueOrderNumber() {
+    const orderArray = []
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const numbers = '0123456789';
+    let orderNumber = '#';
+    
+    for (let i = 0; i < 2; i++) {
+        orderNumber += letters.charAt(Math.floor(Math.random() * letters.length));
+    }
+
+    for (let i = 0; i < 10; i++) {
+        orderNumber += numbers.charAt(Math.floor(Math.random() * numbers.length));
+    }
+    
+    
+
+    if (getLocalStorage('orderNumbers')) {
+        const uniqueOrders = getLocalStorage('orderNumbers')
+        uniqueOrders.forEach (item => {
+            orderArray.push (item)
+        })
+        
+    }
+
+    if (orderArray.includes(orderNumber)){
+        generateUniqueOrderNumber()
+
+    }
+
+    else { orderArray.push(orderNumber) 
+    addLocalStorage('orderNumbers', orderArray)
+}
+
+}
+
+
+
     var minuter = Math.floor(Math.random() * (20 - 13 + 1)) + 13;
     document.getElementById("deliveryCounter").innerHTML = "<strong>" + minuter + "</strong> minuter";
 }
