@@ -266,10 +266,51 @@ function renderOrderHistory(order) {
     divRef.appendChild(pRef)
 }
 
+function renderProducts() {
+    const products = getLocalStorage(`products`)
+    document.querySelector(`.menu-coffee-cont`).textContent = ``
+    if (products) {
+        products.forEach(item => {
+            const articleRef = document.createElement(`article`)
+            articleRef.classList.add(`row`)
+            document.querySelector(`.menu-coffee-cont`).appendChild(articleRef)
+
+            const imgRef = document.createElement(`img`)
+            imgRef.classList.add(`img-add-icon`)
+            imgRef.src = `./Assets/add.svg`
+            imgRef.alt = `Add to ${item.title}`
+            imgRef.dataset.id = item.id
+            imgRef.addEventListener(`click`, changeCartValue);
+            articleRef.appendChild(imgRef)
+
+            let divRef = document.createElement(`div`)
+            divRef.classList.add(`menu-coffe-text`)
+            articleRef.appendChild(divRef)
+
+            const h2Ref = document.createElement(`h2`)
+            h2Ref.textContent = item.title
+            divRef.appendChild(h2Ref)
+
+            const pRef = document.createElement(`p`)
+            pRef.textContent = item.desc
+            divRef.appendChild(pRef)
+
+            divRef = document.createElement(`div`)
+            divRef.classList.add(`menu-coffe-text`)
+            articleRef.appendChild(divRef)
+
+            const h3Ref = document.createElement(`h3`)
+            h3Ref.textContent = `${item.price}kr`
+            divRef.appendChild(h3Ref)
+        });
+    }
+}
+
 export {
     renderNavLinks,
     renderShoppingModal,
     renderShoppingCart,
     renderProfilePageInformation,
+    renderProducts,
 };
 

@@ -2,6 +2,7 @@ import {
     addLocalStorage,
     getLocalStorage,
     addUsersLocalStorage,
+    addProductsLocalStorage,
 } from "./localStorage.js";
 
 import {
@@ -9,6 +10,7 @@ import {
     renderShoppingModal,
     renderShoppingCart,
     renderProfilePageInformation,
+    renderProducts,
 } from "./render.js";
 
 import {
@@ -16,11 +18,14 @@ import {
 } from "./fetch.js";
 
 addUsersLocalStorage()
+addProductsLocalStorage()
 renderShoppingModal()
 
 if (window.location.pathname === "/product-page.html") {
     document.querySelector(`.img-header-bag-icon`).addEventListener(`click`, openShoppingCart)
     document.querySelectorAll(`.img-add-icon`).forEach(item => item.addEventListener(`click`, changeCartValue))
+    renderProducts()
+    renderShoppingCart()
 }
 
 if (document.querySelector(`.main__nav-icon`)) {
@@ -41,7 +46,6 @@ if (document.querySelector(`.main__nav-icon`)) {
         }
         renderNavLinks();
     })
-
 }
 
 function openShoppingCart() {
@@ -243,5 +247,3 @@ function validateLogin() {
         console.error(error);
     }
 }
-
-renderProfilePageInformation()

@@ -593,7 +593,8 @@ span {
 .row-4,
 .row-5,
 .row-6,
-.row-1 {
+.row-1,
+.row {
 
     max-width: 350px;
     display: flex;
