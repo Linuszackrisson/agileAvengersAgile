@@ -21,6 +21,18 @@ addUsersLocalStorage()
 addProductsLocalStorage()
 renderShoppingModal()
 
+window.onload = function () {
+    if (window.location.pathname.endsWith("login.html")) {
+        console.log('login load');
+        checkLoginDetails();        
+    } else {
+        if (window.location.pathname.endsWith("profile.html")) {
+            console.log('profile load');
+            updateProfile();
+        }       
+    }
+};
+
 if (window.location.pathname === "/product-page.html") {
     document.querySelector(`.img-header-bag-icon`).addEventListener(`click`, openShoppingCart)
     document.querySelectorAll(`.img-add-icon`).forEach(item => item.addEventListener(`click`, changeCartValue))
@@ -192,20 +204,13 @@ function generateUniqueOrderNumber() {
     }
 }
 
-//ˇˇˇˇˇˇ Den här funktionen får gärna flyttas upp senare när vi går igenom och snyggar till!!!
-window.onload = function () {
-    if (window.location.pathname.endsWith("login.html")) {
-        checkLoginDetails();
-    }
-};
-//^^^^^^^ Den här funktionen får gärna flyttas upp senare när vi går igenom och snyggar till!!!
 
-function checkLoginDetails() {
-    let logInBtnRef = document.querySelector('.login-page__submit-btn');
-    logInBtnRef.addEventListener('click', (event) => {
-        event.preventDefault();
-        validateLogin();
-    })
+    function checkLoginDetails() {
+        let logInBtnRef = document.querySelector('.login-page__submit-btn');
+        logInBtnRef.addEventListener('click', (event) => {
+            event.preventDefault();
+            validateLogin();
+    });
 }
 
 function validateLogin() {
@@ -246,13 +251,9 @@ function validateLogin() {
     } catch (error) {
         console.error(error);
     }
+    
 }
 
-window.onload = function () {
-    if (window.location.pathname.endsWith("profile.html")) {
-        updateProfile();
-    }
-};
 
 function updateProfile() {
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -272,4 +273,4 @@ function updateProfile() {
         document.querySelector('.profile__mail').textContent = '';
     }
 
-}
+ }
