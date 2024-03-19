@@ -23,22 +23,26 @@ if (window.location.pathname === "/product-page.html") {
     document.querySelectorAll(`.img-add-icon`).forEach(item => item.addEventListener(`click`, changeCartValue))
 }
 
-// document.querySelector(`.main__nav-icon`).addEventListener(`click`, () => {
-//     const iconRef = document.querySelector(`.main__nav-icon`)
-//     const iconImgRef = document.querySelector(`.main__nav-icon img`)
-//     const navRef = document.querySelector(`.nav-menu`)
+if (document.querySelector(`.main__nav-icon`)) {
 
-//     if (document.querySelector(`.nav-menu--open`)) {
-//         iconImgRef.src = `../assets/navicon.svg`
-//         navRef.classList.remove(`nav-menu--open`)
-//         iconRef.classList.remove(`main__nav-icon--close`)
-//     } else {
-//         iconImgRef.src = `../assets/close.svg`
-//         navRef.classList.add(`nav-menu--open`)
-//         iconRef.classList.add(`main__nav-icon--close`)
-//     }
-//     renderNavLinks();
-// })
+    document.querySelector(`.main__nav-icon`).addEventListener(`click`, () => {
+        const iconRef = document.querySelector(`.main__nav-icon`)
+        const iconImgRef = document.querySelector(`.main__nav-icon img`)
+        const navRef = document.querySelector(`.nav-menu`)
+
+        if (document.querySelector(`.nav-menu--open`)) {
+            iconImgRef.src = `../assets/navicon.svg`
+            navRef.classList.remove(`nav-menu--open`)
+            iconRef.classList.remove(`main__nav-icon--close`)
+        } else {
+            iconImgRef.src = `../assets/close.svg`
+            navRef.classList.add(`nav-menu--open`)
+            iconRef.classList.add(`main__nav-icon--close`)
+        }
+        renderNavLinks();
+    })
+
+}
 
 function openShoppingCart() {
     const modalRef = document.querySelector(`.shopping`)
