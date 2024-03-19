@@ -8,6 +8,7 @@ import {
     renderNavLinks,
     renderShoppingModal,
     renderShoppingCart,
+    renderProfilePageInformation,
 } from "./render.js";
 
 import {
@@ -22,22 +23,26 @@ if (window.location.pathname === "/product-page.html") {
     document.querySelectorAll(`.img-add-icon`).forEach(item => item.addEventListener(`click`, changeCartValue))
 }
 
-document.querySelector(`.main__nav-icon`).addEventListener(`click`, () => {
-    const iconRef = document.querySelector(`.main__nav-icon`)
-    const iconImgRef = document.querySelector(`.main__nav-icon img`)
-    const navRef = document.querySelector(`.nav-menu`)
+if (document.querySelector(`.main__nav-icon`)) {
 
-    if (document.querySelector(`.nav-menu--open`)) {
-        iconImgRef.src = `../assets/navicon.svg`
-        navRef.classList.remove(`nav-menu--open`)
-        iconRef.classList.remove(`main__nav-icon--close`)
-    } else {
-        iconImgRef.src = `../assets/close.svg`
-        navRef.classList.add(`nav-menu--open`)
-        iconRef.classList.add(`main__nav-icon--close`)
-    }
-    renderNavLinks();
-})
+    document.querySelector(`.main__nav-icon`).addEventListener(`click`, () => {
+        const iconRef = document.querySelector(`.main__nav-icon`)
+        const iconImgRef = document.querySelector(`.main__nav-icon img`)
+        const navRef = document.querySelector(`.nav-menu`)
+
+        if (document.querySelector(`.nav-menu--open`)) {
+            iconImgRef.src = `../assets/navicon.svg`
+            navRef.classList.remove(`nav-menu--open`)
+            iconRef.classList.remove(`main__nav-icon--close`)
+        } else {
+            iconImgRef.src = `../assets/close.svg`
+            navRef.classList.add(`nav-menu--open`)
+            iconRef.classList.add(`main__nav-icon--close`)
+        }
+        renderNavLinks();
+    })
+
+}
 
 function openShoppingCart() {
     const modalRef = document.querySelector(`.shopping`)
@@ -131,7 +136,6 @@ export {
 
 // Här ska det implementeras värde från funktion som skrivs senare.
 function statusPageUpdate() {
-    console.log(`test`);
     const uniqueOrderNr = '#12345';
     // Här ska det implementeras värde från funktion som skrivs senare.
     const orderNrRef = document.querySelector(".status__orderNr")
@@ -182,13 +186,10 @@ function generateUniqueOrderNumber() {
         orderArray.push(orderNumber)
         addLocalStorage('orderNumbers', orderArray)
     }
-
 }
 
-renderDeliveryTime();
-
 //ˇˇˇˇˇˇ Den här funktionen får gärna flyttas upp senare när vi går igenom och snyggar till!!!
-window.onload = function() {    
+window.onload = function () {
     if (window.location.pathname.endsWith("login.html")) {
         checkLoginDetails();
     }
@@ -219,12 +220,12 @@ function validateLogin() {
         console.log(user);
 
         // if(!users.some(user => user.username === userNameRef.value)){
-        if(!user) {            
+        if (!user) {
             descriptionRef.innerText = 'Kontrollera användarnamn!';
-            userNameRef.focus();        
+            userNameRef.focus();
         } else {
             // const user = users.find(user => user.username === userNameRef.value);
-            if(user.password !== passwordRef.value) {
+            if (user.password !== passwordRef.value) {
                 descriptionRef.innerText = 'Kontrollera lösenord!'
                 passwordRef.focus();
             } else {
@@ -232,8 +233,8 @@ function validateLogin() {
                     descriptionRef.innerText = 'Godkänn GDPR!';
                     checkboxRef.focus()
                 } else {
-                    descriptionRef.innerText ='Logga in på ditt konto nedan för att se din orderhistorik.';
-                    addLocalStorage("currentUser", user)                    
+                    descriptionRef.innerText = 'Logga in på ditt konto nedan för att se din orderhistorik.';
+                    addLocalStorage("currentUser", user)
                     window.location.href = 'product-page.html';
                 }
             }
@@ -242,3 +243,5 @@ function validateLogin() {
         console.error(error);
     }
 }
+
+renderProfilePageInformation()
