@@ -247,3 +247,29 @@ function validateLogin() {
         console.error(error);
     }
 }
+
+window.onload = function () {
+    if (window.location.pathname.endsWith("profile.html")) {
+        updateProfile();
+    }
+};
+
+function updateProfile() {
+    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    if (currentUser) {
+        var username = currentUser.username;
+        console.log(username)
+        var email = currentUser.email;
+        console.log(email)
+        var profileImg = currentUser.profile_image;
+
+        document.querySelector('.profile__image').src = profileImg;
+        document.querySelector('.profile__name').textContent = username;
+        document.querySelector('.profile__mail').textContent = email;
+    } else {
+        document.querySelector('.profile__name').textContent = 'Guest';
+        document.querySelector('.profile__mail').textContent = '';
+    }
+
+}
