@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="icon" href="/Assets/drone.svg" type="image/x-icon">
+    <title>Air Bean Register</title>
+    
+</head>
+
+<body>
+    <header>
+        <nav class="nav-menu">
+            <ul class="nav-menu__list">
+
+            </ul>
+        </nav>
+    </header>
+    <main class="register-page">
+        <div class="main__nav-icon">
+            <img src="/Assets/navicon.svg" alt="Navigation-icon">
+        </div>
+        
+        
+        
+        <form class="register-page__form">
+            <section class="register-page__form-container">
+                <img class="register-page__logo" src="Assets/logo-sml.svg">
+                <h1 class="register-page__form-title">
+                    Välkommen att registrera dig till AirBean
+                </h1>
+                <p class="register-page__form-description">
+                    Registrera dig med namn och mailadress för att kunna
+                    beställa våra tjänster
+                </p>
+            </section>
+            <section class="register-page__form-container">
+                <div class="register-page__input-container">
+                    <label class="register-page__form-label" for="loginEmail"> Email</label>
+                    <input class="register-page__form-input" type="email" id="loginEmail">
+                </div>
+                <div class="register-page__input-container">
+                    <label class="register-page__form-label" for="LoginPassword">
+                        Password
+                    </label>
+                    <input class="register-page__form-input" type="password" id="loginPassword">
+                </div>
+                <label class="register-page__check-container">
+
+                    GDPR Ok!
+                    <input type="checkbox">
+                    <span class="register-page__form-checkmark"></span>
+                </label>
+            </section>
+            <button class="register-page__submit-btn">
+                Register Now!
+            </button>
+        </form>
+    </main>
+    <script type="module" src="scripts/script.js"></script>
+</body>
+
+</html>
