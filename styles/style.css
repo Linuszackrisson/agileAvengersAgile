@@ -641,6 +641,7 @@ span {
 .profile__image {
     min-width: 94px;
     height: auto;
+    border-radius: 50%;
 }
 
 .profile__name {

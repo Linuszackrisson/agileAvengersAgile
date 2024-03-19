@@ -25,7 +25,7 @@ function renderNavLinks() {
             },
             {
                 text: `Min profil`,
-                href: `profil.html`
+                href: `profile.html`
             },
             {
                 text: `Orderstatus`,
@@ -197,9 +197,22 @@ function renderShoppingCart() {
     }
 }
 
+function renderProfilePageInformation() {
+
+    const currentUser = getLocalStorage(`currentUser`)
+    console.log(currentUser);
+
+    document.querySelector(`.profile__image`).src = currentUser.profile_image;
+    document.querySelector(`.profile__name`).textContent = currentUser.username;
+    document.querySelector(`.profile__mail`).textContent = currentUser.email;
+
+
+}
+
 export {
     renderNavLinks,
     renderShoppingModal,
     renderShoppingCart,
+    renderProfilePageInformation,
 };
 
