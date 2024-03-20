@@ -32,6 +32,20 @@ window.onload = function () {
 };
 
 
+window.onload = function () {
+    if (window.location.pathname.endsWith("login.html")) {
+        checkLoginDetails();
+    } else if (window.location.pathname.endsWith("status.html")) {
+        statusPageUpdate();
+    } else if (window.location.pathname.endsWith("profile.html")) {
+        renderProfilePageInformation();
+    }
+
+    if (document.querySelector(`.main__nav-icon`)) {
+        document.querySelector(`.main__nav-icon`).addEventListener(`click`, navMenuEvent)
+    }
+};
+
 addUsersLocalStorage()
 addProductsLocalStorage()
 renderShoppingModal()
@@ -150,6 +164,7 @@ export {
     changeCartValue,
     checkUserRole,
     statusPageUpdate,
+    generateUniqueOrderNumber,
 };
 
 function statusPageUpdate() {
