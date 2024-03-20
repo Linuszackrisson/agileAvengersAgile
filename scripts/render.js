@@ -7,6 +7,7 @@ import {
     countTotalPrice,
     changeCartValue,
     checkUserRole,
+    statusPageUpdate,
 } from "./script.js";
 
 function renderNavLinks() {
@@ -16,7 +17,7 @@ function renderNavLinks() {
         [
             {
                 text: `Meny`,
-                href: `menu.html`
+                href: `product-page.html`
             },
             {
                 text: `Vårt Kaffe`,
@@ -24,7 +25,7 @@ function renderNavLinks() {
             },
             {
                 text: `Min profil`,
-                href: `profil.html`
+                href: `profile.html`
             },
             {
                 text: `Orderstatus`,
@@ -34,7 +35,7 @@ function renderNavLinks() {
         [
             {
                 text: `Meny`,
-                href: `menu.html`
+                href: `product-page.html`
             },
             {
                 text: `Vårt Kaffe`,
@@ -54,6 +55,10 @@ function renderNavLinks() {
             }
         ],
         [
+            {
+                text: `Meny`,
+                href: `product-page.html`
+            },
             {
                 text: `Admin`,
                 href: `admin.html`
@@ -108,7 +113,7 @@ function renderShoppingModal() {
     modalRef.classList.add(`shopping`);
     document.querySelector(`body`).appendChild(modalRef);
     const formRef = document.createElement(`form`);
-    formRef.classList.add(`shopping__containe`);
+    formRef.classList.add(`shopping__container`);
     formRef.method = `dialog`;
     modalRef.appendChild(formRef);
     const h2Ref = document.createElement(`h2`);
@@ -141,9 +146,8 @@ function renderShoppingModal() {
     const btnRef = document.createElement(`button`);
     btnRef.classList.add(`shopping__btn`);
     btnRef.textContent = `Take my money!`;
-    btnRef.addEventListener(`click`, () => { statusPageUpdate(), window.location.href = `status.html` });
+    btnRef.addEventListener(`click`, () => { window.location.href = `status.html`; statusPageUpdate() });
     formRef.appendChild(btnRef);
-    renderShoppingCart();
 }
 
 function renderShoppingCart() {
@@ -159,7 +163,7 @@ function renderShoppingCart() {
                 divRef.classList.add(`shopping__item-container`);
                 articleRef.appendChild(divRef);
                 let h3Ref = document.createElement(`h3`);
-                h3Ref.classList.add(`"shopping__item-title`);
+                h3Ref.classList.add(`shopping__item-title`);
                 h3Ref.textContent = item.title;
                 divRef.appendChild(h3Ref);
                 let pRef = document.createElement(`p`);
@@ -189,7 +193,116 @@ function renderShoppingCart() {
                 divRef.appendChild(imgRef);
             }
         });
-        document.querySelector(`.shopping__total-price`).textContent = countTotalPrice(cart);
+        document.querySelector(`.shopping__total-price`).textContent = countTotalPrice(cart) + ` kr`;
+    }
+}
+
+function renderProfilePageInformation() {
+
+    const currentUser = getLocalStorage(`currentUser`)
+    let totalSum = 0;
+
+    if (currentUser) {
+        document.querySelector(`.profile__image`).src = currentUser.profile_image;
+        document.querySelector(`.profile__name`).textContent = currentUser.username;
+        document.querySelector(`.profile__mail`).textContent = currentUser.email;
+
+        if (currentUser.orders.length >= 0 || !currentUser.orders) {
+            currentUser.orders.forEach(item => {
+                renderOrderHistory(item)
+                totalSum += item.price
+            });
+        }
+    }
+    const articleRef = document.createElement(`article`)
+    articleRef.classList.add(`total-spent`)
+    document.querySelector(`.orderhistory-container`).appendChild(articleRef)
+    let pRef = document.createElement(`p`)
+    pRef.classList.add(`total-spent__title`)
+    pRef.textContent = `Totalt Spenderat`
+    articleRef.appendChild(pRef)
+
+    pRef = document.createElement(`p`)
+    pRef.classList.add(`total-spent__sum`)
+    pRef.textContent = `${totalSum} kr`
+    articleRef.appendChild(pRef)
+}
+
+function renderOrderHistory(order) {
+    const articleRef = document.createElement(`article`)
+    articleRef.classList.add(`order`)
+    document.querySelector(`.orderhistory-container`).appendChild(articleRef)
+
+    const mainDivRef = document.createElement(`div`)
+    mainDivRef.classList.add(`order-details`)
+    articleRef.appendChild(mainDivRef)
+
+    let divRef = document.createElement(`div`)
+    divRef.classList.add(`order-flex`)
+    mainDivRef.appendChild(divRef)
+
+    let pRef = document.createElement(`p`)
+    pRef.classList.add(`order-number`)
+    pRef.innerHTML = `#<span class="orderNumber1">${order.orderNumber} <span>`
+    divRef.appendChild(pRef)
+
+    pRef = document.createElement(`p`)
+    pRef.classList.add(`order-date`)
+    pRef.textContent = order.date
+    divRef.appendChild(pRef)
+
+    divRef = document.createElement(`div`)
+    divRef.classList.add(`order-flex`)
+    mainDivRef.appendChild(divRef)
+
+    pRef = document.createElement(`p`)
+    pRef.classList.add(`order-total`)
+    pRef.textContent = `total ordersumma`
+    divRef.appendChild(pRef)
+
+    pRef = document.createElement(`p`)
+    pRef.classList.add(`order-total`)
+    pRef.textContent = `${order.price} kr`
+    divRef.appendChild(pRef)
+}
+
+function renderProducts() {
+    const products = getLocalStorage(`products`)
+    document.querySelector(`.menu-coffee-cont`).textContent = ``
+    if (products) {
+        products.forEach(item => {
+            const articleRef = document.createElement(`article`)
+            articleRef.classList.add(`row`)
+            document.querySelector(`.menu-coffee-cont`).appendChild(articleRef)
+
+            const imgRef = document.createElement(`img`)
+            imgRef.classList.add(`img-add-icon`)
+            imgRef.src = `./Assets/add.svg`
+            imgRef.alt = `Add to ${item.title}`
+            imgRef.dataset.id = item.id
+            imgRef.addEventListener(`click`, changeCartValue);
+            articleRef.appendChild(imgRef)
+
+            let divRef = document.createElement(`div`)
+            divRef.classList.add(`menu-coffe-text`)
+            articleRef.appendChild(divRef)
+
+            const h2Ref = document.createElement(`h2`)
+            h2Ref.textContent = item.title
+            divRef.appendChild(h2Ref)
+
+            const pRef = document.createElement(`p`)
+            pRef.textContent = item.desc
+            divRef.appendChild(pRef)
+
+            divRef = document.createElement(`div`)
+            divRef.classList.add(`menu-coffe-text`)
+            articleRef.appendChild(divRef)
+
+            const h3Ref = document.createElement(`h3`)
+            h3Ref.textContent = `${item.price}kr`
+            divRef.appendChild(h3Ref)
+        });
     }
 }
 
@@ -197,5 +310,7 @@ export {
     renderNavLinks,
     renderShoppingModal,
     renderShoppingCart,
+    renderProfilePageInformation,
+    renderProducts,
 };
 

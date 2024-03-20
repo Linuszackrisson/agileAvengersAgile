@@ -1,4 +1,4 @@
-import { fetchUsers, } from "./fetch.js";
+import { fetchProducts, fetchUsers, } from "./fetch.js";
 
 function addLocalStorage(title, item) {
     try {
@@ -26,8 +26,13 @@ function removeLocalStorage(title) {
 }
 
 async function addUsersLocalStorage() {
-    const users = await fetchUsers()
-    addLocalStorage("users", users.users)
+    const users = await fetchUsers();
+    addLocalStorage("users", users.users);
+}
+
+async function addProductsLocalStorage() {
+    const products = await fetchProducts();
+    addLocalStorage("products", products.menu);
 }
 
 export {
@@ -35,4 +40,5 @@ export {
     getLocalStorage,
     removeLocalStorage,
     addUsersLocalStorage,
+    addProductsLocalStorage,
 };

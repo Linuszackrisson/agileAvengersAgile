@@ -462,27 +462,28 @@ font-weight: 400;
 
 
 /*size on body acordenly to figma skiss */
-.menu-coffee{
-background-color:#F3E4E1;
-width: 100%;
+.menu-coffee {
+    background-color: #F3E4E1;
+    width: 100%;
 
-font-family: "PT Serif", serif;
+    font-family: "PT Serif", serif;
 
 
 }
- .menu-coffee-cont{
 
-    margin:0 auto;
+.menu-coffee-cont {
+
+    margin: 0 auto;
 }
 
-span{
+span {
 
-    font-size:10px;
+    font-size: 10px;
 }
 
 
 
-.menu-coffee-cont h2{
+.menu-coffee-cont h2 {
 
     font-size: 23px;
     font-weight: 700;
@@ -490,18 +491,18 @@ span{
 }
 
 
-.menu-coffee-cont img{
+.menu-coffee-cont img {
 
-    width:32px;
+    width: 32px;
     height: 32px;
-    background-color:black;
+    background-color: black;
     border-radius: 50%;
-    padding:10px;
+    padding: 10px;
 }
 
 
 
-.img-header{
+.img-header {
 
     background-image: url('/Assets/graphics-header.svg');
     height: 113px;
@@ -511,85 +512,85 @@ span{
     width: 100%;
 }
 
-.menu-title{
+.menu-title {
 
-    display:flex;
+    display: flex;
     justify-content: center;
 }
 
-.menu-title h1{
+.menu-title h1 {
 
-    font-size:42px;
+    font-size: 42px;
     font-weight: 700;
     line-height: 50.4px;
-    
+
 }
 
-.img-footer{
-   
-    
+.img-footer {
+
+
     background-image: url('/Assets/graphics-footer.svg');
     height: 100px;
-    background-size:cover;
+    background-size: cover;
     background-repeat: no-repeat;
     z-index: 100%;
     width: 100%;
-    
-   
+
+
 }
 
-.img-header-nav-icon img{
-    position:absolute;
-    top:0;
+.img-header-nav-icon img {
+    position: absolute;
+    top: 0;
     width: 45px;
     height: 45px;
     padding: 10px;
     background-color: white;
     border-radius: 50%;
-    margin:20px;
+    margin: 20px;
 }
 
-.img-header-bag-icon-number{
+.img-header-bag-icon-number {
     position: absolute;
-    left:371px;
-    top:22px;
-    width:18px;
+    left: 371px;
+    top: 22px;
+    width: 18px;
     height: 18px;
-    background-color:red;
+    background-color: red;
     z-index: 50;
     border-radius: 50%;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
 
 
-.small-number{
+.small-number {
 
-    color:#fff;
+    color: #fff;
     font-weight: 700;
-    font-size:10px;
+    font-size: 10px;
 }
 
-.img-header-bag-icon{
-    display:flex;
+.img-header-bag-icon {
+    display: flex;
     justify-content: center;
-    position:absolute;
-    left:321px;
-    top:4px;
-   
-    z-index:20;
+    position: absolute;
+    left: 321px;
+    top: 4px;
+
+    z-index: 20;
     background-color: black;
-    border-radius:50%;
-    padding:15px;
-    margin:20px;
+    border-radius: 50%;
+    padding: 15px;
+    margin: 20px;
 }
 
-.img-header-bag-icon img{
+.img-header-bag-icon img {
 
-    width:20px;
-    height:20px;
+    width: 20px;
+    height: 20px;
 }
 
 .row-2,
@@ -597,25 +598,26 @@ span{
 .row-4,
 .row-5,
 .row-6,
-.row-1{
+.row-1,
+.row {
 
     max-width: 350px;
-    display:flex;
+    display: flex;
     justify-content: space-between;
     margin: 0 auto;
-    margin-bottom:2.8rem;
-    margin-top:2rem;
+    margin-bottom: 2.8rem;
+    margin-top: 2rem;
 }
 
-.img-add-icon{
+.img-add-icon {
 
-    margin-right:20px;
-    margin-top:10px;
+    margin-right: 20px;
+    margin-top: 10px;
 }
 
-.img-footer{
+.img-footer {
 
-    margin-top:120px;
+    margin-top: 120px;
 }
 
 
@@ -639,12 +641,13 @@ span{
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
 }
 
 .profile__image {
     min-width: 94px;
     height: auto;
+    border-radius: 50%;
 }
 
 .profile__name {
@@ -654,9 +657,9 @@ span{
     font-weight: 600;
     line-height: 29px;
     margin-top: 1rem;
-    
-    
-    
+
+
+
 }
 
 .profile__mail {
@@ -664,7 +667,7 @@ span{
     font-size: 14px;
     font-weight: 400;
     line-height: 17px;
-    color:#FFFFFFCC; 
+    color: #FFFFFFCC;
     margin-top: 0.5rem;
 }
 
@@ -687,8 +690,9 @@ span{
     align-items: center;
     justify-content: space-between;
 }
+
 .order-number {
-    color:#FFFFFFB2;
+    color: #FFFFFFB2;
     font-family: Work Sans;
     font-size: 14px;
     font-weight: 700;
@@ -708,7 +712,7 @@ span{
 
 }
 
-.order-total, #orderTotal1 {
+.order-total {
     font-family: Work Sans;
     font-size: 12px;
     color: #FFFFFF80;
@@ -735,7 +739,7 @@ span{
     font-size: 14px;
     font-weight: 700;
     color: #FFFFFFCC;
-    border-top: 1px solid #FFFF; 
+    border-top: 1px solid #FFFF;
 
 }
 
@@ -889,3 +893,189 @@ font-family: 'PT serif',serif;
 }
 
 /* End of register-page Styling */
+.btn {
+    background-color: black;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.shopping {
+    position: fixed;
+    top: 0;
+    z-index: 20;
+    height: 100vh;
+    width: 100vw;
+    border: none;
+    background: rgba(0, 0, 0, .8);
+    pointer-events: none;
+    transition: all .5s ease-in-out;
+}
+
+.shopping ::-webkit-scrollbar {
+    display: none;
+}
+
+.shopping__container {
+    position: absolute;
+    top: 60px;
+    right: .8rem;
+    left: auto;
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    z-index: 21;
+    border: none;
+    border-radius: 4px;
+    padding: 3rem 1rem;
+    width: 93vw;
+    max-width: 500px;
+    height: 80vh;
+    max-height: 800px;
+
+    background-color: white;
+}
+
+.shopping__container::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -10px;
+    left: auto;
+    right: 15px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid white;
+}
+
+.shopping__title {
+    font-size: 32px;
+    font-family: "PT Serif", serif;
+}
+
+.shopping__cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 70%;
+}
+
+.shopping__cart-container {
+    display: flex;
+    flex-direction: column;
+    pointer-events: all;
+    gap: 8px;
+    height: 89%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.shopping__cart-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shopping__item-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: -webkit-fill-available;
+}
+
+.shopping__item-container--stock {
+    justify-content: space-between;
+    align-items: center;
+    gap: auto;
+    width: fit-content;
+}
+
+.shopping__item-title {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 700;
+    font-family: "PT Serif", serif;
+    width: 100%;
+    background-color: white;
+}
+
+.shopping__item-title::after {
+    content: "";
+    display: block;
+    border-bottom: dotted 2px rgba(0, 0, 0, .4);
+    margin-left: auto;
+    margin-right: 1rem;
+    width: 55%;
+
+}
+
+.shopping__item-price {
+    font-size: 12px;
+    font-weight: 400;
+    font-family: "Work Sans", sans-serif;
+}
+
+
+.shopping__stock-arrow {
+    padding: 4px;
+    pointer-events: all;
+    cursor: pointer;
+}
+
+.shopping__item-stock {
+    font-weight: 600;
+    font-family: "Work Sans", sans-serif;
+}
+
+.shopping__total {
+    display: flex;
+    flex-direction: column;
+}
+
+.shopping__total-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.shopping__total-title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 27.6px;
+    font-family: "PT Serif", serif;
+}
+
+.shopping__total-price {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 27.6px;
+    text-align: right;
+    font-family: "PT Serif", serif;
+}
+
+.shopping__total-description {
+    font-size: 12px;
+    font-family: "Work Sans", sans-serif;
+}
+
+.shopping__btn {
+    padding: 8px 27px 12px 27px;
+    font-weight: 700;
+    font-size: 24px;
+    color: white;
+    background-color: rgba(47, 41, 38, 1);
+    border-radius: 50px;
+    text-decoration: none;
+    pointer-events: all;
+    cursor: pointer;
+    font-family: "PT Serif", serif;
+}
+
