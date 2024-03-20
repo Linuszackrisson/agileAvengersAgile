@@ -37,10 +37,20 @@
                 </p>
             </section>
             <section class="register-page__form-container">
+
+                <div class="register-page__alert"  id="emailAlert">
+                    Felaktig epost-adress!
+                  </div>
+
                 <div class="register-page__input-container">
                     <label class="register-page__form-label" for="loginEmail"> Email</label>
                     <input class="register-page__form-input" type="email" id="loginEmail">
                 </div>
+
+                <div class="register-page__alert"  id="passwordAlert">
+                    lösenordet måste vara minst 8 tecken!!
+                  </div>
+
                 <div class="register-page__input-container">
                     <label class="register-page__form-label" for="LoginPassword">
                         Password
@@ -53,6 +63,11 @@
                     <input type="checkbox">
                     <span class="register-page__form-checkmark"></span>
                 </label>
+
+                <div class="register-page__alert"  id="gdprAlert">
+                    Godkänn GDPR!!
+                  </div>
+
             </section>
             <button class="register-page__submit-btn">
                 Register Now!
