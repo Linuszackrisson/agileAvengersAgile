@@ -8,7 +8,7 @@ import {
     countTotalPrice,
     changeCartValue,
     checkUserRole,
-    generateUniqueOrderNumber,
+    createOrder,
 } from "./script.js";
 
 function renderNavLinks() {
@@ -147,9 +147,7 @@ function renderShoppingModal() {
     const btnRef = document.createElement(`button`);
     btnRef.classList.add(`shopping__btn`);
     btnRef.textContent = `Take my money!`;
-    btnRef.addEventListener(`click`, () => {
-        window.location.href = `status.html`;
-    });
+    btnRef.addEventListener(`click`, createOrder);
     formRef.appendChild(btnRef);
 }
 

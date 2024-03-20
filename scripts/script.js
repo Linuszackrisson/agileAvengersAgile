@@ -3,6 +3,7 @@ import {
     getLocalStorage,
     addUsersLocalStorage,
     addProductsLocalStorage,
+    addCustomerOrderHistory,
 } from "./localStorage.js";
 
 import {
@@ -165,6 +166,7 @@ export {
     checkUserRole,
     statusPageUpdate,
     generateUniqueOrderNumber,
+    createOrder,
 };
 
 function statusPageUpdate() {
@@ -253,8 +255,10 @@ function validateLogin() {
 }
 
 function createOrder() {
+    console.log(`test`);
     generateUniqueOrderNumber()
-
+    const price = countTotalPrice(getLocalStorage("cart"))
+    addCustomerOrderHistory(price)
+    // Funktion för att tömma varukorg 
     window.location.href = `status.html`;
-
 }
