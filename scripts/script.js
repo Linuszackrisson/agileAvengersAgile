@@ -21,6 +21,8 @@ addUsersLocalStorage()
 addProductsLocalStorage()
 renderShoppingModal()
 
+statusPageUpdate()
+
 if (window.location.pathname === "/product-page.html") {
     document.querySelector(`.img-header-bag-icon`).addEventListener(`click`, openShoppingCart)
     document.querySelectorAll(`.img-add-icon`).forEach(item => item.addEventListener(`click`, changeCartValue))
@@ -28,7 +30,13 @@ if (window.location.pathname === "/product-page.html") {
     renderShoppingCart()
 }
 
+ document.querySelector(`.main__nav-icon`).addEventListener(`click`, () => { 
+    const iconRef = document.querySelector(`.main__nav-icon`)
+    const iconImgRef = document.querySelector(`.main__nav-icon img`)
+    const navRef = document.querySelector(`.nav-menu`)
+=======
 if (document.querySelector(`.main__nav-icon`)) {
+
 
     document.querySelector(`.main__nav-icon`).addEventListener(`click`, () => {
         const iconRef = document.querySelector(`.main__nav-icon`)
@@ -138,27 +146,13 @@ export {
     statusPageUpdate,
 };
 
-// Här ska det implementeras värde från funktion som skrivs senare.
+
+
 function statusPageUpdate() {
-    const uniqueOrderNr = '#12345';
-    // Här ska det implementeras värde från funktion som skrivs senare.
-    const orderNrRef = document.querySelector(".status__orderNr")
-    let orderNr = uniqueOrderNr;
-    let orderNrText = orderNrRef.textContent;
-    orderNrText = orderNrText.replace("[ordernr]", orderNr);
-    orderNrRef.textContent = orderNrText;
-    const delivCountRef = document.querySelector(".status__delivCounter");
-    let deliveryTime = 30;
-    // ^ Här ska det istället för en siffra implementeras värde från funktion som skrivs senare.
-    let counterText = delivCountRef.textContent;
-    counterText = counterText.replace("[nr]", deliveryTime);
-    delivCountRef.textContent = counterText;
-}
+    const orderNumbers = getLocalStorage('orderNumbers');
+    const latestOrderNumber = orderNumbers[orderNumbers.length - 1]; 
+    document.getElementById("orderNr").innerHTML = "Ordernummer: " + latestOrderNumber;
 
-// Simpel funktion för att slumpa tiden för leveransen. Mellan 13 och 20 minuter.
-// Körs varje gång sidan laddas om.
-
-function renderDeliveryTime() {
     var minuter = Math.floor(Math.random() * (20 - 13 + 1)) + 13;
     document.getElementById("deliveryCounter").innerHTML = "<strong>" + minuter + "</strong> minuter";
 }
@@ -191,6 +185,7 @@ function generateUniqueOrderNumber() {
         addLocalStorage('orderNumbers', orderArray)
     }
 }
+
 
 //ˇˇˇˇˇˇ Den här funktionen får gärna flyttas upp senare när vi går igenom och snyggar till!!!
 window.onload = function () {

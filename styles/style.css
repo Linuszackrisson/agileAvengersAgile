@@ -230,6 +230,9 @@ main {
     border-radius: 50px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    line-height: 3.4rem;
 }
 
 .status__acceptBtn:hover {
