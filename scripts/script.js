@@ -46,7 +46,6 @@ window.onload = function () {
     }
 };
 
-addCustomerOrderHistory(123)
 addUsersLocalStorage()
 addProductsLocalStorage()
 renderShoppingModal()
@@ -165,6 +164,7 @@ export {
     changeCartValue,
     checkUserRole,
     statusPageUpdate,
+    generateUniqueOrderNumber,
 };
 
 function statusPageUpdate() {

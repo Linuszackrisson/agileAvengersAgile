@@ -35,14 +35,14 @@ async function addProductsLocalStorage() {
     addLocalStorage("products", products.menu);
 }
 
-async function addCustomerOrderHistory(orderNumber, price) {
-
+async function addCustomerOrderHistory(price) {
     if (getLocalStorage(`currentUser`)) {
         const order = []
         const date = new Date();
         const day = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
         const user = getLocalStorage(`currentUser`)
-
+        const allOrders = getLocalStorage(`orderNumbers`)
+        console.log(allOrders);
         if (user.orders) {
             user.orders.forEach(item => {
                 order.push(item)
@@ -50,41 +50,7 @@ async function addCustomerOrderHistory(orderNumber, price) {
         }
         order.unshift(
             {
-                "orderNumber": orderNumber,
-                "price": price,
-                "date": day,
-            }
-        )
-
-        const updatedUser = {
-            "username": user.username,
-            "password": user.password,
-            "role": user.role,
-            "email": user.email,
-            "profile_image": user.profile_image,
-            "orders": order,
-        }
-
-        addLocalStorage("currentUser", updatedUser)
-    }
-}
-
-async function addCustomerOrderHistory(orderNumber, price) {
-
-    if (getLocalStorage(`currentUser`)) {
-        const order = []
-        const date = new Date();
-        const day = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
-        const user = getLocalStorage(`currentUser`)
-
-        if (user.orders) {
-            user.orders.forEach(item => {
-                order.push(item)
-            });
-        }
-        order.unshift(
-            {
-                "orderNumber": orderNumber,
+                "orderNumber": allOrders[allOrders.length - 1],
                 "price": price,
                 "date": day,
             }
