@@ -1,5 +1,6 @@
 import {
     getLocalStorage,
+    addCustomerOrderHistory,
 } from "./localStorage.js";
 
 import {
@@ -7,7 +8,7 @@ import {
     countTotalPrice,
     changeCartValue,
     checkUserRole,
-    createOrder,
+    generateUniqueOrderNumber,
 } from "./script.js";
 
 function renderNavLinks() {
@@ -146,7 +147,9 @@ function renderShoppingModal() {
     const btnRef = document.createElement(`button`);
     btnRef.classList.add(`shopping__btn`);
     btnRef.textContent = `Take my money!`;
-    btnRef.addEventListener(`click`, createOrder);
+    btnRef.addEventListener(`click`, () => {
+        window.location.href = `status.html`;
+    });
     formRef.appendChild(btnRef);
 }
 
