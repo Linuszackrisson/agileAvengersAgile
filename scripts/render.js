@@ -118,7 +118,7 @@ function renderShoppingModal() {
     modalRef.appendChild(formRef);
     const h2Ref = document.createElement(`h2`);
     h2Ref.classList.add(`shopping__title`);
-    h2Ref.textContent = `Din Beställnin`;
+    h2Ref.textContent = `Din Beställning`;
     formRef.appendChild(h2Ref);
     const sectionRef = document.createElement(`section`);
     sectionRef.classList.add(`shopping__cart`);
@@ -207,7 +207,7 @@ function renderProfilePageInformation() {
         document.querySelector(`.profile__name`).textContent = currentUser.username;
         document.querySelector(`.profile__mail`).textContent = currentUser.email;
 
-        if (currentUser.orders.length >= 0 || !currentUser.orders) {
+        if (currentUser.orders) {
             currentUser.orders.forEach(item => {
                 renderOrderHistory(item)
                 totalSum += item.price
