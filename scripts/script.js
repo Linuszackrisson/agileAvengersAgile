@@ -2,29 +2,65 @@ import {
     addLocalStorage,
     getLocalStorage,
     addUsersLocalStorage,
-    addCustomerOrderHistory,
+    addProductsLocalStorage,
 } from "./localStorage.js";
 
 import {
     renderNavLinks,
     renderShoppingModal,
     renderShoppingCart,
+    renderProfilePageInformation,
+    renderProducts,
 } from "./render.js";
 
 import {
     fetchProducts,
 } from "./fetch.js";
 
+window.onload = function () {
+    if (window.location.pathname.endsWith("login.html")) {
+        checkLoginDetails();
+    } else if (window.location.pathname.endsWith("status.html")) {
+        statusPageUpdate();
+    } else if (window.location.pathname.endsWith("profile.html")) {
+        renderProfilePageInformation();
+    }
+
+    if (document.querySelector(`.main__nav-icon`)) {
+        document.querySelector(`.main__nav-icon`).addEventListener(`click`, navMenuEvent)
+    }
+};
+
+
+window.onload = function () {
+    if (window.location.pathname.endsWith("login.html")) {
+        checkLoginDetails();
+    } else if (window.location.pathname.endsWith("status.html")) {
+        statusPageUpdate();
+    } else if (window.location.pathname.endsWith("profile.html")) {
+        renderProfilePageInformation();
+    }
+
+    if (document.querySelector(`.main__nav-icon`)) {
+        document.querySelector(`.main__nav-icon`).addEventListener(`click`, navMenuEvent)
+    }
+};
+
 addCustomerOrderHistory(123)
 addUsersLocalStorage()
+addProductsLocalStorage()
 renderShoppingModal()
 
 if (window.location.pathname === "/product-page.html") {
     document.querySelector(`.img-header-bag-icon`).addEventListener(`click`, openShoppingCart)
     document.querySelectorAll(`.img-add-icon`).forEach(item => item.addEventListener(`click`, changeCartValue))
+    renderProducts()
+    renderShoppingCart()
 }
 
-document.querySelector(`.main__nav-icon`).addEventListener(`click`, () => {
+
+
+function navMenuEvent() {
     const iconRef = document.querySelector(`.main__nav-icon`)
     const iconImgRef = document.querySelector(`.main__nav-icon img`)
     const navRef = document.querySelector(`.nav-menu`)
@@ -39,7 +75,7 @@ document.querySelector(`.main__nav-icon`).addEventListener(`click`, () => {
         iconRef.classList.add(`main__nav-icon--close`)
     }
     renderNavLinks();
-})
+}
 
 function openShoppingCart() {
     const modalRef = document.querySelector(`.shopping`)
@@ -131,29 +167,14 @@ export {
     statusPageUpdate,
 };
 
-// Här ska det implementeras värde från funktion som skrivs senare.
 function statusPageUpdate() {
-    const uniqueOrderNr = '#12345';
-    // Här ska det implementeras värde från funktion som skrivs senare.
-    const orderNrRef = document.querySelector(".status__orderNr")
-    let orderNr = uniqueOrderNr;
-    let orderNrText = orderNrRef.textContent;
-    orderNrText = orderNrText.replace("[ordernr]", orderNr);
-    orderNrRef.textContent = orderNrText;
-    const delivCountRef = document.querySelector(".status__delivCounter");
-    let deliveryTime = 30;
-    // ^ Här ska det istället för en siffra implementeras värde från funktion som skrivs senare.
-    let counterText = delivCountRef.textContent;
-    counterText = counterText.replace("[nr]", deliveryTime);
-    delivCountRef.textContent = counterText;
-}
-
-// Simpel funktion för att slumpa tiden för leveransen. Mellan 13 och 20 minuter.
-// Körs varje gång sidan laddas om.
-
-function renderDeliveryTime() {
+    const orderNumbers = getLocalStorage('orderNumbers');
+    if (orderNumbers) {
+        const latestOrderNumber = orderNumbers[orderNumbers.length - 1];
+        document.getElementById("orderNr").textContent = "Ordernummer: " + latestOrderNumber;
+    }
     var minuter = Math.floor(Math.random() * (20 - 13 + 1)) + 13;
-    document.getElementById("deliveryCounter").innerHTML = "<strong>" + minuter + "</strong> minuter";
+    document.getElementById("deliveryCounter").textContent = minuter;
 }
 
 // Här börjar funktionen för att generera unikt ordernummer.
@@ -185,4 +206,48 @@ function generateUniqueOrderNumber() {
     }
 }
 
-renderDeliveryTime();
+function checkLoginDetails() {
+    let logInBtnRef = document.querySelector('.login-page__submit-btn');
+    logInBtnRef.addEventListener('click', (event) => {
+        event.preventDefault();
+        validateLogin();
+    })
+}
+
+function validateLogin() {
+    try {
+        const userNameRef = document.querySelector('#loginEmail');
+        const passwordRef = document.querySelector('#loginPassword');
+        let descriptionRef = document.querySelector('.login-page__form-description');
+        const checkboxRef = document.querySelector('.login-page__check-container input[type="checkbox"]');
+
+        const users = getLocalStorage("users");
+        if (!users) {
+            throw "No users found in localStorage!"
+        }
+
+        const user = users.find(user => user.email === userNameRef.value);
+        console.log(user);
+
+        if (!user) {
+            descriptionRef.innerText = 'Kontrollera användarnamn!';
+            userNameRef.focus();
+        } else {
+            if (user.password !== passwordRef.value) {
+                descriptionRef.innerText = 'Kontrollera lösenord!'
+                passwordRef.focus();
+            } else {
+                if (!checkboxRef.checked) {
+                    descriptionRef.innerText = 'Godkänn GDPR!';
+                    checkboxRef.focus()
+                } else {
+                    descriptionRef.innerText = 'Logga in på ditt konto nedan för att se din orderhistorik.';
+                    addLocalStorage("currentUser", user)
+                    window.location.href = 'product-page.html';
+                }
+            }
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}

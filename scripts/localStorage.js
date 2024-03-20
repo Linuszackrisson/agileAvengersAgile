@@ -1,4 +1,4 @@
-import { fetchUsers, } from "./fetch.js";
+import { fetchProducts, fetchUsers, } from "./fetch.js";
 
 function addLocalStorage(title, item) {
     try {
@@ -26,8 +26,47 @@ function removeLocalStorage(title) {
 }
 
 async function addUsersLocalStorage() {
-    const users = await fetchUsers()
-    addLocalStorage("users", users.users)
+    const users = await fetchUsers();
+    addLocalStorage("users", users.users);
+}
+
+async function addProductsLocalStorage() {
+    const products = await fetchProducts();
+    addLocalStorage("products", products.menu);
+}
+
+async function addCustomerOrderHistory(orderNumber, price) {
+
+    if (getLocalStorage(`currentUser`)) {
+        const order = []
+        const date = new Date();
+        const day = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
+        const user = getLocalStorage(`currentUser`)
+
+        if (user.orders) {
+            user.orders.forEach(item => {
+                order.push(item)
+            });
+        }
+        order.unshift(
+            {
+                "orderNumber": orderNumber,
+                "price": price,
+                "date": day,
+            }
+        )
+
+        const updatedUser = {
+            "username": user.username,
+            "password": user.password,
+            "role": user.role,
+            "email": user.email,
+            "profile_image": user.profile_image,
+            "orders": order,
+        }
+
+        addLocalStorage("currentUser", updatedUser)
+    }
 }
 
 async function addCustomerOrderHistory(orderNumber, price) {
@@ -69,5 +108,6 @@ export {
     getLocalStorage,
     removeLocalStorage,
     addUsersLocalStorage,
+    addProductsLocalStorage,
     addCustomerOrderHistory,
 };

@@ -25,7 +25,7 @@ function renderNavLinks() {
             },
             {
                 text: `Min profil`,
-                href: `profil.html`
+                href: `profile.html`
             },
             {
                 text: `Orderstatus`,
@@ -118,7 +118,7 @@ function renderShoppingModal() {
     modalRef.appendChild(formRef);
     const h2Ref = document.createElement(`h2`);
     h2Ref.classList.add(`shopping__title`);
-    h2Ref.textContent = `Din Beställnin`;
+    h2Ref.textContent = `Din Beställning`;
     formRef.appendChild(h2Ref);
     const sectionRef = document.createElement(`section`);
     sectionRef.classList.add(`shopping__cart`);
@@ -197,9 +197,120 @@ function renderShoppingCart() {
     }
 }
 
+function renderProfilePageInformation() {
+
+    const currentUser = getLocalStorage(`currentUser`)
+    let totalSum = 0;
+
+    if (currentUser) {
+        document.querySelector(`.profile__image`).src = currentUser.profile_image;
+        document.querySelector(`.profile__name`).textContent = currentUser.username;
+        document.querySelector(`.profile__mail`).textContent = currentUser.email;
+
+        if (currentUser.orders) {
+            currentUser.orders.forEach(item => {
+                renderOrderHistory(item)
+                totalSum += item.price
+            });
+        }
+    }
+    const articleRef = document.createElement(`article`)
+    articleRef.classList.add(`total-spent`)
+    document.querySelector(`.orderhistory-container`).appendChild(articleRef)
+    let pRef = document.createElement(`p`)
+    pRef.classList.add(`total-spent__title`)
+    pRef.textContent = `Totalt Spenderat`
+    articleRef.appendChild(pRef)
+
+    pRef = document.createElement(`p`)
+    pRef.classList.add(`total-spent__sum`)
+    pRef.textContent = `${totalSum} kr`
+    articleRef.appendChild(pRef)
+}
+
+function renderOrderHistory(order) {
+    const articleRef = document.createElement(`article`)
+    articleRef.classList.add(`order`)
+    document.querySelector(`.orderhistory-container`).appendChild(articleRef)
+
+    const mainDivRef = document.createElement(`div`)
+    mainDivRef.classList.add(`order-details`)
+    articleRef.appendChild(mainDivRef)
+
+    let divRef = document.createElement(`div`)
+    divRef.classList.add(`order-flex`)
+    mainDivRef.appendChild(divRef)
+
+    let pRef = document.createElement(`p`)
+    pRef.classList.add(`order-number`)
+    pRef.innerHTML = `#<span class="orderNumber1">${order.orderNumber} <span>`
+    divRef.appendChild(pRef)
+
+    pRef = document.createElement(`p`)
+    pRef.classList.add(`order-date`)
+    pRef.textContent = order.date
+    divRef.appendChild(pRef)
+
+    divRef = document.createElement(`div`)
+    divRef.classList.add(`order-flex`)
+    mainDivRef.appendChild(divRef)
+
+    pRef = document.createElement(`p`)
+    pRef.classList.add(`order-total`)
+    pRef.textContent = `total ordersumma`
+    divRef.appendChild(pRef)
+
+    pRef = document.createElement(`p`)
+    pRef.classList.add(`order-total`)
+    pRef.textContent = `${order.price} kr`
+    divRef.appendChild(pRef)
+}
+
+function renderProducts() {
+    const products = getLocalStorage(`products`)
+    document.querySelector(`.menu-coffee-cont`).textContent = ``
+    if (products) {
+        products.forEach(item => {
+            const articleRef = document.createElement(`article`)
+            articleRef.classList.add(`row`)
+            document.querySelector(`.menu-coffee-cont`).appendChild(articleRef)
+
+            const imgRef = document.createElement(`img`)
+            imgRef.classList.add(`img-add-icon`)
+            imgRef.src = `./Assets/add.svg`
+            imgRef.alt = `Add to ${item.title}`
+            imgRef.dataset.id = item.id
+            imgRef.addEventListener(`click`, changeCartValue);
+            articleRef.appendChild(imgRef)
+
+            let divRef = document.createElement(`div`)
+            divRef.classList.add(`menu-coffe-text`)
+            articleRef.appendChild(divRef)
+
+            const h2Ref = document.createElement(`h2`)
+            h2Ref.textContent = item.title
+            divRef.appendChild(h2Ref)
+
+            const pRef = document.createElement(`p`)
+            pRef.textContent = item.desc
+            divRef.appendChild(pRef)
+
+            divRef = document.createElement(`div`)
+            divRef.classList.add(`menu-coffe-text`)
+            articleRef.appendChild(divRef)
+
+            const h3Ref = document.createElement(`h3`)
+            h3Ref.textContent = `${item.price}kr`
+            divRef.appendChild(h3Ref)
+        });
+    }
+}
+
 export {
     renderNavLinks,
     renderShoppingModal,
     renderShoppingCart,
+    renderProfilePageInformation,
+    renderProducts,
 };
 
