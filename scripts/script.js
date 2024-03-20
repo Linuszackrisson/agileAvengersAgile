@@ -24,21 +24,11 @@ window.onload = function () {
         statusPageUpdate();
     } else if (window.location.pathname.endsWith("profile.html")) {
         renderProfilePageInformation();
-    }
-
-    if (document.querySelector(`.main__nav-icon`)) {
-        document.querySelector(`.main__nav-icon`).addEventListener(`click`, navMenuEvent)
-    }
-};
-
-
-window.onload = function () {
-    if (window.location.pathname.endsWith("login.html")) {
-        checkLoginDetails();
-    } else if (window.location.pathname.endsWith("status.html")) {
-        statusPageUpdate();
-    } else if (window.location.pathname.endsWith("profile.html")) {
-        renderProfilePageInformation();
+    } else if (window.location.pathname.endsWith("register.html")) {
+        document.querySelector('.register-page__submit-btn').addEventListener(`click`, function(event){
+            event.preventDefault();
+            validateRegistration();
+        });        
     }
 
     if (document.querySelector(`.main__nav-icon`)) {
@@ -56,8 +46,6 @@ if (window.location.pathname === "/product-page.html") {
     renderProducts()
     renderShoppingCart()
 }
-
-
 
 function navMenuEvent() {
     const iconRef = document.querySelector(`.main__nav-icon`)
@@ -249,5 +237,78 @@ function validateLogin() {
         }
     } catch (error) {
         console.error(error);
+    }
+}
+// ========================================
+// Här börjar kod för registreringsfunktion
+// ========================================
+
+function getUsers() {
+    // Denna ska startas från function validateRegistration()
+    console.log('getUsers!');
+    const userString = localStorage.getItem('users');
+    const users = userString ? JSON.parse(userString) : [];
+    return users;
+}
+
+// ========================================
+// Regex för att matcha en giltig e-postadress
+// ========================================
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// ========================================
+// Validering av ny användare
+// ========================================
+
+function validateRegistration() {
+    console.log('validateRegistration!');    
+    const users = getUsers();
+    const emailInput = document.getElementById('loginEmail').value;
+    const passwordInput = document.getElementById('loginPassword').value;
+    const checkboxRef = document.querySelector('.register-page__check-container input[type="checkbox"]');
+
+    if (!validateEmail(emailInput)) {
+        console.log('Ogiltig e-postadress!');
+        window.alert('Ogiltig e-postadress!');
+        return;
+    }
+    
+    if (passwordInput.length < 8) {
+        console.log('Lösenordet måste vara minst 8 tecken långt!');
+        window.alert('lösenordet måste vara minst 8 tecken!');
+        return;
+    }
+    
+    const emailExists = users.some(user => user.email === emailInput);
+    
+    if (emailExists) {
+        console.log('Användaren existerar redan');
+        document.querySelector('.register-page__form-description').textContent = 'Användaren existerar redan.';
+        const loginLink = document.createElement('a');
+        loginLink.textContent = 'Logga in';
+        loginLink.href = 'login.html';
+        loginLink.classList.add('register__loginBtn');
+        document.querySelector('.register-page__form-container').appendChild(loginLink);
+    } else {
+        if (!checkboxRef.checked) {
+            console.log('Godkänn GDPR!');
+            window.alert('Godkänn GDPR!');
+            return;
+        } else {
+            console.log('välkommen in!')
+            const usernameRef = emailInput.split('@')[0];
+            const newUser = {
+                username: usernameRef,
+                password: passwordInput,
+                role: 'user',
+                email: emailInput,
+                profile_image: 'assets/profile.svg'
+            };
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+        }
     }
 }
