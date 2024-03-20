@@ -21,11 +21,15 @@ window.onload = function () {
     if (window.location.pathname.endsWith("login.html")) {
         checkLoginDetails();
     } else if (window.location.pathname.endsWith("status.html")) {
-            statusPageUpdate();
-        } else if (window.location.pathname.endsWith("profile.html")) {
-            renderProfilePageInformation();
-        }
-    };
+        statusPageUpdate();
+    } else if (window.location.pathname.endsWith("profile.html")) {
+        renderProfilePageInformation();
+    }
+
+    if (document.querySelector(`.main__nav-icon`)) {
+        document.querySelector(`.main__nav-icon`).addEventListener(`click`, navMenuEvent)
+    }
+};
 
 
 addUsersLocalStorage()
@@ -39,23 +43,23 @@ if (window.location.pathname === "/product-page.html") {
     renderShoppingCart()
 }
 
- if (document.querySelector(`.main__nav-icon`)) {
-    document.querySelector(`.main__nav-icon`).addEventListener(`click`, () => {
-        const iconRef = document.querySelector(`.main__nav-icon`)
-        const iconImgRef = document.querySelector(`.main__nav-icon img`)
-        const navRef = document.querySelector(`.nav-menu`)
 
-        if (document.querySelector(`.nav-menu--open`)) {
-            iconImgRef.src = `../assets/navicon.svg`
-            navRef.classList.remove(`nav-menu--open`)
-            iconRef.classList.remove(`main__nav-icon--close`)
-        } else {
-            iconImgRef.src = `../assets/close.svg`
-            navRef.classList.add(`nav-menu--open`)
-            iconRef.classList.add(`main__nav-icon--close`)
-        }
-        renderNavLinks();
-    })
+
+function navMenuEvent() {
+    const iconRef = document.querySelector(`.main__nav-icon`)
+    const iconImgRef = document.querySelector(`.main__nav-icon img`)
+    const navRef = document.querySelector(`.nav-menu`)
+
+    if (document.querySelector(`.nav-menu--open`)) {
+        iconImgRef.src = `../assets/navicon.svg`
+        navRef.classList.remove(`nav-menu--open`)
+        iconRef.classList.remove(`main__nav-icon--close`)
+    } else {
+        iconImgRef.src = `../assets/close.svg`
+        navRef.classList.add(`nav-menu--open`)
+        iconRef.classList.add(`main__nav-icon--close`)
+    }
+    renderNavLinks();
 }
 
 function openShoppingCart() {
@@ -148,10 +152,10 @@ export {
     statusPageUpdate,
 };
 
-function statusPageUpdate() {    
+function statusPageUpdate() {
     const orderNumbers = getLocalStorage('orderNumbers');
     if (orderNumbers) {
-        const latestOrderNumber = orderNumbers[orderNumbers.length - 1];         
+        const latestOrderNumber = orderNumbers[orderNumbers.length - 1];
         document.getElementById("orderNr").textContent = "Ordernummer: " + latestOrderNumber;
     }
     var minuter = Math.floor(Math.random() * (20 - 13 + 1)) + 13;
@@ -209,7 +213,7 @@ function validateLogin() {
 
         const user = users.find(user => user.email === userNameRef.value);
         console.log(user);
-        
+
         if (!user) {
             descriptionRef.innerText = 'Kontrollera användarnamn!';
             userNameRef.focus();
