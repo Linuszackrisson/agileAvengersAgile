@@ -17,11 +17,20 @@ import {
     fetchProducts,
 } from "./fetch.js";
 
+window.onload = function () {
+    if (window.location.pathname.endsWith("login.html")) {
+        checkLoginDetails();
+    } else if (window.location.pathname.endsWith("status.html")) {
+            statusPageUpdate();
+        } else if (window.location.pathname.endsWith("profile.html")) {
+            renderProfilePageInformation();
+        }
+    };
+
+
 addUsersLocalStorage()
 addProductsLocalStorage()
 renderShoppingModal()
-
-statusPageUpdate()
 
 if (window.location.pathname === "/product-page.html") {
     document.querySelector(`.img-header-bag-icon`).addEventListener(`click`, openShoppingCart)
@@ -30,14 +39,7 @@ if (window.location.pathname === "/product-page.html") {
     renderShoppingCart()
 }
 
- document.querySelector(`.main__nav-icon`).addEventListener(`click`, () => { 
-    const iconRef = document.querySelector(`.main__nav-icon`)
-    const iconImgRef = document.querySelector(`.main__nav-icon img`)
-    const navRef = document.querySelector(`.nav-menu`)
-=======
-if (document.querySelector(`.main__nav-icon`)) {
-
-
+ if (document.querySelector(`.main__nav-icon`)) {
     document.querySelector(`.main__nav-icon`).addEventListener(`click`, () => {
         const iconRef = document.querySelector(`.main__nav-icon`)
         const iconImgRef = document.querySelector(`.main__nav-icon img`)
@@ -146,15 +148,14 @@ export {
     statusPageUpdate,
 };
 
-
-
-function statusPageUpdate() {
+function statusPageUpdate() {    
     const orderNumbers = getLocalStorage('orderNumbers');
-    const latestOrderNumber = orderNumbers[orderNumbers.length - 1]; 
-    document.getElementById("orderNr").innerHTML = "Ordernummer: " + latestOrderNumber;
-
+    if (orderNumbers) {
+        const latestOrderNumber = orderNumbers[orderNumbers.length - 1];         
+        document.getElementById("orderNr").textContent = "Ordernummer: " + latestOrderNumber;
+    }
     var minuter = Math.floor(Math.random() * (20 - 13 + 1)) + 13;
-    document.getElementById("deliveryCounter").innerHTML = "<strong>" + minuter + "</strong> minuter";
+    document.getElementById("deliveryCounter").textContent = minuter;
 }
 
 // Här börjar funktionen för att generera unikt ordernummer.
@@ -186,15 +187,6 @@ function generateUniqueOrderNumber() {
     }
 }
 
-
-//ˇˇˇˇˇˇ Den här funktionen får gärna flyttas upp senare när vi går igenom och snyggar till!!!
-window.onload = function () {
-    if (window.location.pathname.endsWith("login.html")) {
-        checkLoginDetails();
-    }
-};
-//^^^^^^^ Den här funktionen får gärna flyttas upp senare när vi går igenom och snyggar till!!!
-
 function checkLoginDetails() {
     let logInBtnRef = document.querySelector('.login-page__submit-btn');
     logInBtnRef.addEventListener('click', (event) => {
@@ -217,13 +209,11 @@ function validateLogin() {
 
         const user = users.find(user => user.email === userNameRef.value);
         console.log(user);
-
-        // if(!users.some(user => user.username === userNameRef.value)){
+        
         if (!user) {
             descriptionRef.innerText = 'Kontrollera användarnamn!';
             userNameRef.focus();
         } else {
-            // const user = users.find(user => user.username === userNameRef.value);
             if (user.password !== passwordRef.value) {
                 descriptionRef.innerText = 'Kontrollera lösenord!'
                 passwordRef.focus();
