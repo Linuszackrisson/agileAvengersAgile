@@ -150,6 +150,7 @@ export {
     changeCartValue,
     checkUserRole,
     statusPageUpdate,
+    createOrder,
 };
 
 function statusPageUpdate() {
@@ -235,4 +236,11 @@ function validateLogin() {
     } catch (error) {
         console.error(error);
     }
+}
+
+function createOrder() {
+    generateUniqueOrderNumber()
+
+    window.location.href = `status.html`;
+
 }
