@@ -203,13 +203,10 @@ main {
     color: rgba(255, 255, 255, .70);
 }
 
-<<<<<<< HEAD
 /* .status__droneImg {
     
 } */
 
-=======
->>>>>>> dev
 .status__orderOnWay {
     font-size: 2.25rem;
     font-family: 'PT Serif';
@@ -1174,10 +1171,7 @@ span {
     pointer-events: all;
     cursor: pointer;
     font-family: "PT Serif", serif;
-<<<<<<< HEAD
 }
-
-
 
 .register__loginBtn {
     text-decoration: none;
@@ -1208,6 +1202,3 @@ span {
     border-radius: 5px;
     z-index: 2;
   }
-=======
-}
->>>>>>> dev
