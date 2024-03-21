@@ -13,6 +13,7 @@ import {
     renderShoppingCart,
     renderProfilePageInformation,
     renderProducts,
+    renderForm,
 } from "./render.js";
 
 import {
@@ -245,6 +246,110 @@ function logOutEvent() {
     window.location.href = `index.html`;
 }
 
+function saveProduct(e) {
+
+    e.preventDefault()
+
+    try {
+        const title = document.querySelector(`#productName`);
+        const price = document.querySelector(`#productPrice`);
+        const desc = document.querySelector(`#productShortDesc`);
+        const longerDesc = document.querySelector(`#productDesc`);
+        if (title.value === "") {
+            throw {
+                msg: `Vänligen fyll i produktnamn`,
+                node: title
+            };
+        } else if (price.value === "") {
+            throw {
+                msg: `Vänligen fyll i productpris`,
+                node: price
+            };
+        } else if (desc.value === "") {
+            throw {
+                msg: `Vänligen fyll i en kort beskrivning om producten`,
+                node: desc
+            };
+        } else if (longerDesc.value === "") {
+            throw {
+                msg: `änligen fyll i en beskrivning om producten`,
+                node: longerDesc
+            };
+        }
+        const products = getLocalStorage(`products`);
+        const newId = products[products.length - 1].id + 1;
+        const newProduct = {
+            desc: desc.value,
+            id: newId,
+            longer_desc: longerDesc.value,
+            price: price.value,
+            title: title.value,
+        };
+
+        const array = []
+        products.forEach(item => {
+            array.push(item);
+        });
+
+        array.push(newProduct);
+
+        addLocalStorage(`products`, array);
+        window.location.href = 'product-page.html';
+    } catch (error) {
+        document.querySelector(`.add-form__message`).textContent = error.msg;
+        error.node.focus();
+    }
+
+}
+
+function changeProduct() {
+    const products = getLocalStorage(`products`);
+    const thisProduct = products.find((item) => item.id === Number(this.dataset.id))
+    renderForm(this)
+    document.querySelector(`#productName`).value = thisProduct.title
+    document.querySelector(`#productPrice`).value = thisProduct.price
+    document.querySelector(`#productShortDesc`).value = thisProduct.desc
+    document.querySelector(`#productDesc`).value = thisProduct.longer_desc
+}
+
+function SaveChangesProduct(e) {
+    e.preventDefault()
+    const products = getLocalStorage(`products`);
+    const thisProduct = products.find((item) => item.id === Number(this.dataset.id))
+    const indexOf = products.indexOf(thisProduct)
+
+    console.log(thisProduct);
+
+    const newInformation = {
+        "id": thisProduct.id,
+        "desc": document.querySelector(`#productShortDesc`).value,
+        "title": document.querySelector(`#productName`).value,
+        "longer_desc": document.querySelector(`#productDesc`).value,
+        "price": Number(document.querySelector(`#productPrice`).value),
+    }
+    console.log(newInformation);
+    products.splice(indexOf, 1, newInformation)
+    if (products.length === 0) {
+        removeLocalStorage(`products`)
+    } else {
+        addLocalStorage(`products`, products)
+    }
+    renderProducts();
+}
+
+function removeProduct() {
+    const products = getLocalStorage(`products`);
+    const thisProduct = products.find((item) => item.id === Number(this.dataset.id))
+    const indexOf = products.indexOf(thisProduct)
+    products.splice(indexOf, 1)
+    if (products.length === 0) {
+        removeLocalStorage(`products`)
+    } else {
+        addLocalStorage(`products`, products)
+    }
+    renderProducts();
+}
+
 export {
     countItemPrice,
     countTotalPrice,
@@ -254,6 +359,10 @@ export {
     generateUniqueOrderNumber,
     createOrder,
     logOutEvent,
+    saveProduct,
+    changeProduct,
+    SaveChangesProduct,
+    removeProduct,
 };
 
 // ========================================
