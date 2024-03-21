@@ -13,6 +13,7 @@ import {
     renderShoppingCart,
     renderProfilePageInformation,
     renderProducts,
+    renderProfileEditInformation,
 } from "./render.js";
 
 import {
@@ -35,6 +36,8 @@ window.onload = function () {
         statusPageUpdate();
     } else if (window.location.pathname.endsWith("profile.html")) {
         renderProfilePageInformation();
+    } else if (window.location.pathname.endsWith("edit.html")) {
+        renderProfileEditInformation();    
     } else if (window.location.pathname === "/product-page.html") {
         document.querySelector(`.img-header-bag-icon`).addEventListener(`click`, openShoppingCart);
         document.querySelectorAll(`.img-add-icon`).forEach(item => item.addEventListener(`click`, changeCartValue));

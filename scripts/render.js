@@ -319,11 +319,32 @@ function renderProducts() {
     }
 }
 
+function renderProfileEditInformation() {
+
+    const currentUser = getLocalStorage(`currentUser`);
+    let totalSum = 0;
+
+    if (currentUser) {
+        document.querySelector(`.profile__image`).src = currentUser.profile_image;
+        document.querySelector(`.profile__name`).textContent = currentUser.username;
+        document.querySelector(`.profile__mail`).textContent = currentUser.email;
+
+        if (currentUser.orders) {
+            currentUser.orders.forEach(item => {
+                renderOrderHistory(item);
+                totalSum += item.price;
+            });
+        }
+    }    
+}
+
+
 export {
     renderNavLinks,
     renderShoppingModal,
     renderShoppingCart,
     renderProfilePageInformation,
     renderProducts,
+    renderProfileEditInformation,
 };
 
