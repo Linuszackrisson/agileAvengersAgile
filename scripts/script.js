@@ -240,6 +240,60 @@ function logOutEvent() {
     window.location.href = `index.html`;
 }
 
+function saveProduct(e) {
+    e.preventDefault()
+    try {
+        const title = document.querySelector(`#productName`);
+        const price = document.querySelector(`#productPrice`);
+        const desc = document.querySelector(`#productShortDesc`);
+        const longerDesc = document.querySelector(`#productDesc`);
+        if (title.value === "") {
+            throw {
+                msg: `Vänligen fyll i produktnamn`,
+                node: title
+            };
+        } else if (price.value === "") {
+            throw {
+                msg: `Vänligen fyll i productpris`,
+                node: price
+            };
+        } else if (desc.value === "") {
+            throw {
+                msg: `Vänligen fyll i en kort beskrivning om producten`,
+                node: desc
+            };
+        } else if (longerDesc.value === "") {
+            throw {
+                msg: `änligen fyll i en beskrivning om producten`,
+                node: longerDesc
+            };
+        }
+        const products = getLocalStorage(`products`);
+        const newId = products[products.length - 1].id + 1;
+        const newProduct = {
+            desc: desc.value,
+            id: newId,
+            longer_desc: longerDesc.value,
+            price: price.value,
+            title: title.value,
+        };
+
+        const array = []
+        products.forEach(item => {
+            array.push(item);
+        });
+
+        array.push(newProduct);
+
+        addLocalStorage(`products`, array);
+        window.location.href = 'product-page.html';
+    } catch (error) {
+        document.querySelector(`.add-form__message`).textContent = error.msg;
+        error.node.focus();
+    }
+
+}
+
 export {
     countItemPrice,
     countTotalPrice,
@@ -249,4 +303,5 @@ export {
     generateUniqueOrderNumber,
     createOrder,
     logOutEvent,
+    saveProduct,
 };

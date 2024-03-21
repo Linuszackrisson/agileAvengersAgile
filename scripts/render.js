@@ -9,6 +9,7 @@ import {
     checkUserRole,
     createOrder,
     logOutEvent,
+    saveProduct,
 } from "./script.js";
 
 function renderNavLinks() {
@@ -317,6 +318,95 @@ function renderProducts() {
             divRef.appendChild(h3Ref);
         });
     }
+    if (checkUserRole() === `admin`) {
+        const imgRef = document.createElement(`img`);
+        imgRef.src = `./Assets/add.svg`;
+        imgRef.alt = `Create new product`;
+        imgRef.classList.add(`menu-coffee-add`);
+        imgRef.addEventListener(`click`, renderForm);
+
+        document.querySelector(`.menu-coffee-cont`).appendChild(imgRef);
+    }
+}
+
+function renderForm() {
+    document.querySelector(`.menu-coffee-add`).remove();
+    if (!document.querySelector(`.add-form`)) {
+        const formRef = document.createElement(`form`);
+        formRef.classList.add(`add-form`);
+
+        const pRef = document.createElement(`p`);
+        pRef.textContent = `Fyll i uppgifter om den nya producten`;
+        pRef.classList.add(`add-form__message`);
+
+        document.querySelector(`.menu-coffee-cont`).appendChild(formRef);
+        formRef.appendChild(pRef);
+
+    }
+
+    const formInput = [
+        {
+            "input": `input`,
+            "label": `Produkt namn`,
+            "id": `productName`,
+            "type": `text`,
+            "attribute": `maxlength`,
+            "length": 20,
+            "class": `add-form__input`
+        },
+        {
+            "input": `input`,
+            "label": `Produkt pris`,
+            "id": `productPrice`,
+            "type": `number`,
+            "attribute": `max`,
+            "length": 9999,
+            "class": `add-form__input`
+        },
+        {
+            "input": `textarea`,
+            "label": `Kort Beskrivning `,
+            "id": `productShortDesc`,
+            "type": `text`,
+            "attribute": `maxlength`,
+            "length": 80,
+            "class": `add-form__textarea`
+        },
+        {
+            "input": `textarea`,
+            "label": `Beskrivning`,
+            "id": `productDesc`,
+            "type": `text`,
+            "attribute": `maxlength`,
+            "length": 250,
+            "class": `add-form__large-textarea`
+        },
+    ]
+
+    formInput.forEach(item => {
+        const divRef = document.createElement(`div`);
+        divRef.classList.add(`add-form__box`);
+
+        const labelRef = document.createElement(`label`);
+        labelRef.textContent = item.label;
+        labelRef.classList.add(`add-form__label`);
+        labelRef.setAttribute(`for`, item.id);
+        divRef.appendChild(labelRef);
+
+        const inputRef = document.createElement(item.input);
+        if (item.input === `label`)
+            inputRef.type = item.type;
+        inputRef.id = item.id;
+        inputRef.classList.add(item.class);
+        inputRef.setAttribute(item.attribute, item.length);
+        divRef.appendChild(inputRef);
+        document.querySelector(`.add-form`).appendChild(divRef);
+    })
+    const btnRef = document.createElement(`button`);
+    btnRef.textContent = `Lägg till produkten`;
+    btnRef.classList.add(`add-form__btn`);
+    btnRef.addEventListener(`click`, saveProduct);
+    document.querySelector(`.add-form`).appendChild(btnRef);
 }
 
 export {
