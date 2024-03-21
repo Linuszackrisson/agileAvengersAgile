@@ -40,8 +40,13 @@ window.onload = function () {
         document.querySelectorAll(`.img-add-icon`).forEach(item => item.addEventListener(`click`, changeCartValue));
         renderShoppingModal();
         renderProducts();
-    }
-};
+    } else if (window.location.pathname.endsWith("register.html")) {
+        document.querySelector('.register-page__submit-btn').addEventListener(`click`, function(event){
+            event.preventDefault();
+            validateRegistration();
+        });
+    };
+}    
 
 function navMenuEvent() {
     const iconRef = document.querySelector(`.main__nav-icon`);
@@ -249,4 +254,94 @@ export {
     generateUniqueOrderNumber,
     createOrder,
     logOutEvent,
+};
+
+// ========================================
+// Här börjar kod för registreringsfunktion
+// ========================================
+
+function getUsers() {        
+    const userString = localStorage.getItem('users');
+    const users = userString ? JSON.parse(userString) : [];
+    return users;
+}
+
+// ========================================
+// Regex för att matcha en giltig e-postadress
+// ========================================
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// ========================================
+// Validering av ny användare
+// ========================================
+
+let loginLinkAdded = false;
+function validateRegistration() {    
+    const users = getUsers();
+    const emailInput = document.getElementById('loginEmail').value;
+    const passwordInput = document.getElementById('loginPassword').value;
+    const checkboxRef = document.querySelector('.register-page__check-container input[type="checkbox"]');
+
+    if (!validateEmail(emailInput)) {        
+        document.getElementById('emailAlert').style.display = 'block';        
+        setTimeout(function(){            
+            document.getElementById('emailAlert').style.display = 'none';
+        }, 1200);
+        return;
+    }
+    
+    if (passwordInput.length < 8) {
+        document.getElementById('passwordAlert').style.display = 'block';
+        setTimeout(function(){
+            document.getElementById('passwordAlert').style.display = 'none';
+        }, 1200);
+        return;
+    }
+    
+    const emailExists = users.some(user => user.email === emailInput);
+    
+    if (emailExists) {        
+        document.querySelector('.register-page__form-description').textContent = 'Användaren existerar redan.';
+        if (!loginLinkAdded) {
+        const loginLink = document.createElement('a');
+        loginLink.textContent = 'Logga in';
+        loginLink.href = 'login.html';
+        loginLink.classList.add('register__loginBtn');
+        document.querySelector('.register-page__form-container').appendChild(loginLink);
+        loginLinkAdded = true;
+        }
+    } else {
+            if (!checkboxRef.checked) {
+
+                document.getElementById('gdprAlert').style.display = 'block';
+                setTimeout(function(){
+                    document.getElementById('gdprAlert').style.display = 'none';
+                }, 1200);
+            return;
+            } else {
+                console.log('välkommen in!')
+                const usernameRef = emailInput.split('@')[0];
+                    const newUser = {
+                    username: usernameRef,
+                    password: passwordInput,
+                    role: 'user',
+                    email: emailInput,
+                    profile_image: 'assets/profile.svg'
+                    };
+            addLocalStorage("currentUser", newUser)
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+         
+            document.querySelector('.register-page__form-description').textContent = 'Registrera dig med namn och mailadress för att kunna beställa våra tjänster';
+            const formContainer = document.querySelector('.register-page__form-container');
+            const loginLink = formContainer.querySelector('.register__loginBtn');
+            if (loginLink) {
+                formContainer.removeChild(loginLink);
+            }            
+                window.location.href = 'profile.html';
+            }
+    }
 };
