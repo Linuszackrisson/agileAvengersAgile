@@ -1,6 +1,5 @@
 import {
     getLocalStorage,
-    addCustomerOrderHistory,
 } from "./localStorage.js";
 
 import {
@@ -66,45 +65,45 @@ function renderNavLinks() {
             }
         ],
     ]
-    document.querySelector(`.nav-menu__list`).textContent = ``
+    document.querySelector(`.nav-menu__list`).textContent = ``;
     if (role === `user`) {
         navObject[0].forEach(link => {
-            const liRef = document.createElement(`li`)
-            liRef.classList.add(`nav-menu__list-item`)
+            const liRef = document.createElement(`li`);
+            liRef.classList.add(`nav-menu__list-item`);
 
-            const aRef = document.createElement(`a`)
-            aRef.href = link.href
-            aRef.textContent = link.text
-            aRef.classList.add(`nav-menu__list-link`)
-            liRef.appendChild(aRef)
+            const aRef = document.createElement(`a`);
+            aRef.href = link.href;
+            aRef.textContent = link.text;
+            aRef.classList.add(`nav-menu__list-link`);
+            liRef.appendChild(aRef);
 
-            document.querySelector(`.nav-menu__list`).appendChild(liRef)
+            document.querySelector(`.nav-menu__list`).appendChild(liRef);
         })
     } else if (role === `guest`) {
         navObject[1].forEach(link => {
-            const liRef = document.createElement(`li`)
-            liRef.classList.add(`nav-menu__list-item`)
+            const liRef = document.createElement(`li`);
+            liRef.classList.add(`nav-menu__list-item`);
 
-            const aRef = document.createElement(`a`)
-            aRef.href = link.href
-            aRef.textContent = link.text
-            aRef.classList.add(`nav-menu__list-link`)
-            liRef.appendChild(aRef)
+            const aRef = document.createElement(`a`);
+            aRef.href = link.href;
+            aRef.textContent = link.text;
+            aRef.classList.add(`nav-menu__list-link`);
+            liRef.appendChild(aRef);
 
-            document.querySelector(`.nav-menu__list`).appendChild(liRef)
+            document.querySelector(`.nav-menu__list`).appendChild(liRef);
         })
     } else if (role === `admin`) {
         navObject[2].forEach(link => {
-            const liRef = document.createElement(`li`)
-            liRef.classList.add(`nav-menu__list-item`)
+            const liRef = document.createElement(`li`);
+            liRef.classList.add(`nav-menu__list-item`);
 
-            const aRef = document.createElement(`a`)
-            aRef.href = link.href
-            aRef.textContent = link.text
-            aRef.classList.add(`nav-menu__list-link`)
-            liRef.appendChild(aRef)
+            const aRef = document.createElement(`a`);
+            aRef.href = link.href;
+            aRef.textContent = link.text;
+            aRef.classList.add(`nav-menu__list-link`);
+            liRef.appendChild(aRef);
 
-            document.querySelector(`.nav-menu__list`).appendChild(liRef)
+            document.querySelector(`.nav-menu__list`).appendChild(liRef);
         })
     }
 }
@@ -200,7 +199,7 @@ function renderShoppingCart() {
 
 function renderProfilePageInformation() {
 
-    const currentUser = getLocalStorage(`currentUser`)
+    const currentUser = getLocalStorage(`currentUser`);
     let totalSum = 0;
 
     if (currentUser) {
@@ -210,99 +209,99 @@ function renderProfilePageInformation() {
 
         if (currentUser.orders) {
             currentUser.orders.forEach(item => {
-                renderOrderHistory(item)
-                totalSum += item.price
+                renderOrderHistory(item);
+                totalSum += item.price;
             });
         }
     }
-    const articleRef = document.createElement(`article`)
-    articleRef.classList.add(`total-spent`)
-    document.querySelector(`.orderhistory-container`).appendChild(articleRef)
-    let pRef = document.createElement(`p`)
-    pRef.classList.add(`total-spent__title`)
-    pRef.textContent = `Totalt Spenderat`
-    articleRef.appendChild(pRef)
+    const articleRef = document.createElement(`article`);
+    articleRef.classList.add(`total-spent`);
+    document.querySelector(`.orderhistory-container`).appendChild(articleRef);
+    let pRef = document.createElement(`p`);
+    pRef.classList.add(`total-spent__title`);
+    pRef.textContent = `Totalt Spenderat`;
+    articleRef.appendChild(pRef);
 
-    pRef = document.createElement(`p`)
-    pRef.classList.add(`total-spent__sum`)
-    pRef.textContent = `${totalSum} kr`
-    articleRef.appendChild(pRef)
+    pRef = document.createElement(`p`);
+    pRef.classList.add(`total-spent__sum`);
+    pRef.textContent = `${totalSum} kr`;
+    articleRef.appendChild(pRef);
 }
 
 function renderOrderHistory(order) {
-    const articleRef = document.createElement(`article`)
-    articleRef.classList.add(`order`)
-    document.querySelector(`.orderhistory-container`).appendChild(articleRef)
+    const articleRef = document.createElement(`article`);
+    articleRef.classList.add(`order`);
+    document.querySelector(`.orderhistory-container`).appendChild(articleRef);
 
-    const mainDivRef = document.createElement(`div`)
-    mainDivRef.classList.add(`order-details`)
-    articleRef.appendChild(mainDivRef)
+    const mainDivRef = document.createElement(`div`);
+    mainDivRef.classList.add(`order-details`);
+    articleRef.appendChild(mainDivRef);
 
-    let divRef = document.createElement(`div`)
-    divRef.classList.add(`order-flex`)
-    mainDivRef.appendChild(divRef)
+    let divRef = document.createElement(`div`);
+    divRef.classList.add(`order-flex`);
+    mainDivRef.appendChild(divRef);
 
-    let pRef = document.createElement(`p`)
-    pRef.classList.add(`order-number`)
-    pRef.innerHTML = `#<span class="orderNumber1">${order.orderNumber} <span>`
-    divRef.appendChild(pRef)
+    let pRef = document.createElement(`p`);
+    pRef.classList.add(`order-number`);
+    pRef.innerHTML = `#<span class="orderNumber1">${order.orderNumber} <span>`;
+    divRef.appendChild(pRef);
 
-    pRef = document.createElement(`p`)
-    pRef.classList.add(`order-date`)
-    pRef.textContent = order.date
-    divRef.appendChild(pRef)
+    pRef = document.createElement(`p`);
+    pRef.classList.add(`order-date`);
+    pRef.textContent = order.date;
+    divRef.appendChild(pRef);
 
-    divRef = document.createElement(`div`)
-    divRef.classList.add(`order-flex`)
-    mainDivRef.appendChild(divRef)
+    divRef = document.createElement(`div`);
+    divRef.classList.add(`order-flex`);
+    mainDivRef.appendChild(divRef);
 
-    pRef = document.createElement(`p`)
-    pRef.classList.add(`order-total`)
-    pRef.textContent = `total ordersumma`
-    divRef.appendChild(pRef)
+    pRef = document.createElement(`p`);
+    pRef.classList.add(`order-total`);
+    pRef.textContent = `total ordersumma`;
+    divRef.appendChild(pRef);
 
-    pRef = document.createElement(`p`)
-    pRef.classList.add(`order-total`)
-    pRef.textContent = `${order.price} kr`
-    divRef.appendChild(pRef)
+    pRef = document.createElement(`p`);
+    pRef.classList.add(`order-total`);
+    pRef.textContent = `${order.price} kr`;
+    divRef.appendChild(pRef);
 }
 
 function renderProducts() {
-    const products = getLocalStorage(`products`)
-    document.querySelector(`.menu-coffee-cont`).textContent = ``
+    const products = getLocalStorage(`products`);
+    document.querySelector(`.menu-coffee-cont`).textContent = ``;
     if (products) {
         products.forEach(item => {
-            const articleRef = document.createElement(`article`)
-            articleRef.classList.add(`row`)
-            document.querySelector(`.menu-coffee-cont`).appendChild(articleRef)
+            const articleRef = document.createElement(`article`);
+            articleRef.classList.add(`row`);
+            document.querySelector(`.menu-coffee-cont`).appendChild(articleRef);
 
-            const imgRef = document.createElement(`img`)
-            imgRef.classList.add(`img-add-icon`)
-            imgRef.src = `./Assets/add.svg`
-            imgRef.alt = `Add to ${item.title}`
-            imgRef.dataset.id = item.id
+            const imgRef = document.createElement(`img`);
+            imgRef.classList.add(`img-add-icon`);
+            imgRef.src = `./Assets/add.svg`;
+            imgRef.alt = `Add to ${item.title}`;
+            imgRef.dataset.id = item.id;
             imgRef.addEventListener(`click`, changeCartValue);
-            articleRef.appendChild(imgRef)
+            articleRef.appendChild(imgRef);
 
-            let divRef = document.createElement(`div`)
-            divRef.classList.add(`menu-coffe-text`)
-            articleRef.appendChild(divRef)
+            let divRef = document.createElement(`div`);
+            divRef.classList.add(`menu-coffe-text`);
+            articleRef.appendChild(divRef);
 
-            const h2Ref = document.createElement(`h2`)
-            h2Ref.textContent = item.title
-            divRef.appendChild(h2Ref)
+            const h2Ref = document.createElement(`h2`);
+            h2Ref.textContent = item.title;
+            divRef.appendChild(h2Ref);
 
-            const pRef = document.createElement(`p`)
-            pRef.textContent = item.desc
-            divRef.appendChild(pRef)
+            const pRef = document.createElement(`p`);
+            pRef.textContent = item.desc;
+            divRef.appendChild(pRef);
 
-            divRef = document.createElement(`div`)
-            divRef.classList.add(`menu-coffe-text`)
-            articleRef.appendChild(divRef)
+            divRef = document.createElement(`div`);
+            divRef.classList.add(`menu-coffe-text`);
+            articleRef.appendChild(divRef);
 
-            const h3Ref = document.createElement(`h3`)
-            h3Ref.textContent = `${item.price}kr`
-            divRef.appendChild(h3Ref)
+            const h3Ref = document.createElement(`h3`);
+            h3Ref.textContent = `${item.price}kr`;
+            divRef.appendChild(h3Ref);
         });
     }
 }

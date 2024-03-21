@@ -1,4 +1,7 @@
-import { fetchProducts, fetchUsers, } from "./fetch.js";
+import {
+    fetchProducts,
+    fetchUsers,
+} from "./fetch.js";
 
 function addLocalStorage(title, item) {
     try {
@@ -37,15 +40,15 @@ async function addProductsLocalStorage() {
 
 async function addCustomerOrderHistory(price) {
     if (getLocalStorage(`currentUser`)) {
-        const order = []
+        const order = [];
         const date = new Date();
-        const day = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
-        const user = getLocalStorage(`currentUser`)
-        const allOrders = getLocalStorage(`orderNumbers`)
+        const day = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+        const user = getLocalStorage(`currentUser`);
+        const allOrders = getLocalStorage(`orderNumbers`);
         console.log(allOrders);
         if (user.orders) {
             user.orders.forEach(item => {
-                order.push(item)
+                order.push(item);
             });
         }
         order.unshift(
@@ -54,7 +57,7 @@ async function addCustomerOrderHistory(price) {
                 "price": price,
                 "date": day,
             }
-        )
+        );
 
         const updatedUser = {
             "username": user.username,
@@ -63,9 +66,9 @@ async function addCustomerOrderHistory(price) {
             "email": user.email,
             "profile_image": user.profile_image,
             "orders": order,
-        }
+        };
 
-        addLocalStorage("currentUser", updatedUser)
+        addLocalStorage("currentUser", updatedUser);
     }
 }
 
