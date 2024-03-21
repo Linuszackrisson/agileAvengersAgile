@@ -8,6 +8,7 @@ import {
     changeCartValue,
     checkUserRole,
     createOrder,
+    logOutEvent,
 } from "./script.js";
 
 function renderNavLinks() {
@@ -105,6 +106,18 @@ function renderNavLinks() {
 
             document.querySelector(`.nav-menu__list`).appendChild(liRef);
         })
+    }
+    if (role !== "guest") {
+        const liRef = document.createElement(`li`)
+        liRef.classList.add(`nav-menu__list-item`)
+
+        const aRef = document.createElement(`a`)
+        aRef.textContent = `Logout`
+        aRef.classList.add(`nav-menu__list-link`)
+        aRef.addEventListener(`click`, logOutEvent)
+        liRef.appendChild(aRef)
+
+        document.querySelector(`.nav-menu__list`).appendChild(liRef)
     }
 }
 

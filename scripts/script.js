@@ -235,6 +235,10 @@ function createOrder() {
     removeLocalStorage('cart');
     window.location.href = `status.html`;
 }
+function logOutEvent() {
+    removeLocalStorage('currentUser');
+    window.location.href = `index.html`;
+}
 
 export {
     countItemPrice,
@@ -244,4 +248,5 @@ export {
     statusPageUpdate,
     generateUniqueOrderNumber,
     createOrder,
+    logOutEvent,
 };
