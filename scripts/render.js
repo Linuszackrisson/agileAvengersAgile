@@ -387,6 +387,8 @@ function renderForm(change) {
         document.querySelector(`.menu-coffee-cont`).appendChild(formRef);
         formRef.appendChild(pRef);
 
+    } else {
+        document.querySelector(`.add-form`).textContent = ""
     }
 
     const formInput = [

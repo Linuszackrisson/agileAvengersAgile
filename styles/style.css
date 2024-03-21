@@ -1235,6 +1235,8 @@ span {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    gap: .5rem;
+    margin-left: .5rem;
     align-items: center;
 }
 
