@@ -203,7 +203,9 @@ main {
     color: rgba(255, 255, 255, .70);
 }
 
-.status__droneImg {}
+/* .status__droneImg {
+    
+} */
 
 .status__orderOnWay {
     font-size: 2.25rem;
@@ -1256,9 +1258,10 @@ font-family: 'PT serif',serif;
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 20px;
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+    background-color: #E5674E;
+    font-size: 1rem;
+    color: #000000;
+    border: 3px solid #1A4143;
     border-radius: 5px;
-    z-index: 1000;
+    z-index: 2;
   }
