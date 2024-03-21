@@ -9,6 +9,10 @@ import {
     checkUserRole,
     createOrder,
     logOutEvent,
+    saveProduct,
+    changeProduct,
+    SaveChangesProduct,
+    removeProduct,
 } from "./script.js";
 
 function renderNavLinks() {
@@ -61,9 +65,25 @@ function renderNavLinks() {
                 href: `product-page.html`
             },
             {
-                text: `Admin`,
-                href: `admin.html`
-            }
+                text: `Vårt Kaffe`,
+                href: `about.html`
+            },
+            {
+                text: `Min profil`,
+                href: `profile.html`
+            },
+            {
+                text: `Orderstatus`,
+                href: `status.html`
+            },
+            {
+                text: `Login`,
+                href: `login.html`
+            },
+            {
+                text: `Registrera`,
+                href: `register.html`
+            },
         ],
     ]
     document.querySelector(`.nav-menu__list`).textContent = ``;
@@ -315,8 +335,136 @@ function renderProducts() {
             const h3Ref = document.createElement(`h3`);
             h3Ref.textContent = `${item.price}kr`;
             divRef.appendChild(h3Ref);
+
+
+
+            if (checkUserRole() === `admin`) {
+                divRef = document.createElement(`div`);
+                divRef.classList.add(`admin__container`);
+                articleRef.appendChild(divRef);
+
+                let removeRef = document.createElement(`img`)
+                removeRef.src = `./Assets/close.svg`
+                removeRef.alt = `Remove ${item.title}`
+                removeRef.classList.add(`admin__remove-btn`)
+                removeRef.dataset.id = item.id
+                removeRef.addEventListener(`click`, removeProduct)
+                divRef.appendChild(removeRef)
+
+                let changeRef = document.createElement(`img`)
+                changeRef.src = `./Assets/logo-sml.svg`
+                changeRef.alt = `Change ${item.title}`
+                changeRef.classList.add(`admin__change-btn`)
+                changeRef.dataset.id = item.id
+                changeRef.addEventListener(`click`, changeProduct)
+                divRef.appendChild(changeRef)
+            }
+
         });
     }
+    if (checkUserRole() === `admin`) {
+        const imgRef = document.createElement(`img`);
+        imgRef.src = `./Assets/add.svg`;
+        imgRef.alt = `Create new product`;
+        imgRef.classList.add(`menu-coffee-add`);
+        imgRef.addEventListener(`click`, renderForm);
+
+        document.querySelector(`.menu-coffee-cont`).appendChild(imgRef);
+    }
+}
+
+function renderForm(change) {
+    if (document.querySelector(`.menu-coffee-add`))
+        document.querySelector(`.menu-coffee-add`).remove();
+    if (!document.querySelector(`.add-form`)) {
+        const formRef = document.createElement(`form`);
+        formRef.classList.add(`add-form`);
+
+        const pRef = document.createElement(`p`);
+        pRef.textContent = `Fyll i uppgifter om den nya producten`;
+        pRef.classList.add(`add-form__message`);
+
+        document.querySelector(`.menu-coffee-cont`).appendChild(formRef);
+        formRef.appendChild(pRef);
+
+    } else {
+        document.querySelector(`.add-form`).textContent = ""
+    }
+
+    const formInput = [
+        {
+            "input": `input`,
+            "label": `Produkt namn`,
+            "id": `productName`,
+            "type": `text`,
+            "attribute": `maxlength`,
+            "length": 20,
+            "class": `add-form__input`
+        },
+        {
+            "input": `input`,
+            "label": `Produkt pris`,
+            "id": `productPrice`,
+            "type": `number`,
+            "attribute": `max`,
+            "length": 9999,
+            "class": `add-form__input`
+        },
+        {
+            "input": `textarea`,
+            "label": `Kort Beskrivning `,
+            "id": `productShortDesc`,
+            "type": `text`,
+            "attribute": `maxlength`,
+            "length": 80,
+            "class": `add-form__textarea`
+        },
+        {
+            "input": `textarea`,
+            "label": `Beskrivning`,
+            "id": `productDesc`,
+            "type": `text`,
+            "attribute": `maxlength`,
+            "length": 250,
+            "class": `add-form__large-textarea`
+        },
+    ]
+
+    formInput.forEach(item => {
+        const divRef = document.createElement(`div`);
+        divRef.classList.add(`add-form__box`);
+
+        const labelRef = document.createElement(`label`);
+        labelRef.textContent = item.label;
+        labelRef.classList.add(`add-form__label`);
+        labelRef.setAttribute(`for`, item.id);
+        divRef.appendChild(labelRef);
+
+        const inputRef = document.createElement(item.input);
+        if (item.input === `label`)
+            inputRef.type = item.type;
+        inputRef.id = item.id;
+        inputRef.classList.add(item.class);
+        inputRef.setAttribute(item.attribute, item.length);
+        divRef.appendChild(inputRef);
+        document.querySelector(`.add-form`).appendChild(divRef);
+    })
+    if (!change.type) {
+        const btnRef = document.createElement(`button`);
+        btnRef.textContent = `Ändra produktinformation`;
+        btnRef.classList.add(`add-form__btn`);
+        btnRef.dataset.id = change.dataset.id
+        btnRef.addEventListener(`click`, SaveChangesProduct);
+        document.querySelector(`.add-form`).appendChild(btnRef);
+    } else {
+        const btnRef = document.createElement(`button`);
+        btnRef.textContent = `Lägg till produkten`;
+        btnRef.classList.add(`add-form__btn`);
+        btnRef.addEventListener(`click`, saveProduct);
+        document.querySelector(`.add-form`).appendChild(btnRef);
+    }
+
+    document.querySelector(`.add-form`).scrollIntoView(`smooth`)
 }
 
 export {
@@ -325,5 +473,6 @@ export {
     renderShoppingCart,
     renderProfilePageInformation,
     renderProducts,
+    renderForm,
 };
 
