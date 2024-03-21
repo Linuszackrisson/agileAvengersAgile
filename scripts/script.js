@@ -168,6 +168,7 @@ export {
     statusPageUpdate,
     generateUniqueOrderNumber,
     createOrder,
+    logOutEvent,
 };
 
 function statusPageUpdate() {
@@ -264,5 +265,7 @@ function createOrder() {
     // Funktion för att tömma varukorg 
     window.location.href = `status.html`;
 }
-
-
+function logOutEvent() {
+    removeLocalStorage('currentUser');
+    window.location.href = `index.html`;
+}
