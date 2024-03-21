@@ -203,10 +203,13 @@ main {
     color: rgba(255, 255, 255, .70);
 }
 
+<<<<<<< HEAD
 /* .status__droneImg {
     
 } */
 
+=======
+>>>>>>> dev
 .status__orderOnWay {
     font-size: 2.25rem;
     font-family: 'PT Serif';
@@ -384,22 +387,19 @@ main {
 
 /* Custom Checkbox Styling */
 
-.login-page__check-container{
-text-align: left;
-display:block;
-position: relative;
-padding-left: 24px;
-margin:12px 0;
-cursor:pointer;
--webkit-user-select: none;
+.login-page__check-container {
+    text-align: left;
+    display: block;
+    position: relative;
+    padding-left: 24px;
+    margin: 12px 0;
+    cursor: pointer;
+    -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-font-family: Work Sans;
-font-weight: 400;
-
-
-
+    font-family: Work Sans;
+    font-weight: 400;
 }
 
 
@@ -464,32 +464,24 @@ font-weight: 400;
 
 /* Order menu-coffee Styling */
 
-
-
 /*size on body acordenly to figma skiss */
 .menu-coffee {
     background-color: #F3E4E1;
     width: 100%;
-
     font-family: "PT Serif", serif;
-
-
 }
 
 .menu-coffee-cont {
-
     margin: 0 auto;
 }
 
 span {
-
     font-size: 10px;
 }
 
 
 
 .menu-coffee-cont h2 {
-
     font-size: 23px;
     font-weight: 700;
     line-height: 27.6px;
@@ -497,7 +489,6 @@ span {
 
 
 .menu-coffee-cont img {
-
     width: 32px;
     height: 32px;
     background-color: black;
@@ -508,7 +499,6 @@ span {
 
 
 .img-header {
-
     background-image: url('/Assets/graphics-header.svg');
     height: 113px;
     background-size: cover;
@@ -518,30 +508,23 @@ span {
 }
 
 .menu-title {
-
     display: flex;
     justify-content: center;
 }
 
 .menu-title h1 {
-
     font-size: 42px;
     font-weight: 700;
     line-height: 50.4px;
-
 }
 
 .img-footer {
-
-
     background-image: url('/Assets/graphics-footer.svg');
     height: 100px;
     background-size: cover;
     background-repeat: no-repeat;
     z-index: 100%;
     width: 100%;
-
-
 }
 
 .img-header-nav-icon img {
@@ -569,10 +552,7 @@ span {
     align-items: center;
 }
 
-
-
 .small-number {
-
     color: #fff;
     font-weight: 700;
     font-size: 10px;
@@ -584,7 +564,6 @@ span {
     position: absolute;
     left: 321px;
     top: 4px;
-
     z-index: 20;
     background-color: black;
     border-radius: 50%;
@@ -593,19 +572,11 @@ span {
 }
 
 .img-header-bag-icon img {
-
     width: 20px;
     height: 20px;
 }
 
-.row-2,
-.row-3,
-.row-4,
-.row-5,
-.row-6,
-.row-1,
 .row {
-
     max-width: 350px;
     display: flex;
     justify-content: space-between;
@@ -615,19 +586,18 @@ span {
 }
 
 .img-add-icon {
-
     margin-right: 20px;
     margin-top: 10px;
+    transition: all .3s ease-in-out;
+}
+
+.img-add-icon:active {
+    scale: .7;
 }
 
 .img-footer {
-
     margin-top: 120px;
 }
-
-
-
-
 
 /* End of Order menu-coffee Styling */
 
@@ -646,7 +616,6 @@ span {
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
 .profile__image {
@@ -662,9 +631,6 @@ span {
     font-weight: 600;
     line-height: 29px;
     margin-top: 1rem;
-
-
-
 }
 
 .profile__mail {
@@ -687,7 +653,6 @@ span {
     font-weight: 700;
     line-height: 26px;
     margin-bottom: 1rem;
-
 }
 
 .order-flex {
@@ -702,9 +667,6 @@ span {
     font-size: 14px;
     font-weight: 700;
     line-height: 17px;
-
-
-
 }
 
 .order-date {
@@ -714,7 +676,6 @@ span {
     color: #FFFFFFB2;
     line-height: 17px;
     text-align: right;
-
 }
 
 .order-total {
@@ -726,7 +687,6 @@ span {
     line-height: 14px;
     letter-spacing: 0em;
     text-align: left;
-
 }
 
 .order {
@@ -745,155 +705,148 @@ span {
     font-weight: 700;
     color: #FFFFFFCC;
     border-top: 1px solid #FFFF;
-
 }
-/* styling register page */
-.register-page{
 
+/* styling register page */
+.register-page {
     background-color: #2F2926;
     background-image: url(../Assets/graphics-header.svg);
     background-repeat: no-repeat;
     background-size: 100%;
     min-height: 100vh;
-    padding-top:83px;;
+    padding-top: 83px;
 }
 
-.register-page__form{
- display:flex;
- flex-direction: column;
- justify-content: space-around;
- align-items: center;
- gap: 2rem;
- padding: 2rem 1rem;
- background-color: #F3E4E1;
- width: 92%;
- max-width: 700px;
- height: 85vh;
- margin: 0 auto;
-}
-
-.register-page__form-container{
-    display:flex;
+.register-page__form {
+    display: flex;
     flex-direction: column;
-     width:100%;
-     text-align:center;
-     gap:4px;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 1rem;
+    background-color: #F3E4E1;
+    width: 92%;
+    max-width: 700px;
+    height: 85vh;
+    margin: 0 auto;
 }
 
-.register-page__logo{
-    height:30px;
+.register-page__form-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    gap: 4px;
+}
+
+.register-page__logo {
+    height: 30px;
     width: 30px;
     margin: 0 auto;
 }
-.register-page__form-title{
 
-    font-size:2rem;
+.register-page__form-title {
+    font-size: 2rem;
     font-family: "PT Serif", serif;
-}   
-
-.register-page__form-description{
-
-    font-size: 1rem;
-    font-family: Work sans;
-    
 }
 
-.register-page__input-container{
-    display:flex;
+.register-page__form-description {
+    font-size: 1rem;
+    font-family: Work sans;
+}
+
+.register-page__input-container {
+    display: flex;
     flex-direction: column;
-    gap:4px;
-    width:100%;
+    gap: 4px;
+    width: 100%;
     margin-bottom: 10px;
 }
 
-.register-page__input-container--checkbox{
-
+.register-page__input-container--checkbox {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
 }
 
-.register-page__form-label{
+.register-page__form-label {
     text-align: left;
     font-family: Work Sans;
-    font-weight:400;
+    font-weight: 400;
 }
 
-.register-page__form-input{
-
+.register-page__form-input {
     padding: .7rem;
     border: solid 1px #2f2926;
-    border-radius:6px;
-    background-color:transparent;
+    border-radius: 6px;
+    background-color: transparent;
     font-family: Work Sans;
-    font-weight:400;
+    font-weight: 400;
 }
 
 /* Custom Checkbox Styling */
-.register-page__check-container{
-text-align: left;
-display:block;
-position: relative;
-padding-left: 24px;
-margin: 12px 0;
-cursor:pointer;
--webkit-user-select: none;
+.register-page__check-container {
+    text-align: left;
+    display: block;
+    position: relative;
+    padding-left: 24px;
+    margin: 12px 0;
+    cursor: pointer;
+    -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-font-family: Work Sans;
-font-weight: 400;
+    font-family: Work Sans;
+    font-weight: 400;
 }
 
-.register-page__check-container input{
-position: absolute;
-opacity: 0;
-cursor: pointer;
-height: 10px;
-width: 10px;
-}
-
-.register-page__form-checkmark{
-
+.register-page__check-container input {
     position: absolute;
-    top:0;
-    left:0;
-    height:16px;
+    opacity: 0;
+    cursor: pointer;
+    height: 10px;
+    width: 10px;
+}
+
+.register-page__form-checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16px;
     width: 16px;
     border-radius: 50%;
     border: 1px solid black;
     border: inset 1px solid white;
 }
 
-.register-page__form-checkmark::after{
-    content:"";
+.register-page__form-checkmark::after {
+    content: "";
     position: absolute;
     display: none;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     width: 12px;
     height: 12px;
     border-radius: 50%;
     border: 1px solid white;
 }
 
-.register-page__check-container input:checked~.register-page__form-checkmark::after{
-display:block;
-background-color: #0E927D;
-
+.register-page__check-container input:checked~.register-page__form-checkmark::after {
+    display: block;
+    background-color: #0E927D;
 }
 
-.register-page__submit-btn{
-width:248px;
-height: 55px;
-border-radius: 50px;
-background-color: #2F2926;
-color:#FFFFFF;
-font-size:24px;
-font-weight: 700;
-line-height: 28.8px;
-text-align: center;
-font-family: 'PT serif',serif;
+.register-page__submit-btn {
+    width: 248px;
+    height: 55px;
+    border-radius: 50px;
+    background-color: #2F2926;
+    color: #FFFFFF;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28.8px;
+    text-align: center;
+    font-family: 'PT serif', serif;
 }
 
 /* End of register-page Styling */
@@ -907,152 +860,145 @@ font-family: 'PT serif',serif;
 }
 
 /* styling register page */
-.register-page{
-
+.register-page {
     background-color: #2F2926;
     background-image: url(../Assets/graphics-header.svg);
     background-repeat: no-repeat;
     background-size: 100%;
     min-height: 100vh;
-    padding-top:83px;;
+    padding-top: 83px;
 }
 
-.register-page__form{
- display:flex;
- flex-direction: column;
- justify-content: space-around;
- align-items: center;
- gap: 2rem;
- padding: 2rem 1rem;
- background-color: #F3E4E1;
- width: 92%;
- max-width: 700px;
- height: 85vh;
- margin: 0 auto;
-}
-
-.register-page__form-container{
-    display:flex;
+.register-page__form {
+    display: flex;
     flex-direction: column;
-     width:100%;
-     text-align:center;
-     gap:4px;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 1rem;
+    background-color: #F3E4E1;
+    width: 92%;
+    max-width: 700px;
+    height: 85vh;
+    margin: 0 auto;
 }
 
-.register-page__logo{
-    height:30px;
+.register-page__form-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    gap: 4px;
+}
+
+.register-page__logo {
+    height: 30px;
     width: 30px;
     margin: 0 auto;
 }
-.register-page__form-title{
 
-    font-size:2rem;
+.register-page__form-title {
+    font-size: 2rem;
     font-family: "PT Serif", serif;
-}   
-
-.register-page__form-description{
-
-    font-size: 1rem;
-    font-family: Work sans;
-    
 }
 
-.register-page__input-container{
-    display:flex;
+.register-page__form-description {
+    font-size: 1rem;
+    font-family: Work sans;
+}
+
+.register-page__input-container {
+    display: flex;
     flex-direction: column;
-    gap:4px;
-    width:100%;
+    gap: 4px;
+    width: 100%;
     margin-bottom: 10px;
 }
 
-.register-page__input-container--checkbox{
-
+.register-page__input-container--checkbox {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
 }
 
-.register-page__form-label{
+.register-page__form-label {
     text-align: left;
     font-family: Work Sans;
-    font-weight:400;
+    font-weight: 400;
 }
 
-.register-page__form-input{
-
+.register-page__form-input {
     padding: .7rem;
     border: solid 1px #2f2926;
-    border-radius:6px;
-    background-color:transparent;
+    border-radius: 6px;
+    background-color: transparent;
     font-family: Work Sans;
-    font-weight:400;
+    font-weight: 400;
 }
 
 /* Custom Checkbox Styling */
-.register-page__check-container{
-text-align: left;
-display:block;
-position: relative;
-padding-left: 24px;
-margin: 12px 0;
-cursor:pointer;
--webkit-user-select: none;
+.register-page__check-container {
+    text-align: left;
+    display: block;
+    position: relative;
+    padding-left: 24px;
+    margin: 12px 0;
+    cursor: pointer;
+    -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-font-family: Work Sans;
-font-weight: 400;
+    font-family: Work Sans;
+    font-weight: 400;
 }
 
-.register-page__check-container input{
-position: absolute;
-opacity: 0;
-cursor: pointer;
-height: 10px;
-width: 10px;
-}
-
-.register-page__form-checkmark{
-
+.register-page__check-container input {
     position: absolute;
-    top:0;
-    left:0;
-    height:16px;
+    opacity: 0;
+    cursor: pointer;
+    height: 10px;
+    width: 10px;
+}
+
+.register-page__form-checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16px;
     width: 16px;
     border-radius: 50%;
     border: 1px solid black;
     border: inset 1px solid white;
 }
 
-.register-page__form-checkmark::after{
-    content:"";
+.register-page__form-checkmark::after {
+    content: "";
     position: absolute;
     display: none;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     width: 12px;
     height: 12px;
     border-radius: 50%;
     border: 1px solid white;
 }
 
-.register-page__check-container input:checked~.register-page__form-checkmark::after{
-display:block;
-background-color: #0E927D;
-
+.register-page__check-container input:checked~.register-page__form-checkmark::after {
+    display: block;
+    background-color: #0E927D;
 }
 
-.register-page__submit-btn{
-width:248px;
-height: 55px;
-border-radius: 50px;
-background-color: #2F2926;
-color:#FFFFFF;
-font-size:24px;
-font-weight: 700;
-line-height: 28.8px;
-text-align: center;
-font-family: 'PT serif',serif;
+.register-page__submit-btn {
+    width: 248px;
+    height: 55px;
+    border-radius: 50px;
+    background-color: #2F2926;
+    color: #FFFFFF;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28.8px;
+    text-align: center;
+    font-family: 'PT serif', serif;
 }
 
 /* End of register-page Styling */
@@ -1078,8 +1024,6 @@ font-family: 'PT serif',serif;
     top: 60px;
     right: .8rem;
     left: auto;
-
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1093,7 +1037,6 @@ font-family: 'PT serif',serif;
     max-width: 500px;
     height: 80vh;
     max-height: 800px;
-
     background-color: white;
 }
 
@@ -1169,7 +1112,6 @@ font-family: 'PT serif',serif;
     margin-left: auto;
     margin-right: 1rem;
     width: 55%;
-
 }
 
 .shopping__item-price {
@@ -1232,6 +1174,7 @@ font-family: 'PT serif',serif;
     pointer-events: all;
     cursor: pointer;
     font-family: "PT Serif", serif;
+<<<<<<< HEAD
 }
 
 
@@ -1265,3 +1208,6 @@ font-family: 'PT serif',serif;
     border-radius: 5px;
     z-index: 2;
   }
+=======
+}
+>>>>>>> dev

@@ -3,6 +3,8 @@ import {
     getLocalStorage,
     addUsersLocalStorage,
     addProductsLocalStorage,
+    addCustomerOrderHistory,
+    removeLocalStorage,
 } from "./localStorage.js";
 
 import {
@@ -18,54 +20,53 @@ import {
 } from "./fetch.js";
 
 window.onload = function () {
+    if (!getLocalStorage('users')) {
+        addUsersLocalStorage();
+    }
+    if (!getLocalStorage('products')) {
+        addProductsLocalStorage();
+    }
+    if (document.querySelector(`.main__nav-icon`)) {
+        document.querySelector(`.main__nav-icon`).addEventListener(`click`, navMenuEvent);
+    }
     if (window.location.pathname.endsWith("login.html")) {
         checkLoginDetails();
     } else if (window.location.pathname.endsWith("status.html")) {
         statusPageUpdate();
     } else if (window.location.pathname.endsWith("profile.html")) {
         renderProfilePageInformation();
+    } else if (window.location.pathname === "/product-page.html") {
+        document.querySelector(`.img-header-bag-icon`).addEventListener(`click`, openShoppingCart);
+        document.querySelectorAll(`.img-add-icon`).forEach(item => item.addEventListener(`click`, changeCartValue));
+        renderShoppingModal();
+        renderProducts();
     } else if (window.location.pathname.endsWith("register.html")) {
         document.querySelector('.register-page__submit-btn').addEventListener(`click`, function(event){
             event.preventDefault();
             validateRegistration();
-        });        
-    }
-
-    if (document.querySelector(`.main__nav-icon`)) {
-        document.querySelector(`.main__nav-icon`).addEventListener(`click`, navMenuEvent)
-    }
-};
-
-addUsersLocalStorage()
-addProductsLocalStorage()
-renderShoppingModal()
-
-if (window.location.pathname === "/product-page.html") {
-    document.querySelector(`.img-header-bag-icon`).addEventListener(`click`, openShoppingCart)
-    document.querySelectorAll(`.img-add-icon`).forEach(item => item.addEventListener(`click`, changeCartValue))
-    renderProducts()
-    renderShoppingCart()
-}
+        });
+    };
+}    
 
 function navMenuEvent() {
-    const iconRef = document.querySelector(`.main__nav-icon`)
-    const iconImgRef = document.querySelector(`.main__nav-icon img`)
-    const navRef = document.querySelector(`.nav-menu`)
+    const iconRef = document.querySelector(`.main__nav-icon`);
+    const iconImgRef = document.querySelector(`.main__nav-icon img`);
+    const navRef = document.querySelector(`.nav-menu`);
 
     if (document.querySelector(`.nav-menu--open`)) {
-        iconImgRef.src = `../assets/navicon.svg`
-        navRef.classList.remove(`nav-menu--open`)
-        iconRef.classList.remove(`main__nav-icon--close`)
+        iconImgRef.src = `../assets/navicon.svg`;
+        navRef.classList.remove(`nav-menu--open`);
+        iconRef.classList.remove(`main__nav-icon--close`);
     } else {
-        iconImgRef.src = `../assets/close.svg`
-        navRef.classList.add(`nav-menu--open`)
-        iconRef.classList.add(`main__nav-icon--close`)
+        iconImgRef.src = `../assets/close.svg`;
+        navRef.classList.add(`nav-menu--open`);
+        iconRef.classList.add(`main__nav-icon--close`);
     }
     renderNavLinks();
 }
 
 function openShoppingCart() {
-    const modalRef = document.querySelector(`.shopping`)
+    const modalRef = document.querySelector(`.shopping`);
     if (modalRef.open) {
         modalRef.open = false;
     } else {
@@ -89,8 +90,8 @@ function countTotalPrice(cart) {
 
 async function changeCartValue() {
     if (!getLocalStorage(`cart`)) {
-        const products = await fetchProducts()
-        const cart = []
+        const products = await fetchProducts();
+        const cart = [];
         products.menu.forEach(item => {
 
             if (item.id === Number(this.dataset.id)) {
@@ -99,27 +100,27 @@ async function changeCartValue() {
                     "title": item.title,
                     "price": item.price,
                     "inCart": 1,
-                }
-                cart.push(cartItem)
+                };
+                cart.push(cartItem);
             } else {
                 const cartItem = {
                     "id": item.id,
                     "title": item.title,
                     "price": item.price,
                     "inCart": 0,
-                }
-                cart.push(cartItem)
+                };
+                cart.push(cartItem);
             }
         });
         addLocalStorage(`cart`, cart);
-        renderShoppingCart()
+        renderShoppingCart();
     } else {
         const cart = getLocalStorage(`cart`);
         if (this.alt.includes(`Add`)) {
             cart.forEach(item => {
                 if (item.id === Number(this.dataset.id)) {
                     if (item.inCart >= 0) {
-                        item.inCart++;
+                        item.inCart++;;
                     }
                 }
             });
@@ -138,22 +139,13 @@ async function changeCartValue() {
 }
 
 function checkUserRole() {
-    const currentUser = getLocalStorage(`currentUser`)
+    const currentUser = getLocalStorage(`currentUser`);
     if (!currentUser) {
-        return `guest`
+        return `guest`;
     } else {
-        return currentUser.role
+        return currentUser.role;
     }
 }
-
-export {
-    countItemPrice,
-    countTotalPrice,
-    changeCartValue,
-    checkUserRole,
-    statusPageUpdate,
-    generateUniqueOrderNumber,
-};
 
 function statusPageUpdate() {
     const orderNumbers = getLocalStorage('orderNumbers');
@@ -167,7 +159,7 @@ function statusPageUpdate() {
 
 // Här börjar funktionen för att generera unikt ordernummer.
 function generateUniqueOrderNumber() {
-    const orderArray = []
+    const orderArray = [];
     const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const numbers = '0123456789';
     let orderNumber = '#';
@@ -180,17 +172,17 @@ function generateUniqueOrderNumber() {
         orderNumber += numbers.charAt(Math.floor(Math.random() * numbers.length));
     }
     if (getLocalStorage('orderNumbers')) {
-        const uniqueOrders = getLocalStorage('orderNumbers')
+        const uniqueOrders = getLocalStorage('orderNumbers');
         uniqueOrders.forEach(item => {
-            orderArray.push(item)
-        })
+            orderArray.push(item);
+        });
     }
     if (orderArray.includes(orderNumber)) {
-        generateUniqueOrderNumber()
+        generateUniqueOrderNumber();
 
     } else {
-        orderArray.push(orderNumber)
-        addLocalStorage('orderNumbers', orderArray)
+        orderArray.push(orderNumber);
+        addLocalStorage('orderNumbers', orderArray);
     }
 }
 
@@ -211,7 +203,7 @@ function validateLogin() {
 
         const users = getLocalStorage("users");
         if (!users) {
-            throw "No users found in localStorage!"
+            throw "No users found in localStorage!";
         }
 
         const user = users.find(user => user.email === userNameRef.value);
@@ -222,15 +214,15 @@ function validateLogin() {
             userNameRef.focus();
         } else {
             if (user.password !== passwordRef.value) {
-                descriptionRef.innerText = 'Kontrollera lösenord!'
+                descriptionRef.innerText = 'Kontrollera lösenord!';
                 passwordRef.focus();
             } else {
                 if (!checkboxRef.checked) {
                     descriptionRef.innerText = 'Godkänn GDPR!';
-                    checkboxRef.focus()
+                    checkboxRef.focus();
                 } else {
                     descriptionRef.innerText = 'Logga in på ditt konto nedan för att se din orderhistorik.';
-                    addLocalStorage("currentUser", user)
+                    addLocalStorage("currentUser", user);
                     window.location.href = 'product-page.html';
                 }
             }
@@ -239,6 +231,31 @@ function validateLogin() {
         console.error(error);
     }
 }
+
+function createOrder() {
+    console.log(`test`);
+    generateUniqueOrderNumber();
+    const price = countTotalPrice(getLocalStorage("cart"));
+    addCustomerOrderHistory(price);
+    removeLocalStorage('cart');
+    window.location.href = `status.html`;
+}
+function logOutEvent() {
+    removeLocalStorage('currentUser');
+    window.location.href = `index.html`;
+}
+
+export {
+    countItemPrice,
+    countTotalPrice,
+    changeCartValue,
+    checkUserRole,
+    statusPageUpdate,
+    generateUniqueOrderNumber,
+    createOrder,
+    logOutEvent,
+};
+
 // ========================================
 // Här börjar kod för registreringsfunktion
 // ========================================
