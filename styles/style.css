@@ -1230,3 +1230,19 @@ span {
     cursor: pointer;
     font-family: "PT Serif", serif;
 }
+
+.admin__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.admin__container .admin__remove-btn {
+    background-color: red;
+}
+
+.admin__container .admin__change-btn {
+    padding: 0;
+    background-color: transparent;
+}

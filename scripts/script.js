@@ -13,6 +13,7 @@ import {
     renderShoppingCart,
     renderProfilePageInformation,
     renderProducts,
+    renderForm,
 } from "./render.js";
 
 import {
@@ -241,7 +242,9 @@ function logOutEvent() {
 }
 
 function saveProduct(e) {
+
     e.preventDefault()
+
     try {
         const title = document.querySelector(`#productName`);
         const price = document.querySelector(`#productPrice`);
@@ -294,6 +297,54 @@ function saveProduct(e) {
 
 }
 
+function changeProduct() {
+    const products = getLocalStorage(`products`);
+    const thisProduct = products.find((item) => item.id === Number(this.dataset.id))
+    renderForm(this)
+    document.querySelector(`#productName`).value = thisProduct.title
+    document.querySelector(`#productPrice`).value = thisProduct.price
+    document.querySelector(`#productShortDesc`).value = thisProduct.desc
+    document.querySelector(`#productDesc`).value = thisProduct.longer_desc
+}
+
+function SaveChangesProduct(e) {
+    e.preventDefault()
+    const products = getLocalStorage(`products`);
+    const thisProduct = products.find((item) => item.id === Number(this.dataset.id))
+    const indexOf = products.indexOf(thisProduct)
+
+    console.log(thisProduct);
+
+    const newInformation = {
+        "id": thisProduct.id,
+        "desc": document.querySelector(`#productShortDesc`).value,
+        "title": document.querySelector(`#productName`).value,
+        "longer_desc": document.querySelector(`#productDesc`).value,
+        "price": Number(document.querySelector(`#productPrice`).value),
+    }
+    console.log(newInformation);
+    products.splice(indexOf, 1, newInformation)
+    if (products.length === 0) {
+        removeLocalStorage(`products`)
+    } else {
+        addLocalStorage(`products`, products)
+    }
+    renderProducts();
+}
+
+function removeProduct() {
+    const products = getLocalStorage(`products`);
+    const thisProduct = products.find((item) => item.id === Number(this.dataset.id))
+    const indexOf = products.indexOf(thisProduct)
+    products.splice(indexOf, 1)
+    if (products.length === 0) {
+        removeLocalStorage(`products`)
+    } else {
+        addLocalStorage(`products`, products)
+    }
+    renderProducts();
+}
+
 export {
     countItemPrice,
     countTotalPrice,
@@ -304,4 +355,7 @@ export {
     createOrder,
     logOutEvent,
     saveProduct,
+    changeProduct,
+    SaveChangesProduct,
+    removeProduct,
 };
