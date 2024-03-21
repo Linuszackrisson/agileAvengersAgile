@@ -606,7 +606,7 @@ span {
 
 .profile-page {
     background-color: #2F2926;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .profile-container {
@@ -1201,4 +1201,4 @@ span {
     border: 3px solid #1A4143;
     border-radius: 5px;
     z-index: 2;
-  }
+}
