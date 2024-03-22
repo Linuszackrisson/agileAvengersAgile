@@ -37,11 +37,14 @@ window.onload = function () {
     } else if (window.location.pathname === ("/profile.html")) {        
         renderProfilePageInformation();
         document.querySelector('.profile-container').addEventListener('click', function() {
-            // Ta användaren till profileedit.html när klickinträffar på .profile-container
             window.location.href = 'profileedit.html';
         });
     } else if (window.location.pathname === ("/profileedit.html")) {
-        renderProfileEditInformation();    
+        renderProfileEditInformation();        
+        document.querySelector('.edit-page__submit-btn').addEventListener('click', function(event){
+            event.preventDefault();
+            saveUserData();
+        });
     } else if (window.location.pathname === "/product-page.html") {
         document.querySelector(`.img-header-bag-icon`).addEventListener(`click`, openShoppingCart);
         document.querySelectorAll(`.img-add-icon`).forEach(item => item.addEventListener(`click`, changeCartValue));
@@ -264,7 +267,7 @@ export {
 };
 
 // ========================================
-// Här börjar kod för registreringsfunktion
+// Här börjar kod för att skapa ny kund
 // ========================================
 
 function getUsers() {        
@@ -352,3 +355,34 @@ function validateRegistration() {
             }
     }
 };
+
+// ==========================================
+// Här börjar kod för att redigera användare
+// ==========================================
+
+function saveUserData() {
+    console.log('Tjenahej!!');
+    const users = getUsers();
+    console.log(users);
+    const currentUser = getLocalStorage(`currentUser`);
+    const thisUser = users.find ((item) => item.username === currentUser.username)
+    console.log(currentUser);
+    console.log('This user', thisUser);
+
+    const indexOf = users.indexOf(thisUser);
+    console.log(indexOf);
+
+    const newUserInfo = {
+        "username": document.querySelector(`#editUsername`).value,
+        "password": document.querySelector(`#editPassword`).value,
+        "role": thisUser.role,
+        "email": document.querySelector(`#editEmail`).value,
+        "profile_image": document.querySelector(`#editImage`).value,
+    }
+    console.log(newUserInfo);
+    users.splice(indexOf, 1, newUserInfo);
+    addLocalStorage(`users`, users);
+    addLocalStorage(`currentUser`, newUserInfo);
+    window.location.href = 'profile.html';
+}
+

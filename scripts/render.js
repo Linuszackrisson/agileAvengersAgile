@@ -322,19 +322,15 @@ function renderProducts() {
 function renderProfileEditInformation() {
 
     const currentUser = getLocalStorage(`currentUser`);
-    let totalSum = 0;
-
+    
     if (currentUser) {
         document.querySelector(`.profile__image`).src = currentUser.profile_image;
         document.querySelector(`.profile__name`).textContent = currentUser.username;
         document.querySelector(`.profile__mail`).textContent = currentUser.email;
-
-        if (currentUser.orders) {
-            currentUser.orders.forEach(item => {
-                renderOrderHistory(item);
-                totalSum += item.price;
-            });
-        }
+        document.querySelector(`#editUsername`).value = currentUser.username;
+        document.querySelector(`#editEmail`).value = currentUser.email;
+        document.querySelector(`#editPassword`).value = currentUser.password;
+        document.querySelector(`#editImage`).value = currentUser.profile_image;
     }    
 }
 
