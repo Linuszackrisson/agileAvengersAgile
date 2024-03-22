@@ -30,20 +30,24 @@ window.onload = function () {
     if (document.querySelector(`.main__nav-icon`)) {
         document.querySelector(`.main__nav-icon`).addEventListener(`click`, navMenuEvent);
     }
-    if (window.location.pathname.endsWith("login.html")) {
+    if (window.location.pathname === ("/login.html")) {
         checkLoginDetails();
-    } else if (window.location.pathname.endsWith("status.html")) {
+    } else if (window.location.pathname === ("/status.html")) {
         statusPageUpdate();
-    } else if (window.location.pathname.endsWith("profile.html")) {
+    } else if (window.location.pathname === ("/profile.html")) {        
         renderProfilePageInformation();
-    } else if (window.location.pathname.endsWith("edit.html")) {
+        document.querySelector('.profile-container').addEventListener('click', function() {
+            // Ta användaren till profileedit.html när klickinträffar på .profile-container
+            window.location.href = 'profileedit.html';
+        });
+    } else if (window.location.pathname === ("/profileedit.html")) {
         renderProfileEditInformation();    
     } else if (window.location.pathname === "/product-page.html") {
         document.querySelector(`.img-header-bag-icon`).addEventListener(`click`, openShoppingCart);
         document.querySelectorAll(`.img-add-icon`).forEach(item => item.addEventListener(`click`, changeCartValue));
         renderShoppingModal();
         renderProducts();
-    } else if (window.location.pathname.endsWith("register.html")) {
+    } else if (window.location.pathname === ("/register.html")) {
         document.querySelector('.register-page__submit-btn').addEventListener(`click`, function(event){
             event.preventDefault();
             validateRegistration();
