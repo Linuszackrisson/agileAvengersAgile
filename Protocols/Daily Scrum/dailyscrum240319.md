@@ -34,5 +34,5 @@ Var och en svarar på frågorna nedan.
 * Har inga direkta hinder.
 
 ### Övrigt
-Är det någon som behöver hjälp? Bestäm vem som hoppar in och stöttar
+
 Nästa möte: Daily scrum imorgon kl. 9.00
