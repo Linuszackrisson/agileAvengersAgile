@@ -467,6 +467,22 @@ function renderForm(change) {
     document.querySelector(`.add-form`).scrollIntoView(`smooth`)
 }
 
+function renderProfileEditInformation() {
+
+    const currentUser = getLocalStorage(`currentUser`);
+    
+    if (currentUser) {
+        document.querySelector(`.profile__image`).src = currentUser.profile_image;
+        document.querySelector(`.profile__name`).textContent = currentUser.username;
+        document.querySelector(`.profile__mail`).textContent = currentUser.email;
+        document.querySelector(`#editUsername`).value = currentUser.username;
+        document.querySelector(`#editEmail`).value = currentUser.email;
+        document.querySelector(`#editPassword`).value = currentUser.password;
+        document.querySelector(`#editImage`).value = currentUser.profile_image;
+    }    
+}
+
+
 export {
     renderNavLinks,
     renderShoppingModal,
@@ -474,5 +490,6 @@ export {
     renderProfilePageInformation,
     renderProducts,
     renderForm,
+    renderProfileEditInformation,
 };
 

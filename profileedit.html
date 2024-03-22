@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit profile</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="nav-menu">
+            <ul class="nav-menu__list">
+
+            </ul>
+        </nav>
+    </header>
+    <section class="profile-page">
+        <div class="main__nav-icon">
+            <img src="/Assets/navicon.svg" alt="Navigation-icon">
+        </div>
+        <img class="Profile__banner" src="Assets/graphics-header.svg" alt="Profile Page Banner">
+
+        <div class="profile-container">
+            <img class="profile__image" src="Assets/profile.svg" alt="Profile Image ">
+            <h2 class="profile__name">Sixten Kaffelövér</h2>
+            <p class="profile__mail">sixten.kaffelover@zocom.se</p>
+        </div>
+
+        <div class="editor-container">
+            <h2 class="editor__title">Redigera profil</h2>
+        
+        <form class="edit-page__form">
+            
+            <section class="edit-page__form-container">
+                
+                <div class="edit-page__input-container">
+                    <label class="edit-page__form-label" for="editUsername"> 
+                        Username 
+                    </label>
+                    <input class="edit-page__form-input" type="username" id="editUsername">
+                </div>
+
+                <div class="edit-page__input-container">
+                    <label class="edit-page__form-label" for="editEmail"> 
+                        Email 
+                    </label>
+                    <input class="edit-page__form-input" type="email" id="editEmail">
+                </div>
+                
+                <div class="edit-page__input-container">
+                    <label class="edit-page__form-label" for="editPassword">
+                        Password
+                    </label>
+                    <input class="edit-page__form-input" type="password" id="editPassword">
+                </div>
+                
+                <div class="edit-page__input-container">
+                    <label class="edit-page__form-label" for="editImage">
+                        Image URL
+                    </label>
+                    <input class="edit-page__form-input" type="URL" id="editImage">
+                </div>
+
+            </section>
+            <button class="edit-page__submit-btn">
+                Gör om mig!
+            </button>
+        </form>
+    </div>
+
+    </section>
+    <script type="module" src="./scripts/script.js"></script>
+</body>
+
+</html>

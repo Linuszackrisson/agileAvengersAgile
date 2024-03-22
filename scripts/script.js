@@ -14,6 +14,7 @@ import {
     renderProfilePageInformation,
     renderProducts,
     renderForm,
+    renderProfileEditInformation,
 } from "./render.js";
 
 import {
@@ -30,21 +31,29 @@ window.onload = function () {
     if (document.querySelector(`.main__nav-icon`)) {
         document.querySelector(`.main__nav-icon`).addEventListener(`click`, navMenuEvent);
     }
-    if (window.location.pathname.endsWith("login.html")) {
+    if (window.location.pathname === ("/login.html")) {
         checkLoginDetails();
-    } else if (window.location.pathname.endsWith("status.html")) {
+    } else if (window.location.pathname === ("/status.html")) {
         statusPageUpdate();
-    } else if (window.location.pathname.endsWith("profile.html")) {
+    } else if (window.location.pathname === ("/profile.html")) {        
         renderProfilePageInformation();
+        document.querySelector('.profile-container').addEventListener('click', function() {
+            window.location.href = 'profileedit.html';
+        });
+    } else if (window.location.pathname === ("/profileedit.html")) {
+        renderProfileEditInformation();        
+        document.querySelector('.edit-page__submit-btn').addEventListener('click', function(event){
+            event.preventDefault();
+            saveUserData();
+        });
     } else if (window.location.pathname === "/product-page.html") {
         document.querySelector(`.img-header-bag-icon`).addEventListener(`click`, openShoppingCart);
         document.querySelectorAll(`.img-add-icon`).forEach(item => item.addEventListener(`click`, changeCartValue));
         changeShoppingCartNumber()
         renderShoppingModal();
         renderProducts();
-
-    } else if (window.location.pathname.endsWith("register.html")) {
-        document.querySelector('.register-page__submit-btn').addEventListener(`click`, function (event) {
+    } else if (window.location.pathname === ("/register.html")) {
+        document.querySelector('.register-page__submit-btn').addEventListener(`click`, function(event){
             event.preventDefault();
             validateRegistration();
         });
@@ -376,7 +385,7 @@ export {
 };
 
 // ========================================
-// Här börjar kod för registreringsfunktion
+// Här börjar kod för att skapa ny kund
 // ========================================
 
 function getUsers() {
@@ -477,3 +486,35 @@ function changeShoppingCartNumber() {
 
     }
 }
+
+
+// ==========================================
+// Här börjar kod för att redigera användare
+// ==========================================
+
+function saveUserData() {
+    console.log('Tjenahej!!');
+    const users = getUsers();
+    console.log(users);
+    const currentUser = getLocalStorage(`currentUser`);
+    const thisUser = users.find ((item) => item.username === currentUser.username)
+    console.log(currentUser);
+    console.log('This user', thisUser);
+
+    const indexOf = users.indexOf(thisUser);
+    console.log(indexOf);
+
+    const newUserInfo = {
+        "username": document.querySelector(`#editUsername`).value,
+        "password": document.querySelector(`#editPassword`).value,
+        "role": thisUser.role,
+        "email": document.querySelector(`#editEmail`).value,
+        "profile_image": document.querySelector(`#editImage`).value,
+    }
+    console.log(newUserInfo);
+    users.splice(indexOf, 1, newUserInfo);
+    addLocalStorage(`users`, users);
+    addLocalStorage(`currentUser`, newUserInfo);
+    window.location.href = 'profile.html';
+}
+
