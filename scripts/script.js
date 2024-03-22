@@ -13,6 +13,7 @@ import {
     renderShoppingCart,
     renderProfilePageInformation,
     renderProducts,
+    renderForm,
     renderProfileEditInformation,
 } from "./render.js";
 
@@ -48,6 +49,7 @@ window.onload = function () {
     } else if (window.location.pathname === "/product-page.html") {
         document.querySelector(`.img-header-bag-icon`).addEventListener(`click`, openShoppingCart);
         document.querySelectorAll(`.img-add-icon`).forEach(item => item.addEventListener(`click`, changeCartValue));
+        changeShoppingCartNumber()
         renderShoppingModal();
         renderProducts();
     } else if (window.location.pathname === ("/register.html")) {
@@ -56,7 +58,7 @@ window.onload = function () {
             validateRegistration();
         });
     };
-}    
+}
 
 function navMenuEvent() {
     const iconRef = document.querySelector(`.main__nav-icon`);
@@ -89,12 +91,18 @@ function countItemPrice(price, quantity) {
 }
 
 function countTotalPrice(cart) {
-    const deliveryFee = 25;
+   
     let totalPrice = 0;
-    totalPrice += deliveryFee;
-    cart.forEach(item => {
-        totalPrice += (item.price * item.inCart);
-    });
+    if (cart) {
+       
+        cart.forEach(item => {
+            totalPrice += (item.price * item.inCart);
+        });
+        if(totalPrice!==0){
+        const deliveryFee = 25;
+        totalPrice += deliveryFee;
+    }
+    }
     return totalPrice;
 }
 
@@ -123,6 +131,7 @@ async function changeCartValue() {
             }
         });
         addLocalStorage(`cart`, cart);
+        changeShoppingCartNumber()
         renderShoppingCart();
     } else {
         const cart = getLocalStorage(`cart`);
@@ -144,6 +153,7 @@ async function changeCartValue() {
             });
         }
         addLocalStorage(`cart`, cart);
+        changeShoppingCartNumber()
         renderShoppingCart();
     }
 }
@@ -255,6 +265,110 @@ function logOutEvent() {
     window.location.href = `index.html`;
 }
 
+function saveProduct(e) {
+
+    e.preventDefault()
+
+    try {
+        const title = document.querySelector(`#productName`);
+        const price = document.querySelector(`#productPrice`);
+        const desc = document.querySelector(`#productShortDesc`);
+        const longerDesc = document.querySelector(`#productDesc`);
+        if (title.value === "") {
+            throw {
+                msg: `Vänligen fyll i produktnamn`,
+                node: title
+            };
+        } else if (price.value === "") {
+            throw {
+                msg: `Vänligen fyll i productpris`,
+                node: price
+            };
+        } else if (desc.value === "") {
+            throw {
+                msg: `Vänligen fyll i en kort beskrivning om producten`,
+                node: desc
+            };
+        } else if (longerDesc.value === "") {
+            throw {
+                msg: `änligen fyll i en beskrivning om producten`,
+                node: longerDesc
+            };
+        }
+        const products = getLocalStorage(`products`);
+        const newId = products[products.length - 1].id + 1;
+        const newProduct = {
+            desc: desc.value,
+            id: newId,
+            longer_desc: longerDesc.value,
+            price: price.value,
+            title: title.value,
+        };
+
+        const array = []
+        products.forEach(item => {
+            array.push(item);
+        });
+
+        array.push(newProduct);
+
+        addLocalStorage(`products`, array);
+        window.location.href = 'product-page.html';
+    } catch (error) {
+        document.querySelector(`.add-form__message`).textContent = error.msg;
+        error.node.focus();
+    }
+
+}
+
+function changeProduct() {
+    const products = getLocalStorage(`products`);
+    const thisProduct = products.find((item) => item.id === Number(this.dataset.id))
+    renderForm(this)
+    document.querySelector(`#productName`).value = thisProduct.title
+    document.querySelector(`#productPrice`).value = thisProduct.price
+    document.querySelector(`#productShortDesc`).value = thisProduct.desc
+    document.querySelector(`#productDesc`).value = thisProduct.longer_desc
+}
+
+function SaveChangesProduct(e) {
+    e.preventDefault()
+    const products = getLocalStorage(`products`);
+    const thisProduct = products.find((item) => item.id === Number(this.dataset.id))
+    const indexOf = products.indexOf(thisProduct)
+
+    console.log(thisProduct);
+
+    const newInformation = {
+        "id": thisProduct.id,
+        "desc": document.querySelector(`#productShortDesc`).value,
+        "title": document.querySelector(`#productName`).value,
+        "longer_desc": document.querySelector(`#productDesc`).value,
+        "price": Number(document.querySelector(`#productPrice`).value),
+    }
+    console.log(newInformation);
+    products.splice(indexOf, 1, newInformation)
+    if (products.length === 0) {
+        removeLocalStorage(`products`)
+    } else {
+        addLocalStorage(`products`, products)
+    }
+    renderProducts();
+}
+
+function removeProduct() {
+    const products = getLocalStorage(`products`);
+    const thisProduct = products.find((item) => item.id === Number(this.dataset.id))
+    const indexOf = products.indexOf(thisProduct)
+    products.splice(indexOf, 1)
+    if (products.length === 0) {
+        removeLocalStorage(`products`)
+    } else {
+        addLocalStorage(`products`, products)
+    }
+    renderProducts();
+}
+
 export {
     countItemPrice,
     countTotalPrice,
@@ -264,13 +378,17 @@ export {
     generateUniqueOrderNumber,
     createOrder,
     logOutEvent,
+    saveProduct,
+    changeProduct,
+    SaveChangesProduct,
+    removeProduct,
 };
 
 // ========================================
 // Här börjar kod för att skapa ny kund
 // ========================================
 
-function getUsers() {        
+function getUsers() {
     const userString = localStorage.getItem('users');
     const users = userString ? JSON.parse(userString) : [];
     return users;
@@ -289,72 +407,86 @@ function validateEmail(email) {
 // ========================================
 
 let loginLinkAdded = false;
-function validateRegistration() {    
+function validateRegistration() {
     const users = getUsers();
     const emailInput = document.getElementById('loginEmail').value;
     const passwordInput = document.getElementById('loginPassword').value;
     const checkboxRef = document.querySelector('.register-page__check-container input[type="checkbox"]');
 
-    if (!validateEmail(emailInput)) {        
-        document.getElementById('emailAlert').style.display = 'block';        
-        setTimeout(function(){            
+    if (!validateEmail(emailInput)) {
+        document.getElementById('emailAlert').style.display = 'block';
+        setTimeout(function () {
             document.getElementById('emailAlert').style.display = 'none';
         }, 1200);
         return;
     }
-    
+
     if (passwordInput.length < 8) {
         document.getElementById('passwordAlert').style.display = 'block';
-        setTimeout(function(){
+        setTimeout(function () {
             document.getElementById('passwordAlert').style.display = 'none';
         }, 1200);
         return;
     }
-    
+
     const emailExists = users.some(user => user.email === emailInput);
-    
-    if (emailExists) {        
+
+    if (emailExists) {
         document.querySelector('.register-page__form-description').textContent = 'Användaren existerar redan.';
         if (!loginLinkAdded) {
-        const loginLink = document.createElement('a');
-        loginLink.textContent = 'Logga in';
-        loginLink.href = 'login.html';
-        loginLink.classList.add('register__loginBtn');
-        document.querySelector('.register-page__form-container').appendChild(loginLink);
-        loginLinkAdded = true;
+            const loginLink = document.createElement('a');
+            loginLink.textContent = 'Logga in';
+            loginLink.href = 'login.html';
+            loginLink.classList.add('register__loginBtn');
+            document.querySelector('.register-page__form-container').appendChild(loginLink);
+            loginLinkAdded = true;
         }
     } else {
-            if (!checkboxRef.checked) {
+        if (!checkboxRef.checked) {
 
-                document.getElementById('gdprAlert').style.display = 'block';
-                setTimeout(function(){
-                    document.getElementById('gdprAlert').style.display = 'none';
-                }, 1200);
+            document.getElementById('gdprAlert').style.display = 'block';
+            setTimeout(function () {
+                document.getElementById('gdprAlert').style.display = 'none';
+            }, 1200);
             return;
-            } else {
-                console.log('välkommen in!')
-                const usernameRef = emailInput.split('@')[0];
-                    const newUser = {
-                    username: usernameRef,
-                    password: passwordInput,
-                    role: 'user',
-                    email: emailInput,
-                    profile_image: 'assets/profile.svg'
-                    };
+        } else {
+            console.log('välkommen in!')
+            const usernameRef = emailInput.split('@')[0];
+            const newUser = {
+                username: usernameRef,
+                password: passwordInput,
+                role: 'user',
+                email: emailInput,
+                profile_image: 'assets/profile.svg'
+            };
             addLocalStorage("currentUser", newUser)
             users.push(newUser);
             localStorage.setItem('users', JSON.stringify(users));
-         
+
             document.querySelector('.register-page__form-description').textContent = 'Registrera dig med namn och mailadress för att kunna beställa våra tjänster';
             const formContainer = document.querySelector('.register-page__form-container');
             const loginLink = formContainer.querySelector('.register__loginBtn');
             if (loginLink) {
                 formContainer.removeChild(loginLink);
-            }            
-                window.location.href = 'profile.html';
             }
+            window.location.href = 'profile.html';
+        }
     }
 };
+
+function changeShoppingCartNumber() {
+    const inCartIcon = getLocalStorage(`cart`)
+    let incartTotal = 0
+    if (inCartIcon) {
+        inCartIcon.forEach(iconitem => {
+            incartTotal += iconitem.inCart
+            const iconNumber = document.querySelector('.img-header-bag-icon-number')
+            iconNumber.textContent = `${incartTotal}`
+        })
+
+    }
+}
+
 
 // ==========================================
 // Här börjar kod för att redigera användare

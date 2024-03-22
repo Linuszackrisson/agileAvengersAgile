@@ -40,15 +40,17 @@ async function addProductsLocalStorage() {
 
 async function addCustomerOrderHistory(price) {
     if (getLocalStorage(`currentUser`)) {
-        const order = [];
+        const order = []
         const date = new Date();
-        const day = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
-        const user = getLocalStorage(`currentUser`);
-        const allOrders = getLocalStorage(`orderNumbers`);
-        console.log(allOrders);
-        if (user.orders) {
-            user.orders.forEach(item => {
-                order.push(item);
+        const day = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
+        const currentUser = getLocalStorage(`currentUser`)
+        const users = getLocalStorage(`users`)
+        const userIndex = users.indexOf(users.find((user) => user.username === currentUser.username))
+        const allOrders = getLocalStorage(`orderNumbers`)
+
+        if (currentUser.orders) {
+            currentUser.orders.forEach(item => {
+                order.push(item)
             });
         }
         order.unshift(
@@ -57,18 +59,19 @@ async function addCustomerOrderHistory(price) {
                 "price": price,
                 "date": day,
             }
-        );
+        )
 
         const updatedUser = {
-            "username": user.username,
-            "password": user.password,
-            "role": user.role,
-            "email": user.email,
-            "profile_image": user.profile_image,
+            "username": currentUser.username,
+            "password": currentUser.password,
+            "role": currentUser.role,
+            "email": currentUser.email,
+            "profile_image": currentUser.profile_image,
             "orders": order,
-        };
-
-        addLocalStorage("currentUser", updatedUser);
+        }
+        users.splice(userIndex, 1, updatedUser)
+        addLocalStorage("currentUser", updatedUser)
+        addLocalStorage("users", users)
     }
 }
 
